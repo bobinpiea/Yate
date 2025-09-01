@@ -99,6 +99,37 @@
           border-radius: 0.4rem;
         }
 
+      /* Connexion et Inscription */   
+
+        /* Connexion (avant-dernier lien) */
+          header > div > div:nth-child(3) ul li:nth-last-child(2) a {
+            border: 2px solid #2563eb;
+            color: #2563eb;
+            padding: 0.4rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+          }
+
+          header > div > div:nth-child(3) ul li:nth-last-child(2) a:hover {
+            background: #2563eb;
+            color: white;
+          }
+
+        /* Inscription (dernier lien) */
+          header > div > div:nth-child(3) ul li:last-child a {
+            background: #2563eb;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+          }
+
+          header > div > div:nth-child(3) ul li:last-child a:hover {
+            background: #1d4ed8;
+          }
+            
     /* Seconde Ligne */
       header nav { 
         background: #f9fafb; 
