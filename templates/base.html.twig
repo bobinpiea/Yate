@@ -5,6 +5,8 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+
+              <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -12,6 +14,55 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+        <header>
+
+            <!-- Première ligne : logo + CTA + actions utilisateurs -->
+            <div>
+
+                <!-- Logo -->
+                <div>
+                    <a href="/"><span>Ayitate</span></a>
+                </div>
+
+                <!-- Bouton Déposer une annonce -->
+                <div>
+                    <a href="#publier">Déposer une annonce</a>
+                </div>
+
+                <!-- Les actions de l'utilisateur -->
+                <div>
+                    <ul>
+                        <li><a href="#forum">Forum</a></li>
+                        <li><a href="#favoris">Favoris</a></li>
+                        <li><a href="#messages">Messages</a></li>
+                        <li><a href="#login">Se connecter</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <!-- Seconde Ligne : navigation des rubriques -->
+            <nav>
+                <ul>
+                    <li><a href="#achat">Achat</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="#colocation">Colocation</a></li>
+                    <li><a href="#evenements">Événements</a></li>
+                    <li><a href="#conseils">Conseils d’experts</a></li>
+                    <li><a href="#Deco">Déco</a></li>
+                    <li><a href="#annuaire">Annuaire Pro</a></li>
+                    <li><a href="#evenements">Services de déménagement</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        {% block body %}
+        
+        {% endblock %}
+
+        <footer>
+
+        </footer>
     </body>
 </html>
