@@ -13,6 +13,7 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+
     <body>
 
         <header>
@@ -63,7 +64,59 @@
         {% endblock %}
 
         <footer>
+            <!-- Haut du footer : colonnes -->
+            <div class="footer-content">
 
+                <!-- Colonne 1 -->
+                <div class="footer-section">
+                    <h4>À propos</h4>
+                    <ul>
+                        <li><a href="#about">Qui sommes-nous ?</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 2 -->
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#achat">Acheter</a></li>
+                        <li><a href="#location">Louer</a></li>
+                        <li><a href="#colocation">Colocation</a></li>
+                        <li><a href="#publier">Déposer une annonce</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 3 -->
+                <div class="footer-section">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#conseils">Conseils d’experts</a></li>
+                        <li><a href="#blog">Blog Déco</a></li>
+                        <li><a href="#annuaire">Annuaire Pro</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 4 -->
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Abidjan, Côte d’Ivoire</li>
+                        <li>+225 07 00 00 00 00</li>
+                        <li>contact@ayitate.ci</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bas du footer -->
+            <div class="footer-bottom">
+                <p>
+                    © 2025 Ayitate. Tous droits réservés. |
+                    <a href="#mentions-legales">Mentions légales</a> |
+                    <a href="#confidentialite">Politique de confidentialité</a>
+                </p>
+            </div>
         </footer>
+
     </body>
 </html>
