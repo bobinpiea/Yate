@@ -295,3 +295,79 @@
         padding: 2rem;
         min-height: 18rem;
       }
+
+  /****** Seconde Section "Explorez par ville" ******/
+
+    .section-villes {
+      padding: 3rem 1.5rem;
+      background: #f3f4f6;
+    }
+
+    .entete-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .titre-section {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    .sous-titre-section {
+      font-size: 1rem;
+      color: #374151;
+    }
+
+  /* carte blanche contenant la grille */
+    .conteneur-villes {
+      max-width: 75rem;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
+
+  /* grille de cartes */
+    .grille-villes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: 1.5rem;
+    }
+
+  /* carte ville */
+    .carte-ville {
+      background: #f3f4f6;
+      border: 2px solid transparent;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+  /* focus clavier accessible */
+    .carte-ville:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+  /* hover */
+    .carte-ville:hover {
+      border-color: #2563eb;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    }
+
+    .nom-ville {
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .compte-biens {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
