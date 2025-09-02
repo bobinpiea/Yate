@@ -221,6 +221,77 @@
       color: #ffffff;
     }
 
-/* ========== HOME (Page D'Accueil ==========*/ 
+/* ========== Homme - Page D'Accueil ==========*/ 
 
+  /****** Premiere Section ******/
 
+    .section-accueil {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* fond dégradé */
+      padding: 3rem 1.5rem;  /* espace interne */
+      display: flex;
+      align-items: center;
+      min-height: 25rem; 
+    }
+
+    .conteneur-accueil {
+      max-width: 75rem; 
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center; 
+    }
+
+    /* Texte */
+      .texte-accueil {
+        text-align: left;
+      }
+
+      .titre-accueil {
+        font-size: 2.5rem;    
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .sous-titre-accueil {
+        font-size: 1.25rem;
+        color: #374151;
+        margin-bottom: 2rem;
+      }
+
+    /* Liste des chiffres */
+      .liste-chiffres {
+        display: flex;    
+        gap: 2rem;  
+        margin-top: 2rem;
+        list-style: none; 
+        padding: 0;
+      }
+
+      .chiffre {
+        text-align: center;
+      }
+
+      .valeur {
+        font-size: 2rem;    
+        font-weight: 800;
+        color: #2563eb; 
+        display: block;
+      }
+
+      .libelle {
+        color: #6b7280;  
+        font-size: 0.875rem;
+        margin-top: 0.3rem;
+      }
+
+    /* Bloc pour le futur formulaire */
+      .bloc-formulaire {
+        background: #ffffff; 
+        border-radius: 1rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); 
+        padding: 2rem;
+        min-height: 18rem;
+      }
