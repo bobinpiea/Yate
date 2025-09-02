@@ -37,4 +37,16 @@ final class HomeController extends AbstractController
     {
         return $this->render('home/boite_idees.html.twig');
     }
+
+    #[Route('/mentions-legales', name: 'app_legal')]
+    public function legal(): Response
+    {
+        return $this->render('home/legal.html.twig');
+    }
+
+    #[Route('/politique-de-confidentialite', name: 'app_privacy')]
+    public function privacy(): Response
+    {
+        return $this->render('home/privacy.html.twig');
+    }
 }
