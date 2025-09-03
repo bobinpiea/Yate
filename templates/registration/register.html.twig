@@ -3,17 +3,30 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Enregistrement</h1>
+    <div class="formulaire-register">
 
-    {{ form_errors(registrationForm) }}
+        <h1 class="titre-register">Créer un compte</h1>
+        <p class="soustitre-register">C’est simple et rapide.</p>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_errors(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        {{ form_start(registrationForm) }}
+            
+            {{ form_row(registrationForm.email) }} {#row pour afficher une ligne du formulaire#}
+            
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Mot de passe'
+            }) }}
+
+            <div class="checkbox-container">
+                <p class="checkbox-label">J'accepte les conditions d'utilisation</p>
+                {{ form_widget(registrationForm.agreeTerms) }} {# fonciton twig pour générer automatiquementun champ d'un el HTML#}
+                {{ form_errors(registrationForm.agreeTerms) }}
+            </div>
+
+            <button type="submit" class="btn-submit">S'inscrire</button>
+
+        {{ form_end(registrationForm) }}
+
+    </div>
 {% endblock %}
