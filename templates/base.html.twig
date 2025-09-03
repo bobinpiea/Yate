@@ -23,7 +23,7 @@
 
                 <!-- Logo -->
                 <div>
-                    <a href="/"><span>Ayitate</span></a>
+                    <a href="{{ path('app_home')}}"><span>Ayitate</span></a>
                 </div>
 
                 <!-- Bouton Déposer une annonce -->
@@ -37,8 +37,8 @@
                         <li><a href="#forum">Forum</a></li>
                         <li><a href="#favoris">Favoris</a></li>
                         <li><a href="#messages">Messages</a></li>
-                        <li><a href="#connexion">Connexion</a></li>
-                        <li><a href="#inscription">Inscription</a></li>
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                        <li><a href="{{ path('app_register')}}">Inscription</a></li>
                     </ul>
                 </div>
 
