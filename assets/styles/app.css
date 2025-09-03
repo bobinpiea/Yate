@@ -371,3 +371,88 @@
       color: #6b7280;
       font-size: 0.95rem;
     }
+
+/* ========== FORMULAIRE DE CONNEXION : LOG IN ==========*/ 
+
+    .formulaire-connexion {
+      max-width: 450px;
+      margin: 5rem auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .formulaire-connexion h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .formulaire-connexion label {
+      display: block;
+      font-weight: 600;
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      color: #374151;
+    }
+
+    .formulaire-connexion input[type="email"],
+    .formulaire-connexion input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .formulaire-connexion input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+
+    .formulaire-connexion .checkbox {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .formulaire-connexion button {
+      margin-top: 2rem;
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .formulaire-connexion button:hover {
+      background: #1d4ed8;
+    }
+
+  /* Créer un compte */
+
+  .texte-inscription {
+    display: flex;               
+    width: fit-content; 
+    margin: 1.5rem auto 0 auto; 
+    background-color: #42b72a;
+    color: white;
+    padding: 0.8rem 1.5rem;  
+    border-radius: 0.5rem; 
+    margin-top: 1.5rem;   
+    text-align: center;              
+    font-size: 1rem;                  
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .texte-inscription a {
+    color: white;
+    text-decoration: none;
+  }
