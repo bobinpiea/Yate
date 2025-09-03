@@ -3,13 +3,15 @@
 namespace App\Entity; // La class User appartientà l'espace de nom App\Entity
 
 use App\Repository\UserRepository; // On importe le Repository lié à cette Entité
-use Doctrine\ORM\Mapping as ORM; // Importation pour utiliser les annotations de Doctrine
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // Importation pour utiliser les annotations de Doctrine
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface; // Reconnaissance de cette classe comme un utilisateur
 use Symfony\Component\Security\Core\User\UserInterface; // Pour l'authentification du mdp
 use Symfony\Component\Validator\Constraints as Assert; // Pour la mise en place des contraintes
 
 #[ORM\Entity(repositoryClass: UserRepository::class)] // Relie cette class à Doctrine pour l'enregistrer en bdd
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])] // Email unique afin de ne pas avoir de doublon
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')] // Email unique afin de ne pas avoir de doublon
 class User implements UserInterface, PasswordAuthenticatedUserInterface // Déclaration de la class et ces 2 implémentations (Contrats)
 {
     #[ORM\Id] // clé primaire
