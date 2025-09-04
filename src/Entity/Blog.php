@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\BlogRepository;
+use App\Repository\BlogRepository; // Quel fichier utiliser pour les requetes SQL / DQL 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: BlogRepository::class)]
+#[ORM\Entity(repositoryClass: BlogRepository::class)] // Cette classe est une entité, il faut passer par le fichier Blogrepository
 class Blog
 {
     #[ORM\Id]
@@ -14,18 +15,35 @@ class Blog
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "Le titre ne peut pas être vide.")]
+    #[Assert\Length(
+        max: 150,
+        maxMessage: "Le titre ne peut pas dépasser 150 caractères."
+    )]
     private ?string $titre = null;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: "L’article ne peut pas être vide.")]
+    #[Assert\Length(
+        min: 10,
+        minMessage: "L’article doit contenir au moins {{ limit }} caractères."
+    )]
     private ?string $article = null;
 
     #[ORM\Column]
     private ?\DateTime $dateCreation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Url(
+        message: "Le format de l’URL n’est pas valide."
+    )]
     private ?string $url = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Choice(
+        choices: ['expertise', 'deco'],
+        message: 'Veuillez sélectionner une des deux catégories.'
+    )]
     private ?string $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'blogs')]
@@ -102,4 +120,11 @@ class Blog
         $this->auteur = $auteur;
         return $this;
     }
+
+        public function __construct() // Initialiser une valeur par défaut
+    {
+        $this->dateCreation = new \DateTime();
+    }
+
 }
+
