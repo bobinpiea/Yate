@@ -2,7 +2,9 @@
 
 namespace App\Entity; // La class User appartientà l'espace de nom App\Entity
 
-use App\Repository\UserRepository; // On importe le Repository lié à cette Entité
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection; // On importe le Repository lié à cette Entité
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // Importation pour utiliser les annotations de Doctrine
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface; // Reconnaissance de cette classe comme un utilisateur
@@ -58,6 +60,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     #[ORM\Column]
     //  #[Assert\PasswordStrength(minScore: Assert\PasswordStrength::STRENGTH_STRONG)] A Utiliser ou pas ? 
     private ?string $password = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatar = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $pseudo = null;
+
+    /**
+     * @var Collection<int, Blog>
+     */
+    #[ORM\OneToMany(targetEntity: Blog::class, mappedBy: 'Auteur')]
+    private Collection $blogs;
+
+    public function __construct()
+    {
+        $this->blogs = new ArrayCollection();
+    }
 
     // Getter pour récupérer lid de l'utilisateur (Clé primaire)
     public function getId(): ?int
@@ -140,5 +165,83 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     public function eraseCredentials(): void
     {
         // @deprecated, to be removed when upgrading to Symfony 8
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(?string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): static
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(?string $pseudo): static
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Blog>
+     */
+    public function getBlogs(): Collection
+    {
+        return $this->blogs;
+    }
+
+    public function addBlog(Blog $blog): static
+    {
+        if (!$this->blogs->contains($blog)) {
+            $this->blogs->add($blog);
+            $blog->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlog(Blog $blog): static
+    {
+        if ($this->blogs->removeElement($blog)) {
+            // set the owning side to null (unless already changed)
+            if ($blog->getAuteur() === $this) {
+                $blog->setAuteur(null);
+            }
+        }
+
+        return $this;
     }
 }
