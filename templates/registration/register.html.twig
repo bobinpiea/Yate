@@ -8,22 +8,33 @@
         <h1 class="titre-register">Créer un compte</h1>
         <p class="soustitre-register">C’est simple et rapide.</p>
 
+        {# Afin d'afficher les erreurs du formulaire #}
         {{ form_errors(registrationForm) }}
 
         {{ form_start(registrationForm) }}
             
-            {{ form_row(registrationForm.email) }} {#row pour afficher une ligne du formulaire#}
+            {# NB : Penser à Mettre les erreurs de chacun  #}
+            <div class="champ-formulaire">
+                {{ form_row(registrationForm.email) }} 
+                {{ form_errors(registrationForm.email) }} 
+            </div>
             
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Mot de passe'
-            }) }}
+            {# Champ MDP #}
+            <div class="champ-formulaire">
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Mot de passe'
+                }) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
 
+            {# Condition D'utilisation #}
             <div class="checkbox-container">
                 <p class="checkbox-label">J'accepte les conditions d'utilisation</p>
-                {{ form_widget(registrationForm.agreeTerms) }} {# fonciton twig pour générer automatiquementun champ d'un el HTML#}
+                {{ form_widget(registrationForm.agreeTerms) }} 
                 {{ form_errors(registrationForm.agreeTerms) }}
             </div>
 
+            {# Bouton de soumission #}
             <button type="submit" class="btn-submit">S'inscrire</button>
 
         {{ form_end(registrationForm) }}

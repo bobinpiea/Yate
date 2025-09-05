@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     /**
      * @var Collection<int, Blog>
      */
-    #[ORM\OneToMany(targetEntity: Blog::class, mappedBy: 'Auteur')]
+    #[ORM\OneToMany(targetEntity: Blog::class, mappedBy: 'auteur')]
     private Collection $blogs;
 
     public function __construct()

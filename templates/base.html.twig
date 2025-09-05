@@ -57,6 +57,15 @@
                     <li><a href="#evenements">Services de déménagement</a></li>
                 </ul>
             </nav>
+                        <!-- Affichage en fonction des ROLES -->
+            {% if app.user %}   <!-- Représente L'utilisateur connecté -->
+            <nav>
+                <ul>
+                    <li><a href="{{ path('blog_new') }}">Écrire un article</a></li>
+             
+                </ul>
+            </nav>
+            {% endif %}
         </header>
         
         {% block body %}

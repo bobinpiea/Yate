@@ -1,20 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!{% endblock %}
+{% block title %}Conseils d’expert{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Conseils d’expert</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Applications/MAMP/htdocs/Projet/Yate/Ayitate/src/Controller/BlogController.php</code></li>
-        <li>Your template at <code>/Applications/MAMP/htdocs/Projet/Yate/Ayitate/templates/blog/index.html.twig</code></li>
-    </ul>
-</div>
+    {% if blogs is empty %}
+        <p>Aucun article pour le moment.</p>
+    {% else %}
+        <ul>
+            {% for blog in blogs %}
+                <li>
+                    <strong>{{ blog.titre }}</strong><br>
+                    {{ blog.article|slice(0, 150) ~ '...' }}<br>
+                    <em>
+                        par 
+                        {% if blog.auteur.pseudo %}
+                            {{ blog.auteur.pseudo }}
+                        {% elseif blog.auteur.prenom or blog.auteur.nom %}
+                            {{ blog.auteur.prenom }} {{ blog.auteur.nom }}
+                        {% else %}
+                            {{ blog.auteur.email }}
+                        {% endif %}
+                        le {{ blog.dateCreation|date('d/m/Y') }}
+                    </em>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
