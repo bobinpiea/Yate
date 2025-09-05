@@ -20,19 +20,19 @@ final class ProfileController extends AbstractController
     }
 
     /* Pour afficher le profil */
-        #[Route('/profile', name: 'app_profile')]
-    public function show(): Response
-    {
-        $user = $this->getUser();
+            #[Route('/profile', name: 'app_profile')]
+        public function show(): Response
+        {
+            $user = $this->getUser();
 
-        if (!$user) {
-            return $this->redirectToRoute('app_login');
+            if (!$user) {
+                return $this->redirectToRoute('app_login');
+            }
+
+            return $this->render('profile/show.html.twig', [
+                'user' => $user,
+            ]);
         }
-
-        return $this->render('profile/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
 
     /* Pour editer le profil */
         #[Route('/profile/edit', name: 'app_profile_edit')]

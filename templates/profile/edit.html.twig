@@ -3,7 +3,12 @@
 {% block title %}Éditer mon profil{% endblock %}
 
 {% block body %}
-    <h1>Éditer mon profil</h1>
+
+    <div>
+        <h1>Éditer mon profil</h1>
+        <a href=" {{ path('app_profile')}}"> Revenir en arrière</a>
+    </div>
+
 
     {{ form_start(form) }}
         {{ form_row(form.nom) }}
