@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <div>
+        {% if user %}
+
+           <div>
+                Avatar :
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo ?? user.email }}" width="100">
+                    {% else %}
+                        Pas encore défini
+                    {% endif %}
+                <h1>Mon profil</h1>
+            </div>
+
+            <div>
+                <a href="{{ path('app_profile_edit') }}">Modifier mon profil</a>
+            </div>
+         
+
+            <ul>
+                <li>Email : {{ user.email }}</li>
+                <li>Nom : {{ user.nom ?? 'Non renseigné' }}</li>
+                <li>Prénom : {{ user.prenom ?? 'Non renseigné' }}</li>
+                <li>Pseudo : {{ user.pseudo ?? 'Non renseigné' }}</li>
+            </ul>
+
+
+        {% else %}
+            <p>Vous devez être connecté pour voir votre profil.</p>
+        {% endif %}
+    </div>
+{% endblock %}

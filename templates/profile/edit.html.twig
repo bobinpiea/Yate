@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer mon profil{% endblock %}
+
+{% block body %}
+    <h1>Éditer mon profil</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.pseudo) }}
+        {{ form_row(form.avatar) }}
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {{ form_end(form) }}
+{% endblock %}
