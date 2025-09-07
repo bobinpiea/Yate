@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l’article{% endblock %}
+
+{% block body %}
+    <div class="formulaire-blog">
+        <h1 class="titre-blog">Modifier l’article</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn-submit">Mettre à jour</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

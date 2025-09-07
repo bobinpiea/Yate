@@ -23,59 +23,105 @@ final class BlogController extends AbstractController // Final car on ne pourra 
     }
     */
 
-    /* PAGE : CONSEIL D'EXPERT - ( Elle sera publique ) */
-        
-   //  Cette méthode affichera tous les articles de la catégorie expertise
-        #[Route('/conseil_expert', name: 'conseil_expert')]
-    public function showExpertArticles(BlogRepository $blogRepository): Response
-    {
-        // On récupère les articles dont la catégorie est "expertise"
-        $articles = $blogRepository->findBy(['categorie' => 'expertise']);
+    /* LISTES */
 
-          // On lui passe les articles récupérés
-        return $this->render('blog/conseil_expert.html.twig', [
-            'blogs' => $articles,
-        ]);
-    }
+        /* PAGE : CONSEIL D'EXPERT - ( Elle sera publique ) */
+            
+            //  Cette méthode affichera tous les articles de la catégorie expertise
+                    #[Route('/conseil_expert', name: 'conseil_expert')]
+                public function showExpertArticles(BlogRepository $blogRepository): Response
+                {
+                    // On récupère les articles dont la catégorie est "expertise"
+                    $articles = $blogRepository->findBy(['categorie' => 'expertise']);
 
-    /* PAGE : CONSEIL DECO -  (Elle sera publique également) */
+                    // On lui passe les articles récupérés
+                    return $this->render('blog/conseil_expert.html.twig', [
+                        'blogs' => $articles,
+                    ]);
+                }
 
-    //  Cette méthode affichera tous les articles de la catégorie déco
-    #[Route('/conseil_deco', name: 'conseil_deco')]
-    public function showDecoArticles(BlogRepository $blogRepository): Response
-    {
-        // On récupère les articles dont la catégorie est "déco"
-        $articles = $blogRepository->findBy(['categorie' => 'deco']);
+        /* PAGE : CONSEIL DECO -  (Elle sera publique également) */
 
-         // On lui passe les articles récupérés
-        return $this->render('blog/conseil_deco.html.twig', [
-            'blogs' => $articles,
-        ]);
-    }
+            //  Cette méthode affichera tous les articles de la catégorie déco
+            #[Route('/conseil_deco', name: 'conseil_deco')]
+            public function showDecoArticles(BlogRepository $blogRepository): Response
+            {
+                // On récupère les articles dont la catégorie est "déco"
+                $articles = $blogRepository->findBy(['categorie' => 'deco']);
+
+                // On lui passe les articles récupérés
+                return $this->render('blog/conseil_deco.html.twig', [
+                    'blogs' => $articles,
+                ]);
+            }
+
+    /* FORMULAIRES */ 
 
         #[Route('/blog/new', name: 'blog_new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        //1. Création d'un objet blog, car on part d'un article vide
-        $blog = new Blog();
+        public function new(Request $request, EntityManagerInterface $entityManager): Response
+        {
+            //1. Création d'un objet blog, car on part d'un article vide
+            $blog = new Blog();
 
-        // 2. On lit le formulaire à notre objet $blog
-        $form = $this->createForm(BlogType::class, $blog);
+            // 2. On lit le formulaire à notre objet $blog
+            $form = $this->createForm(BlogType::class, $blog);
 
-        // 3. on remplit avec les données du formulaire (Hydratation) 
-        $form->handleRequest($request);
+            // 3. on remplit avec les données du formulaire (Hydratation) 
+            $form->handleRequest($request);
 
-        // 4. Vérification si formulaire soumis et valide (qu'il respecte les contraintes)
-        if ($form->isSubmitted() && $form->isValid()) {
-            // 5. L'auteur connecté
-            $blog->setAuteur($this->getUser());
+            // 4. Vérification si formulaire soumis et valide (qu'il respecte les contraintes)
+            if ($form->isSubmitted() && $form->isValid()) {
+                // 5. L'auteur connecté
+                $blog->setAuteur($this->getUser());
 
-            // 6. Enregistrer ds la bdd
-            $entityManager->persist($blog);
-            $entityManager->flush();
+                // 6. Enregistrer ds la bdd
+                $entityManager->persist($blog);
+                $entityManager->flush();
 
-            // 7. Redirection
-            // selon la catégorie choisie
+                // 7. Redirection
+                // selon la catégorie choisie
+                    if ($blog->getCategorie() === 'expertise') {
+                        return $this->redirectToRoute('conseil_expert');
+                    } else {
+                        return $this->redirectToRoute('conseil_deco');
+                    }
+                }
+
+            // 8. Sinon, on affiche le formulaire à nouveau
+            return $this->render('blog/new.html.twig', [
+                'form' => $form->createView(),
+            ]);
+
+        }
+
+    /* DETAILS */  
+
+        #[Route('/blog/{id}', name: 'blog_show')]
+        public function show(Blog $blog): Response
+        {
+            return $this->render('blog/show.html.twig', [
+                'blog' => $blog,
+            ]);
+        }
+
+
+    /* EDIT */
+
+        #[Route('/blog/{id}/edit', name: 'blog_edit')]
+        public function edit(Request $request, Blog $blog, EntityManagerInterface $entityManager): Response
+        {
+
+            // Vérification de l’auteur
+            if ($this->getUser() !== $blog->getAuteur()) {
+                throw $this->createAccessDeniedException('Vous ne pouvez pas modifier cet article.');
+            }
+           
+            $form = $this->createForm(BlogType::class, $blog);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->flush(); 
+
                 if ($blog->getCategorie() === 'expertise') {
                     return $this->redirectToRoute('conseil_expert');
                 } else {
@@ -83,10 +129,11 @@ final class BlogController extends AbstractController // Final car on ne pourra 
                 }
             }
 
-        // 8. Sinon, on affiche le formulaire à nouveau
-        return $this->render('blog/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
+            return $this->render('blog/edit.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+
+    /* SUPPRESSION */
 
 }

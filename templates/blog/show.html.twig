@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ blog.titre }}{% endblock %}
+
+{% block body %}
+    <div class="article-detail">
+        
+        <h1>{{ blog.titre }}</h1>
+
+        {% if app.user and app.user.id == blog.auteur.id %}
+            <a href="{{ path('blog_edit', { id: blog.id }) }}">Modifier</a>
+        {% endif %}
+        <p><em>Publié par 
+            {% if blog.auteur.pseudo %}
+                {{ blog.auteur.pseudo }}
+            {% elseif blog.auteur.prenom or blog.auteur.nom %}
+                {{ blog.auteur.prenom }} {{ blog.auteur.nom }}
+            {% else %}
+                {{ blog.auteur.email }}
+            {% endif %}
+            le {{ blog.dateCreation|date('d/m/Y') }}
+        </em></p>
+
+        <div class="contenu">
+            {{ blog.article|raw }}
+        </div>
+
+        {% if blog.url %}
+            <p><a href="{{ blog.url }}" target="_blank" rel="noopener noreferrer">Lien externe</a></p>
+        {% endif %}
+
+        {% if blog.categorie == 'expertise' %}
+            <p><a href="{{ path('conseil_expert') }}">← Retour aux articles</a></p>
+        {% else %}
+            <p><a href="{{ path('conseil_deco') }}">← Retour aux articles</a></p>
+        {% endif %}
+
+    </div>
+{% endblock %}

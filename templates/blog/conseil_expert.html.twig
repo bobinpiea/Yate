@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Conseils d’expert{% endblock %}
+{% block title %}Conseils Déco{% endblock %}
 
 {% block body %}
-    <h1>Conseils d’expert</h1>
+    <h1>Conseils D'expert</h1>
 
     {% if blogs is empty %}
         <p>Aucun article pour le moment.</p>
@@ -24,6 +24,11 @@
                         {% endif %}
                         le {{ blog.dateCreation|date('d/m/Y') }}
                     </em>
+                    <a href="{{ path('blog_show', {id: blog.id}) }}">Lire la suite</a>
+                    
+                    {% if app.user and app.user.id == blog.auteur.id %}
+                        <a href="{{ path('blog_edit', { id: blog.id }) }}">Modifier</a>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
