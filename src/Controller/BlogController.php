@@ -136,4 +136,25 @@ final class BlogController extends AbstractController // Final car on ne pourra 
 
     /* SUPPRESSION */
 
+        #[Route('/blog/{id}/delete', name: 'blog_delete', methods: ['POST'])]
+        public function delete(Request $request, Blog $blog, EntityManagerInterface $entityManager): Response
+        {
+        
+            if ($this->getUser() !== $blog->getAuteur()) {
+                throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer cet article.');
+            }
+
+            // Protection CSRF 
+            if ($this->isCsrfTokenValid('delete'.$blog->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($blog);
+                $entityManager->flush();
+            }
+
+            if ($blog->getCategorie() === 'expertise') {
+                return $this->redirectToRoute('conseil_expert');
+            } else {
+                return $this->redirectToRoute('conseil_deco');
+            }
+        }
+
 }

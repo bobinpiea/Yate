@@ -28,6 +28,15 @@
                     
                     {% if app.user and app.user.id == blog.auteur.id %}
                         <a href="{{ path('blog_edit', { id: blog.id }) }}">Modifier</a>
+
+                        <form method="post" action="{{ path('blog_delete', { id: blog.id }) }}" 
+                            style="display:inline" onsubmit="return 
+                            confirm('Voulez-vous vraiment supprimer cet article ?');">
+
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.id) }}">
+                            <button type="submit">Supprimer</button>
+                        </form>
+
                     {% endif %}
                 </li>
             {% endfor %}
