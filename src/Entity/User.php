@@ -77,9 +77,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     #[ORM\OneToMany(targetEntity: Blog::class, mappedBy: 'auteur')]
     private Collection $blogs;
 
+    /**
+     * @var Collection<int, Message>
+     */
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'auteur')]
+    private Collection $messages;
+
+    /**
+     * @var Collection<int, Sujet>
+     */
+    #[ORM\OneToMany(targetEntity: Sujet::class, mappedBy: 'auteur')]
+    private Collection $sujets;
+
+    /**
+     * @var Collection<int, Categorie>
+     */
+    #[ORM\OneToMany(targetEntity: Categorie::class, mappedBy: 'createur')]
+    private Collection $categories;
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+        $this->sujets = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     // Getter pour récupérer lid de l'utilisateur (Clé primaire)
@@ -237,6 +258,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
             // set the owning side to null (unless already changed)
             if ($blog->getAuteur() === $this) {
                 $blog->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): static
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): static
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getAuteur() === $this) {
+                $message->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sujet>
+     */
+    public function getSujets(): Collection
+    {
+        return $this->sujets;
+    }
+
+    public function addSujet(Sujet $sujet): static
+    {
+        if (!$this->sujets->contains($sujet)) {
+            $this->sujets->add($sujet);
+            $sujet->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSujet(Sujet $sujet): static
+    {
+        if ($this->sujets->removeElement($sujet)) {
+            // set the owning side to null (unless already changed)
+            if ($sujet->getAuteur() === $this) {
+                $sujet->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setCreateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getCreateur() === $this) {
+                $category->setCreateur(null);
             }
         }
 

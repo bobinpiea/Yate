@@ -3,16 +3,20 @@
 {% block title %}Conseils Déco{% endblock %}
 
 {% block body %}
+
     <h1>Conseils Déco</h1>
 
     {% if blogs is empty %}
         <p>Aucun article pour le moment.</p>
     {% else %}
-        <ul>
+
+        <ul class="articles-grid">
+
             {% for blog in blogs %}
-                <li>
+
+                <li class="article-card">
                     <strong>{{ blog.titre }}</strong><br>
-                    {{ blog.article|slice(0, 150) ~ '...' }}<br>
+                   <p class="article-content">{{ blog.article|slice(0, 200)|nl2br ~ '...' }}</p><br>
                     <em>
                         par 
                         {% if blog.auteur.pseudo %}
@@ -24,22 +28,29 @@
                         {% endif %}
                         le {{ blog.dateCreation|date('d/m/Y') }}
                     </em>
-                    <a href="{{ path('blog_show', {id: blog.id}) }}">Lire la suite</a>
+
+                    <a href="{{ path('blog_show', {id: blog.id}) }}" class="read-more">Lire la suite</a>
                     
                     {% if app.user and app.user.id == blog.auteur.id %}
-                        <a href="{{ path('blog_edit', { id: blog.id }) }}">Modifier</a>
 
-                        <form method="post" action="{{ path('blog_delete', { id: blog.id }) }}" 
-                            style="display:inline" onsubmit="return 
-                            confirm('Voulez-vous vraiment supprimer cet article ?');">
+                        <div class="actions">
+                            <a href="{{ path('blog_edit', { id: blog.id }) }}">Modifier</a>
 
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.id) }}">
-                            <button type="submit">Supprimer</button>
-                        </form>
+                            <form method="post" action="{{ path('blog_delete', { id: blog.id }) }}" 
+                                style="display:inline" 
+                                onsubmit="return confirm('Voulez-vous vraiment supprimer cet article ?');">
+
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.id) }}">
+                                <button type="submit">Supprimer</button>
+                            </form>
+                        </div>
 
                     {% endif %}
                 </li>
+
             {% endfor %}
+
         </ul>
     {% endif %}
+
 {% endblock %}
