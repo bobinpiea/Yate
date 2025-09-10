@@ -622,3 +622,53 @@
 
 
 /* ========== ECRIRE UN MESSAGE ==========*/
+
+
+
+
+/* ========== FORUM  ==========*/
+
+  /****** PAGE GENERALE ******/
+
+    .forum-container {
+      display: grid;
+      grid-template-columns: 20rem 1fr; 
+      gap: 2rem;
+      padding: 5rem 6rem;
+    }
+
+  /****** CATEGORIE ******/
+
+    .forum-categories {
+      background: #f9fafb;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .forum-categories ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .forum-categories li {
+      margin: 2rem 0;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .forum-categories li:hover {
+      color: #2563eb;
+    }
+
+  /****** SUJET ******/
+
+    .forum-subjects {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+  /****** MESSAGE ******/
