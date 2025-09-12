@@ -1,23 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau Sujet{% endblock %}
+{% block title %}Créer un sujet{% endblock %}
 
 {% block body %}
-  <h1>Créer un nouveau sujet dans {{ categorie.nom }}</h1>
+  <div class="sujet-formulaire">
+      <h1>Créer un sujet</h1>
 
-  <div class="formulaire-sujet">
-    {{ form_start(form) }}
-
-      <div class="champ-formulaire">
-        {{ form_label(form.titre, "Titre du sujet") }}
-        {{ form_widget(form.titre, {'attr': {'class': 'input input--lg'}}) }}
-        {{ form_errors(form.titre) }}
-      </div>
-
-      <div class="actions">
-        <button type="submit" class="btn-submit">Publier</button>
-      </div>
-
-    {{ form_end(form) }}
+      {{ form_start(form) }}
+        {{ form_row(form.titre) }}
+        {{ form_row(form.categorie) }}
+        {{ form_row(form.premierMessage) }}
+        
+        <button type="submit">Publier</button>
+      {{ form_end(form) }}
   </div>
 {% endblock %}

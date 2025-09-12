@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SujetRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SujetRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: SujetRepository::class)]
 class Sujet
@@ -31,7 +32,12 @@ class Sujet
     /**
      * @var Collection<int, Message>
      */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'Sujet', orphanRemoval: true)]
+    #[ORM\OneToMany(
+        targetEntity: Message::class,
+        mappedBy: 'sujet',        
+        orphanRemoval: true,
+        cascade: ['persist', 'remove']  
+    )]
     private Collection $messages;
 
     #[ORM\ManyToOne(inversedBy: 'sujets')]

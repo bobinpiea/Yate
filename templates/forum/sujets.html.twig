@@ -1,26 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Forum{% endblock %}
+{% block title %}Forum - {{ categorie.nom }}{% endblock %}
 
 {% block body %}
+
   <div class="forum-container">
       
-      <!-- Colonne Gauche : Catégories -->
-        <aside class="forum-categories">
-            <h2>Catégories</h2>
-            <ul>
-                {% for categorie in categories %}
-                    <li>{{ categorie.nom }}</li>
-                {% endfor %}
-            </ul>
-        </aside>
+      <!-- Colonne gauche : Catégories -->
 
-      <!-- Colonne Droite : Sujet-->
-        <main class="forum-subjects">
-            <h2>Sujets</h2>
-           
-        
-        </main>
-        
+      <aside class="forum-categories">
+
+          <h2><a href=" {{ path('app_forum')}}">Catégorie</a></h2>
+
+            <ul>
+              {% for categorie in categories %}
+                <li>
+                  <a href="{{ path('app_forum_sujets', {id: categorie.id}) }}">{{ categorie.nom }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+
+      </aside>
+
+      <!-- Colonne droite : Sujets -->
+
+      <main class="forum-sujets">
+        <div class="sujet-header">
+          <h2> {{ categorie.nom }} - Sujets </h2>
+          <a href="{{ path('app_forum_sujet_new') }} " class="btn-new-sujet" >Créer un sujet</a>   
+        </div>
+
+          <ul>
+            {% for sujet in sujets %}
+                <li>
+                  <a href="{{ path('app_forum_sujet_show', { id: sujet.id }) }}">{{ sujet.titre }}</a>
+                    
+                  {% if app.user and sujet.auteur and app.user.id == sujet.auteur.id %}
+                    <a href="{{ path('app_forum_sujet_edit', { id: sujet.id }) }}" class="btn-edit-sujet">Modifier</a> 
+                    {% endif %}
+                </li>
+            {% else %}
+              <li>Aucun sujet pour le moment dans cette catégorie</li>
+            {% endfor %}
+          </ul>
+
+      </main>
+
   </div>
 {% endblock %}

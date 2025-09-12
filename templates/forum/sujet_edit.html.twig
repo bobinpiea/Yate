@@ -1,0 +1,37 @@
+{# templates/forum/sujet_edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le sujet{% endblock %}
+
+{% block body %}
+  <div class="forum-container">
+
+      <aside class="forum-categories">
+          <h2>Catégories</h2>
+          <ul>
+            {% for categorie in categories %}
+              <li>
+                <a href="{{ path('app_forum_sujets', {id: categorie.id}) }}">
+                  {{ categorie.nom }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+      </aside>
+
+      <section class="forum-sujet-form">
+          <h1>Modifier le sujet</h1>
+
+          <div class="form-container">
+            {{ form_start(form) }}
+              {{ form_row(form.titre) }}
+              {{ form_row(form.categorie) }}
+              {{ form_row(form.premierMessage) }}
+
+              <button type="submit" class="btn-submit">Mettre à jour</button>
+            {{ form_end(form) }}
+          </div>
+      </section>
+
+  </div>
+{% endblock %}

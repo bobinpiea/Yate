@@ -22,7 +22,7 @@ class Message
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Sujet $Sujet = null;
+    private ?Sujet $sujet = null;  
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     private ?User $auteur = null;
@@ -58,12 +58,12 @@ class Message
 
     public function getSujet(): ?Sujet
     {
-        return $this->Sujet;
+        return $this->sujet;  
     }
 
-    public function setSujet(?Sujet $Sujet): static
+    public function setSujet(?Sujet $sujet): static
     {
-        $this->Sujet = $Sujet;
+        $this->sujet = $sujet;
 
         return $this;
     }

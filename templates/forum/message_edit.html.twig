@@ -1,0 +1,33 @@
+{# templates/forum/message_edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le message{% endblock %}
+
+{% block body %}
+  <div class="forum-container">
+      
+      <!-- Colonne gauche : Catégories -->
+      <aside class="forum-categories">
+          <h2>Catégories</h2>
+          <ul>
+            {% for categorie in categories %}
+              <li>
+                <a href="{{ path('app_forum_sujets', {id: categorie.id}) }}"> {{ categorie.nom }} </a>
+              </li>
+            {% endfor %}
+          </ul>
+      </aside>
+
+      <!-- Colonne droite : Formulaire -->
+      <section class="forum-message-edit">
+          <h1>Modifier votre message</h1>
+
+          {{ form_start(form) }}
+            {{ form_row(form.texte) }}
+            
+            <button type="submit" class="btn-submit">Mettre à jour</button>
+          {{ form_end(form) }}
+      </section>
+
+  </div>
+{% endblock %}

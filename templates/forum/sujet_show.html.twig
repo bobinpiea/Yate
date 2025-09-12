@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ sujet.titre }} - Forum{% endblock %}
+
+{% block body %}
+  <div class="forum-container">
+
+      <!-- Colonne gauche : Catégories -->
+      <aside class="forum-categories">
+          <h2>Catégories</h2>
+          <ul>
+            {% for categorie in categories %}
+              <li>
+                <a href="{{ path('app_forum_sujets', {id: categorie.id}) }}">
+                  {{ categorie.nom }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+      </aside>
+
+      <!-- Colonne droite : Sujet et messages -->
+      <div class="forum-sujet">
+
+          <!-- Sujet -->
+          <article class="sujet-detail">
+              <h1>{{ sujet.titre }}</h1>
+
+              <!-- Messages -->
+              <section class="messages">
+                <h2>Messages</h2>
+
+                {% for message in messages %}
+                  <article class="message">
+
+                      <!-- En-tête du message -->
+                      <div class="message-header">
+                          <span class="message-auteur">
+                            {% if message.auteur and message.auteur.pseudo %}
+                              {{ message.auteur.pseudo }}
+                            {% elseif message.auteur and message.auteur.prenom and message.auteur.nom %}
+                              {{ message.auteur.prenom }} {{ message.auteur.nom }}
+                            {% elseif message.auteur %}
+                              {{ message.auteur.email }}
+                            {% else %}
+                              Utilisateur inconnu
+                            {% endif %}
+                          </span>
+
+                          <span class="message-date">
+                            {{ message.dateMessage|date('d/m/Y') }} 
+                          </span>
+                      </div>
+
+                      <!-- Contenu du message -->
+                      <div class="message-texte">
+                          <p>{{ message.texte }}</p>
+                      </div>
+
+                      <!-- Footer du message ( Ulérieurement pour:  répondre, stats, etc.) -->
+                      <div class="message-footer">
+                          {# Bouton gauche #}
+                          <div class="footer-left">
+                              <a href="#" class="btn-reply">Répondre</a>
+                          </div>
+
+                          {# Boutons droits : Modifier + Supprimer (uniquement si auteur) #}
+                          <div class="footer-right">
+                              {% if app.user and app.user.id == message.auteur.id %}
+                                  <a href="{{ path('app_forum_message_edit', { id: message.id }) }}" 
+                                    class="btn-edit-message">Modifier</a>
+
+                                  <form method="post" 
+                                        action="{{ path('app_forum_message_delete', { id: message.id }) }}" 
+                                        style="display:inline"
+                                        onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
+                                      
+                                      <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ message.id) }}">
+                                      <button type="submit" class="btn-delete-message">Supprimer</button>
+                                  </form>
+                              {% endif %}
+                          </div>
+                      </div>
+                      
+                  </article>
+                {% else %}
+                  <p>Aucun message pour le moment.</p>
+                {% endfor %}
+
+              </section>
+          </article>
+
+      </div>
+
+  </div>
+{% endblock %}

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Ayitate : plateforme immobilière sur Abidjan et la Côte d’Ivoire.
+            Retrouvez annonces, conseils d’experts et forum dédié à l’immobilier">
+
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
-
               <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% endblock %}
 
@@ -17,10 +20,8 @@
     <body>
 
         <header>
-
             <!-- Première ligne : logo + CTA + actions utilisateurs -->
             <div>
-
                 <!-- Logo -->
                 <div>
                     <a href="{{ path('app_home')}}"><span>Ayitate</span></a>
@@ -32,9 +33,9 @@
                 </div>
 
                 <!-- Les actions de l'utilisateur -->
-                <div>
+                <nav aria-label="Actions utilisateur">
                     <ul>
-                        <li><a href=" {{ path('app_forum_categories')}}">Forum</a></li>
+                        <li><a href=" {{ path('app_forum')}}">Forum</a></li>
                         <li><a href="#favoris">Favoris</a></li>
                         <li><a href="#messages">Messages</a></li>
 
@@ -47,18 +48,17 @@
                     {% endif %}
 
                     </ul>
-                </div>
-
+                </nav>
             </div>
             
             <!-- Seconde Ligne : navigation des rubriques -->
-            <nav>
+            <nav aria-label="Navigation principale">
                 <ul>
                     <li><a href="#achat">Achat</a></li>
                     <li><a href="#location">Location</a></li>
                     <li><a href="#colocation">Colocation</a></li>
                     <li><a href="#evenements">Événements</a></li>
-                    <li><a href="{{ path('conseil_expert') }}">Conseils d’experts</a></li>
+                    <li><a href="{{ path('conseil_expert') }}">Conseils d'experts</a></li>
                     <li><a href="{{ path('conseil_deco') }}">Déco</a></li>
                     <li><a href="#annuaire">Annuaire Pro</a></li>
                     <li><a href="#evenements">Services de déménagement</a></li>
@@ -66,78 +66,88 @@
                     <li><a href="#Simulateur">Simulateurs</a></li>
                 </ul>
             </nav>
-                        <!-- Affichage en fonction des ROLES -->
-            {% if app.user %}   <!-- Représente L'utilisateur connecté -->
-            <nav>
+            
+            {% if app.user %}
+            <nav aria-label="Actions auteur">
                 <ul>
                     <li><a href="{{ path('blog_new') }}">Écrire un article</a></li>
-             
                 </ul>
             </nav>
             {% endif %}
         </header>
+
         
         {% block body %}
         
         {% endblock %}
 
-        <footer>
-            <!-- Haut du footer : colonnes -->
-            <div class="footer-content">
+    <!-- FOOTER Structure: 4 colonnes + copyright -->
+    <footer>
+        <!-- PARTIE HAUTE : Grille 4 colonnes -->
 
-                <!-- Colonne 1 -->
-                <div class="footer-section">
-                    <h4>À propos</h4>
-                    <ul>
-                        <li> <a href="{{ path('app_about') }}">Qui sommes-nous ?</a> </li>
-                        <li><a href="{{ path('app_nous_rejoindre') }}">Nous rejoindre</a></li>
-                        <li><a href="{{ path('app_nos_engagements') }}">Nos engagements</a></li>
-                        <li> <a href="{{ path('app_boite_idees') }}">Boîte à idées</a> </li>
-                    </ul>
-                </div>
+        <!-- Premiere ligne -->
+        <div class="footer-content">
 
-                <!-- Colonne 2 -->
-                <div class="footer-section">
-                    <h4>Services</h4>
+            <!-- Colonne 1/4 -->
+            <section class="footer-section">
+                <h2>À propos</h2>
+                <ul>
+                    <li> <a href="{{ path('app_about') }}">Qui sommes-nous ?</a> </li>
+                    <li><a href="{{ path('app_nous_rejoindre') }}">Nous rejoindre</a></li>
+                    <li><a href="{{ path('app_nos_engagements') }}">Nos engagements</a></li>
+                    <li> <a href="{{ path('app_boite_idees') }}">Boîte à idées</a> </li>
+                </ul>
+            </section>
+
+            <!-- Colonne 2/4 -->
+            <section class="footer-section">
+                <h2>Services</h2>
+                <nav aria-label="Services footer">
                     <ul>
                         <li><a href="#achat">Acheter</a></li>
                         <li><a href="#location">Louer</a></li>
                         <li><a href="#colocation">Colocation</a></li>
                         <li><a href="#publier">Déposer une annonce</a></li>
                     </ul>
-                </div>
+                </nav>
+            </section>
 
-                <!-- Colonne 3 -->
-                <div class="footer-section">
-                    <h4>Ressources</h4>
+            <!-- Colonne 3/4 -->
+            <section class="footer-section">
+                <h2>Ressources</h2>
+                <nav aria-label="Ressources footer">
                     <ul>
-                        <li><a href="#conseils">Conseils d’experts</a></li>
+                        <li><a href="#conseils">Conseils d'experts</a></li>
                         <li><a href="#blog">Blog Déco</a></li>
                         <li><a href="#annuaire">Annuaire Pro</a></li>
                     </ul>
-                </div>
+                </nav>
+            </section>
 
-                <!-- Colonne 4 -->
-                <div class="footer-section">
-                    <h4>Contact</h4>
+            <!-- Colonne 4/4 -->
+            <section class="footer-section">
+                <h2>Contact</h2>
+                <address>
                     <ul>
-                        <li>Abidjan, Côte d’Ivoire</li>
+                        <li>Abidjan, Côte d'Ivoire</li>
                         <li>+225 07 00 00 00 00</li>
                         <li>contact@ayitate.ci</li>
                     </ul>
-                </div>
+                </address>
+            </section>
 
-            </div>
+        </div>
 
-            <!-- Bas du footer -->
-            <div class="footer-bottom">
-                <p>
-                    © 2025 Ayitate. Tous droits réservés. |
-                    <a href="{{ path('app_legal') }}">Mentions légales</a> |
-                    <a href="{{ path('app_privacy') }}">Politique de confidentialité</a>
-                </p>
-            </div>
-        </footer>
+        <!-- PARTIE BASSE : Copyright  -->
+        <section class="footer-bottom">
+            <p>
+                © 2025 Ayitate. Tous droits réservés. |
+                <a href="{{ path('app_legal') }}">Mentions légales</a> |
+                <a href="{{ path('app_privacy') }}">Politique de confidentialité</a>
+            </p>
+        </section>
+    </footer>
+
 
     </body>
 </html>

@@ -66,160 +66,245 @@
             background: #1d4ed8; 
           }
 
-      /* Groupe à droite */
-        header > div > div:nth-child(3) { 
-          margin-left: auto; 
-        } 
-        header > div > div:nth-child(3) ul { 
-          list-style: none; 
-          display: flex; 
-          gap: 1.5rem; 
+        /* Groupe à droite - Navigation actions utilisateur */
+          header > div > nav[aria-label="Actions utilisateur"] { 
+            margin-left: auto; 
+          } 
+          header > div > nav[aria-label="Actions utilisateur"] ul { 
+            list-style: none; 
+            display: flex; 
+            gap: 1.5rem; 
+          }
+
+          header > div > nav[aria-label="Actions utilisateur"] ul li a {
+            color: #374151;
+            font-weight: 500;
+            text-decoration: none;
+          }
+          header > div > nav[aria-label="Actions utilisateur"] ul li a:hover {
+            color: #2563eb; 
+          }
+
+          /* Forum */
+          header > div > nav[aria-label="Actions utilisateur"] ul li:first-child a {
+            font-weight: 700;
+            color: #2563eb;
+            background: #e5f0ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.4rem;
+          }
+
+    /* Connexion et Inscription */   
+
+      /* Connexion (avant-dernier lien) */
+        header > div > nav[aria-label="Actions utilisateur"] ul li:nth-last-child(2) a {
+          border: 2px solid #2563eb;
+          color: #2563eb;
+          padding: 0.4rem 1rem;
+          border-radius: 0.5rem;
+          font-weight: 600;
+          text-decoration: none;
         }
 
-        header > div > div:nth-child(3) ul li a {
+        header > div > nav[aria-label="Actions utilisateur"] ul li:nth-last-child(2) a:hover {
+          background: #2563eb;
+          color: white;
+        }
+
+      /* Inscription (dernier lien) */
+        header > div > nav[aria-label="Actions utilisateur"] ul li:last-child a {
+          background: #2563eb;
+          color: white;
+          padding: 0.4rem 1rem;
+          border-radius: 0.5rem;
+          font-weight: 600;
+          text-decoration: none;
+        }
+
+        header > div > nav[aria-label="Actions utilisateur"] ul li:last-child a:hover {
+          background: #1d4ed8;
+        }
+        
+      /* Seconde Ligne - Navigation principale */
+        header nav[aria-label="Navigation principale"] { 
+          background: #f9fafb; 
+          border-top: 1px solid #eee; 
+          border-bottom: 1px solid #eee; 
+        }
+
+        header nav[aria-label="Navigation principale"] ul {
+          list-style: none;
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          padding: 0.8rem 2rem;
+        }
+
+        header nav[aria-label="Navigation principale"] ul li a {
           color: #374151;
           font-weight: 500;
           text-decoration: none;
         }
-        header > div > div:nth-child(3) ul li a:hover {
+
+        header nav[aria-label="Navigation principale"] ul li a:hover { 
           color: #2563eb; 
+          text-decoration: underline; 
         }
 
-        /* Forum */
-        header > div > div:nth-child(3) ul li:first-child a {
-          font-weight: 700;
-        }
-        header > div > div:nth-child(3) ul li:first-child a {
-          color: #2563eb;
-        }
-        
-        header > div > div:nth-child(3) ul li:first-child a {
-          background:#e5f0ff;;
-          padding: 0.3rem 0.8rem;
-          border-radius: 0.4rem;
+      /* Navigation auteur */
+        header nav[aria-label="Actions auteur"] { 
+          background: #f9fafb; 
+          border-top: 1px solid #eee; 
+          border-bottom: 1px solid #eee; 
         }
 
-      /* Connexion et Inscription */   
+        header nav[aria-label="Actions auteur"] ul {
+          list-style: none;
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          padding: 0.8rem 2rem;
+        }
 
-        /* Connexion (avant-dernier lien) */
-          header > div > div:nth-child(3) ul li:nth-last-child(2) a {
-            border: 2px solid #2563eb;
-            color: #2563eb;
-            padding: 0.4rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-          }
+        header nav[aria-label="Actions auteur"] ul li a {
+          color: #374151;
+          font-weight: 500;
+          text-decoration: none;
+        }
 
-          header > div > div:nth-child(3) ul li:nth-last-child(2) a:hover {
-            background: #2563eb;
-            color: white;
-          }
-
-        /* Inscription (dernier lien) */
-          header > div > div:nth-child(3) ul li:last-child a {
-            background: #2563eb;
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-          }
-
-          header > div > div:nth-child(3) ul li:last-child a:hover {
-            background: #1d4ed8;
-          }
-            
-    /* Seconde Ligne */
-      header nav { 
-        background: #f9fafb; 
-        border-top: 1px solid #eee; 
-        border-bottom: 1px solid #eee; }
-
-      header nav ul {
-        list-style: none;
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        padding: 0.8rem 2rem;
-      }
-
-      header nav ul li a {
-        color: #374151;
-        font-weight: 500;
-        text-decoration: none;
-      }
-
-      header nav ul li a:hover { 
-        color: #2563eb; 
-        text-decoration: underline; 
-      }
-
+        header nav[aria-label="Actions auteur"] ul li a:hover { 
+          color: #2563eb; 
+          text-decoration: underline; 
+        }
+      
   /****** FOOTER ******/
 
-    /* footer commun  */
+    /* 
+      FOOTER 
+        1. Container principal
+        2. Grille 4 colonnes  
+        3. Titres et listes des sections
+        4. Liens et hovers
+        5. Navigation (Services & Ressources)
+        6. Section Contact (address)
+        7. Copyright (footer-bottom)
+      */
 
+    /* 1. CONTAINER PRINCIPAL */
+      /* Footer commun */
       footer {
-        background: #111827; 
+        background: #111827;
         color: #ffffff;
-        padding: 3rem 2rem 1.5rem;
+        padding: 3rem 0 1.5rem; 
+        width: 100%;
+        display: flex;  
+        flex-direction: column; 
+        align-items: center;  
       }
 
-    /* Premiere ligne */
+    /* 2. GRILLE 4 COLONNES */
+
+      /* Première ligne */
 
       .footer-content {
-        max-width: 1000px;  
+        max-width: 1200px;
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        gap: 4rem;    
         text-align: left;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        padding: 0 2rem
       }
 
-      .footer-section h4 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 0.8rem;
+  /* 3. TITRES ET LISTES DES SECTIONS */
+      section.footer-section h2 {
+          font-size: 1.1rem;
+          font-weight: 700;
+          margin-bottom: 0.8rem;
       }
 
-      .footer-section ul {
+      section.footer-section ul {
+          list-style: none;
+          padding: 0;
+      }
+
+      section.footer-section ul li {
+          margin-bottom: 0.4rem;
+          font-size: 1rem;
+      }
+
+  /* 4. LIENS ET HOVERS */
+      section.footer-section a {
+          color: rgba(255, 255, 255, 0.7);
+          text-decoration: none;
+      }
+
+      section.footer-section a:hover {
+          color: #ffffff;
+      }
+
+  /* 5. NAVIGATION (Services & Ressources) */
+    section.footer-section nav ul {
         list-style: none;
         padding: 0;
-      }
+    }
 
-      .footer-section ul li {
+    section.footer-section nav ul li {
         margin-bottom: 0.4rem;
         font-size: 1rem;
-      }
+    }
 
-      .footer-section a {
+    section.footer-section nav a {
         color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
-      }
+    }
 
-      .footer-section a:hover {
+    section.footer-section nav a:hover {
         color: #ffffff;
+    }
+
+  /* 6. SECTION CONTACT (address) */
+    section.footer-section address {
+        font-style: normal;
+    }
+
+    section.footer-section address ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    section.footer-section address ul li {
+        margin-bottom: 0.4rem;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+/* 7. COPYRIGHT (footer-bottom) */
+    section.footer-bottom {
+        width: 100%; /* Prend toute la largeur */
+        text-align: center;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+      /* Paragraphe footer-bottom */
+      section.footer-bottom p {
+          margin: 0;
+          padding: 0;
+          text-align: center;
       }
 
-    .footer-bottom {
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.6);
-    }
+      section.footer-bottom a {
+          color: rgba(255, 255, 255, 0.6);
+          text-decoration: none;
+      }
 
-    .footer-bottom a {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-    }
-
-    .footer-bottom a:hover {
-      color: #ffffff;
-    }
+      section.footer-bottom a:hover {
+          color: #ffffff;
+      }
 
 /* ========== Homme - Page D'Accueil ==========*/ 
 
@@ -620,10 +705,7 @@
   }
 
 
-
 /* ========== ECRIRE UN MESSAGE ==========*/
-
-
 
 
 /* ========== FORUM  ==========*/
@@ -639,36 +721,443 @@
 
   /****** CATEGORIE ******/
 
-    .forum-categories {
-      background: #f9fafb;
+  .forum-categories {
+    background: #f9fafb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+    width: 16rem;   
+    height: auto; 
+    align-self: flex-start; 
+  }
+
+  .forum-categories h2 {
+    margin-bottom: 1rem;
+  }
+
+  .forum-categories ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .forum-categories li {
+    margin: 2rem 0;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .forum-categories li:hover {
+    color: #2563eb;
+  }
+
+  .forum-categories a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .forum-categories a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+  /****** SUJET ******/
+
+    .forum-sujets {
+      background: white;
       border-radius: 0.75rem;
       padding: 1rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
-    .forum-categories ul {
+    .forum-sujets h2 {
+      margin-bottom: 1rem;
+    }
+
+    .forum-sujets ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    .forum-categories li {
-      margin: 2rem 0;
-      font-weight: 500;
+    .forum-sujets li {
+      margin-bottom: 0.75rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e5e7eb; 
+    }
+
+    .forum-sujets li:last-child {
+      border-bottom: none; /* pas de ligne sur le dernier */
+
+    }
+
+    /* Bouton modification sujet */
+      .forum-sujets ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+    /* Bouton Modifier Sujet */
+      .btn-edit-sujet {
+        color: #2563eb;
+        border: 1px solid #2563eb;
+        background-color: #fff;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .btn-edit-sujet:hover {
+        background-color: #2563eb;
+        color: #fff;
+      }
+
+  /****** BOUTON CREER UN SUJET ******/
+
+    .sujet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+    }
+
+    .btn-new-sujet {
+      display: inline-block;
+      padding: 0.6rem 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid #2563eb;
+      color: #2563eb;
+      background: #ffffff;
+      border-radius: 0.5rem;
+    }
+
+    .btn-new-sujet:hover {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+  /****** PAGE CRÉER UN SUJET ******/
+
+      .sujet-formulaire {
+        max-width: 800px;   
+        margin: 4rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
+      .sujet-formulaire h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        color: #2563eb;
+      }
+
+    /* Champs du formulaire */
+      
+      .sujet-formulaire label {
+        display: block;
+        margin: 1rem 0 0.5rem;
+        font-weight: 500;
+      }
+
+      .sujet-formulaire input[type="text"],
+      .sujet-formulaire select,
+      .sujet-formulaire textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: border 0.2s;
+      }
+
+      .sujet-formulaire input:focus,
+      .sujet-formulaire select:focus,
+      .sujet-formulaire textarea:focus {
+        border-color: #2563eb;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+  /* Agrandir la zone de texte */
+
+    .sujet-formulaire textarea {
+      min-height: 200px;
+      resize: vertical;
+    }
+
+  /* Bouton */
+  
+    .sujet-formulaire button {
+      margin-top: 1.5rem;
+      background: #2563eb;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
       cursor: pointer;
     }
 
-    .forum-categories li:hover {
+    .sujet-formulaire button:hover {
+      background: #1d4ed8;
+    }
+
+
+  /****** MESSAGE - CONTENU DU SUJET ******/
+
+    .messages {
+      margin-top: 2rem;
+    }
+
+    .message {
+      background: #fff;
+      border-radius: 0.5rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* En-tête du message  objectif : (auteur à gauche, date à droite) */
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .message-auteur {
       color: #2563eb;
     }
 
-  /****** SUJET ******/
-
-    .forum-subjects {
-      background: white;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    .message-date {
+      font-style: italic;
+      color: #777;
     }
 
-  /****** MESSAGE ******/
+    /* Texte du message */
+    .message-texte p {
+      line-height: 1.6;
+      margin: 0;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    /* Footer du message Plus tard pour repodnre et pour les futur stat ? */
+    .message-footer {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+  /****** MODIFIER LE MESSAGE ******/
+
+    .forum-message-edit {
+      background: #fff;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 2rem;
+      flex: 1; 
+    }
+
+    .forum-message-edit h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #2563eb;
+      text-align: center;
+    }
+
+    /* Champ du formulaire */
+    .forum-message-edit label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: 500;
+    }
+
+    .forum-message-edit textarea {
+      width: 100%;
+      min-height: 400px;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .forum-message-edit textarea:focus {
+      border-color: #2563eb;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Bouton */
+      .forum-message-edit .btn-submit {
+        margin-top: 1.5rem;
+        background: #2563eb;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: inline-block;
+      }
+
+      .forum-message-edit .btn-submit:hover {
+        background: #1d4ed8;
+      }
+
+      
+/* MODIFIER  ET REPONDRE */
+
+    .message-footer {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 1rem 0;
+      border-top: 1px solid #eee;
+    }
+
+  /* Bouton générique (a et button) */
+    .message-footer a,
+    .message-footer button {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 0.4rem;
+      text-decoration: none;
+      cursor: pointer;
+      background-color: #fff;
+    }
+
+  /* Répondre */
+    .btn-reply {
+      color: #2563eb;
+      border: 1px solid #2563eb;
+    }
+    .btn-reply:hover {
+      background-color: #2563eb;
+      color: #fff;
+    }
+
+  /* Modifier */
+    .btn-edit-message {
+      color: #2563eb;
+      border: 1px solid #2563eb;
+      margin-right: 0.5rem;
+    }
+    .btn-edit-message:hover {
+      background-color: #2563eb;
+      color: #fff;
+    }
+
+  /* Supprimer */
+    .btn-delete-message {
+      color: #dc2626;
+      border: 1px solid #dc2626;
+    }
+    .btn-delete-message:hover {
+      background-color: #dc2626;
+      color: #fff;
+    }
+
+  /****** MODIFIER LE SUJET ******/
+
+
+/****** MODIFIER LE SUJET — large & aéré, aligné au style “Créer un sujet” ******/
+
+/* carte/formulaire à droite */
+.forum-sujet-form{
+  align-self: start;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,.08);
+  padding: 2rem 2.5rem;
+  /* plus large et respirant que la version précédente */
+  max-width: 52rem;          /* ~ 832px */
+  width: 100%;
+}
+
+/* titre */
+.forum-sujet-form h1{
+  font-size: 2rem;
+  font-weight: 800;
+  color: #2563eb;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* espacement uniforme entre les champs, quel que soit le markup généré par form_row */
+.forum-sujet-form .form-container > *{
+  margin-bottom: 1.25rem;
+}
+
+/* labels lisibles */
+.forum-sujet-form label{
+  display: block;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 .5rem;
+}
+
+/* champs larges et confortables */
+.forum-sujet-form input[type="text"],
+.forum-sujet-form select,
+.forum-sujet-form textarea{
+  width: 100%;
+  padding: .9rem .95rem;
+  border: 1px solid #d1d5db;
+  border-radius: .5rem;
+  font-size: 1rem;
+  background: #fff;
+}
+
+/* textarea bien haut */
+.forum-sujet-form textarea{
+  min-height: 16rem;   /* plus haut que sur la version étroite */
+  resize: vertical;
+}
+
+/* focus accessible */
+.forum-sujet-form input:focus,
+.forum-sujet-form select:focus,
+.forum-sujet-form textarea:focus{
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+
+/* bouton */
+.forum-sujet-form .btn-submit{
+  display: inline-block;
+  margin-top: .5rem;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  padding: .9rem 1.6rem;
+  border: none;
+  border-radius: .55rem;
+  cursor: pointer;
+}
+.forum-sujet-form .btn-submit:hover{
+  background: #1d4ed8;
+}
+
+/* responsive : sur tablette/mobile, on empile, la carte prend toute la largeur */
+@media (max-width: 1024px){
+  .forum-container{ grid-template-columns: 1fr; }
+  .forum-sujet-form{ max-width: 100%; }
+}
