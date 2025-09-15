@@ -1,3 +1,4 @@
+{# templates/forum/sujet_show.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ sujet.titre }} - Forum{% endblock %}
@@ -57,14 +58,12 @@
                           <p>{{ message.texte }}</p>
                       </div>
 
-                      <!-- Footer du message ( Ulérieurement pour:  répondre, stats, etc.) -->
+                      <!-- Footer du message -->
                       <div class="message-footer">
-                          {# Bouton gauche #}
                           <div class="footer-left">
                               <a href="#" class="btn-reply">Répondre</a>
                           </div>
 
-                          {# Boutons droits : Modifier + Supprimer (uniquement si auteur) #}
                           <div class="footer-right">
                               {% if app.user and app.user.id == message.auteur.id %}
                                   <a href="{{ path('app_forum_message_edit', { id: message.id }) }}" 
@@ -86,8 +85,23 @@
                 {% else %}
                   <p>Aucun message pour le moment.</p>
                 {% endfor %}
-
               </section>
+
+              <!-- Formulaire réponse -->
+              {% if app.user %}
+                <section class="message-formulaire">
+                    <h2>Répondre</h2>
+                    {{ form_start(form) }}
+                        {{ form_widget(form.texte, { 'attr': {'placeholder': 'Partager votre point de vue...'} }) }}
+                        <button type="submit" class="btn-submit">Publier</button>
+                    {{ form_end(form) }}
+                </section>
+              {% else %}
+                <p>
+                  <a href="{{ path('app_login') }}">Connectez-vous</a> ou 
+                  <a href="{{ path('app_register') }}">inscrivez-vous</a> pour répondre.
+                </p>
+              {% endif %}
           </article>
 
       </div>

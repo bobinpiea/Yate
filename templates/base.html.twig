@@ -19,63 +19,64 @@
 
     <body>
 
-        <header>
-            <!-- Première ligne : logo + CTA + actions utilisateurs -->
-            <div>
-                <!-- Logo -->
-                <div>
-                    <a href="{{ path('app_home')}}"><span>Ayitate</span></a>
-                </div>
+<header>
+    <!-- Ligne 1 : Logo + CTA + Actions utilisateurs -->
+    <div class="header-top">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="{{ path('app_home')}}"><span>Ayitate</span></a>
+        </div>
 
-                <!-- Bouton Déposer une annonce -->
-                <div>
-                    <a href="#publier">Déposer une annonce</a>
-                </div>
+        <!-- CTA : Déposer une annonce -->
+        <div class="cta-annonce">
+            <a href="#publier">Déposer une annonce</a>
+        </div>
 
-                <!-- Les actions de l'utilisateur -->
-                <nav aria-label="Actions utilisateur">
-                    <ul>
-                        <li><a href=" {{ path('app_forum')}}">Forum</a></li>
-                        <li><a href="#favoris">Favoris</a></li>
-                        <li><a href="#messages">Messages</a></li>
+        <!-- Actions utilisateur -->
+        <nav class="user-actions" aria-label="Actions utilisateur">
+            <ul>
+                <li class="forum"><a href="{{ path('app_forum')}}">Forum</a></li>
+                <li><a href="#favoris">Favoris</a></li>
+                <li><a href="#messages">Messages</a></li>
 
-                    {% if app.user %}
-                        <li><a href="{{ path('app_profile')}}">Mon profil</a></li>
-                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
-                    {% else %}
-                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
-                        <li><a href="{{ path('app_register')}}">Inscription</a></li>
-                    {% endif %}
+                {% if app.user %}
+                    <!-- Utilisateur connecté -->
+                    <li class="connexion"><a href="{{ path('app_profile')}}">Mon profil</a></li>
+                    <li class="inscription"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                {% else %}
+                    <!-- Utilisateur non connecté -->
+                    <li class="connexion"><a href="{{ path('app_login') }}">Connexion</a></li>
+                    <li class="inscription"><a href="{{ path('app_register')}}">Inscription</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- Ligne 2 : Navigation principale -->
+    <nav class="main-nav" aria-label="Navigation principale">
+        <ul>
+            <li><a href="#achat">Achat</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#colocation">Colocation</a></li>
+            <li><a href="#evenements">Événements</a></li>
+            <li><a href="{{ path('conseil_expert') }}">Conseils d'experts</a></li>
+            <li><a href="{{ path('conseil_deco') }}">Déco</a></li>
+            <li><a href="#annuaire">Annuaire Pro</a></li>
+            <li><a href="#evenements">Services de déménagement</a></li>
+            <li><a href="#Immobiliers">Immobiliers</a></li>
+            <li><a href="#Simulateur">Simulateurs</a></li>
+        </ul>
+    </nav>
 
-                    </ul>
-                </nav>
-            </div>
-            
-            <!-- Seconde Ligne : navigation des rubriques -->
-            <nav aria-label="Navigation principale">
-                <ul>
-                    <li><a href="#achat">Achat</a></li>
-                    <li><a href="#location">Location</a></li>
-                    <li><a href="#colocation">Colocation</a></li>
-                    <li><a href="#evenements">Événements</a></li>
-                    <li><a href="{{ path('conseil_expert') }}">Conseils d'experts</a></li>
-                    <li><a href="{{ path('conseil_deco') }}">Déco</a></li>
-                    <li><a href="#annuaire">Annuaire Pro</a></li>
-                    <li><a href="#evenements">Services de déménagement</a></li>
-                    <li><a href="#Immobiliers">Immobiliers</a></li>
-                    <li><a href="#Simulateur">Simulateurs</a></li>
-                </ul>
-            </nav>
-            
-            {% if app.user %}
-            <nav aria-label="Actions auteur">
-                <ul>
-                    <li><a href="{{ path('blog_new') }}">Écrire un article</a></li>
-                </ul>
-            </nav>
-            {% endif %}
-        </header>
-
+    <!-- Ligne 3 : Actions rôles (auteur / modérateur / admin) -->
+    {% if app.user %}
+    <nav class="role-actions" aria-label="Actions rôles">
+        <ul>
+            <li><a href="{{ path('blog_new') }}">Écrire un article</a></li>
+        </ul>
+    </nav>
+    {% endif %}
+</header>
         
         {% block body %}
         

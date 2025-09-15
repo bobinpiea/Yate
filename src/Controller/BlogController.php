@@ -7,7 +7,7 @@ use App\Form\BlogType;
 use App\Repository\BlogRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Attribute\Route; // Classe à laquelle appartient l’attribut de Route
 use Symfony\Component\HttpFoundation\Response; // Répresente la reponse de HTTP enovoyée au navigateur
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Hérite de cette méthode pour avoir droit à des méthodes (ex: Render)
 
@@ -28,7 +28,7 @@ final class BlogController extends AbstractController // Final car on ne pourra 
         /* PAGE : CONSEIL D'EXPERT - ( Elle sera publique ) */
             
             //  Cette méthode affichera tous les articles de la catégorie expertise
-                    #[Route('/conseil_expert', name: 'conseil_expert')]
+                    #[Route('/conseil_expert', name: 'conseil_expert')] // = 2 arguments minimaux 
                 public function showExpertArticles(BlogRepository $blogRepository): Response
                 {
                     // On récupère les articles dont la catégorie est "expertise"

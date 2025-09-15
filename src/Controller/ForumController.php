@@ -105,21 +105,46 @@ final class ForumController extends AbstractController
             ]);
         }
 
-    // AFFICHER UN SUJET
+        // Afficher un sujet + ses messages + formulaire de réponse
         #[Route('/forum/sujet/{id}', name: 'app_forum_sujet_show')]
-        public function showSujet(Sujet $sujet, MessageRepository $messageRepository, CategorieRepository $categorieRepository): Response
-        {
-            $messages = $messageRepository->findBy(
-                ['sujet' => $sujet],
-                ['dateMessage' => 'ASC']
-            );
+        public function showSujet( Sujet $sujet, Request $request, EntityManagerInterface $entityManager,CategorieRepository $categorieRepository): Response {
+            
+            // On recupère les message d'un sujet
+            $messages = $sujet->getMessages();
+
+            // Un nouveau message
+            $message = new Message();
+            $form = $this->createForm(MessageType::class, $message);
+            $form->handleRequest($request);
+
+            // Vérification si le formulaire soumis est valide
+            if ($form->isSubmitted() && $form->isValid()) {
+                if (!$this->getUser()) {
+                    $this->addFlash('error', 'Vous devez être connecté pour répondre.');
+                    return $this->redirectToRoute('app_login');
+                }
+
+                $message->setAuteur($this->getUser());
+                $message->setSujet($sujet);
+                $message->setDateMessage(new \DateTime());
+
+                $entityManager->persist($message);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre réponse a été publiée !');
+
+                return $this->redirectToRoute('app_forum_sujet_show', [
+                    'id' => $sujet->getId(),
+                ]);
+            }
 
             $categories = $categorieRepository->findAll();
 
             return $this->render('forum/sujet_show.html.twig', [
+                'categories' => $categories,
                 'sujet' => $sujet,
                 'messages' => $messages,
-                'categories' => $categories,
+                'form' => $form->createView(),
             ]);
         }
 
@@ -259,5 +284,45 @@ final class ForumController extends AbstractController
                 'id' => $message->getSujet()->getId(),
             ]);
         }
+
+
+    // ECRIRE UN MESSAGE
+        #[Route('/forum/sujet/{id}/message/new', name: 'app_forum_message_new')] public function newMessage( Sujet $sujet, Request $request, EntityManagerInterface $entityManager): Response {
+        
+            //On vérifie tjrs que l'utilisateur est connecté sinon on le reédirige
+        if (!$this->getUser()) {
+            $this->addFlash('error', 'Vous devez être connecté pour écrire un message.');
+            return $this->redirectToRoute('app_login');
+        }
+
+        //
+        $message = new Message();
+        $message->setSujet($sujet);                     
+        $message->setAuteur($this->getUser());          
+        $message->setDateMessage(new \DateTime());     
+
+        //
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        // 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($message);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre message a été publié.');
+
+            // Redirection
+            return $this->redirectToRoute('app_forum_sujet_show', [
+                'id' => $sujet->getId(),
+            ]);
+        }
+
+        // Afficher à nouveau en cas d'errur
+        return $this->render('forum/message_new.html.twig', [
+            'form' => $form->createView(),
+            'sujet' => $sujet,
+        ]);
+    }
 
 }
