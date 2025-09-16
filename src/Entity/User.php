@@ -95,12 +95,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     #[ORM\OneToMany(targetEntity: Categorie::class, mappedBy: 'createur')]
     private Collection $categories;
 
+    /**
+     * @var Collection<int, Annonce>
+     */
+    #[ORM\OneToMany(targetEntity: Annonce::class, mappedBy: 'user')]
+    private Collection $annonces;
+
+    /**
+     * @var Collection<int, Annonce>
+     */
+    #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'certificateurs')]
+    private Collection $annoncesCertifiees;
+
+    /**
+     * @var Collection<int, Annonce>
+     */
+    #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'users')]
+    private Collection $annoncesFavorites;
+
+    /**
+     * @var Collection<int, Echanger>
+     */
+    #[ORM\OneToMany(targetEntity: Echanger::class, mappedBy: 'expediteur')]
+    private Collection $messagesEnvoyes;
+
+    /**
+     * @var Collection<int, Echanger>
+     */
+    #[ORM\OneToMany(targetEntity: Echanger::class, mappedBy: 'destinataire')]
+    private Collection $messagesRecus;
+
+    /**
+     * @var Collection<int, Signalement>
+     */
+    #[ORM\OneToMany(targetEntity: Signalement::class, mappedBy: 'auteur')]
+    private Collection $signalements;
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->sujets = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
+        $this->annoncesCertifiees = new ArrayCollection();
+        $this->annoncesFavorites = new ArrayCollection();
+        $this->messagesEnvoyes = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
+        $this->signalements = new ArrayCollection();
     }
 
     // Getter pour récupérer lid de l'utilisateur (Clé primaire)
@@ -348,6 +390,174 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
             // set the owning side to null (unless already changed)
             if ($category->getCreateur() === $this) {
                 $category->setCreateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonce>
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonce $annonce): static
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces->add($annonce);
+            $annonce->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonce $annonce): static
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            // set the owning side to null (unless already changed)
+            if ($annonce->getUser() === $this) {
+                $annonce->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonce>
+     */
+    public function getAnnoncesCertifiees(): Collection
+    {
+        return $this->annoncesCertifiees;
+    }
+
+    public function addAnnoncesCertifiee(Annonce $annoncesCertifiee): static
+    {
+        if (!$this->annoncesCertifiees->contains($annoncesCertifiee)) {
+            $this->annoncesCertifiees->add($annoncesCertifiee);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnoncesCertifiee(Annonce $annoncesCertifiee): static
+    {
+        $this->annoncesCertifiees->removeElement($annoncesCertifiee);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonce>
+     */
+    public function getAnnoncesFavorites(): Collection
+    {
+        return $this->annoncesFavorites;
+    }
+
+    public function addAnnoncesFavorite(Annonce $annoncesFavorite): static
+    {
+        if (!$this->annoncesFavorites->contains($annoncesFavorite)) {
+            $this->annoncesFavorites->add($annoncesFavorite);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnoncesFavorite(Annonce $annoncesFavorite): static
+    {
+        $this->annoncesFavorites->removeElement($annoncesFavorite);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Echanger>
+     */
+    public function getMessagesEnvoyes(): Collection
+    {
+        return $this->messagesEnvoyes;
+    }
+
+    public function addMessagesEnvoye(Echanger $messagesEnvoye): static
+    {
+        if (!$this->messagesEnvoyes->contains($messagesEnvoye)) {
+            $this->messagesEnvoyes->add($messagesEnvoye);
+            $messagesEnvoye->setExpediteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEnvoye(Echanger $messagesEnvoye): static
+    {
+        if ($this->messagesEnvoyes->removeElement($messagesEnvoye)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesEnvoye->getExpediteur() === $this) {
+                $messagesEnvoye->setExpediteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Echanger>
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecu(Echanger $messagesRecu): static
+    {
+        if (!$this->messagesRecus->contains($messagesRecu)) {
+            $this->messagesRecus->add($messagesRecu);
+            $messagesRecu->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecu(Echanger $messagesRecu): static
+    {
+        if ($this->messagesRecus->removeElement($messagesRecu)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesRecu->getDestinataire() === $this) {
+                $messagesRecu->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Signalement>
+     */
+    public function getSignalements(): Collection
+    {
+        return $this->signalements;
+    }
+
+    public function addSignalement(Signalement $signalement): static
+    {
+        if (!$this->signalements->contains($signalement)) {
+            $this->signalements->add($signalement);
+            $signalement->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSignalement(Signalement $signalement): static
+    {
+        if ($this->signalements->removeElement($signalement)) {
+            // set the owning side to null (unless already changed)
+            if ($signalement->getAuteur() === $this) {
+                $signalement->setAuteur(null);
             }
         }
 

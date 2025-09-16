@@ -34,7 +34,7 @@
                 {% for message in messages %}
                   <article class="message">
 
-                      <!-- En-tête du message -->
+                    
                       <div class="message-header">
                           <span class="message-auteur">
                             {% if message.auteur and message.auteur.pseudo %}
@@ -58,7 +58,7 @@
                           <p>{{ message.texte }}</p>
                       </div>
 
-                      <!-- Footer du message -->
+                      <!-- Footer du message : UX - REVOIR LE CSS PEUT ETRE -->
                       <div class="message-footer">
                           <div class="footer-left">
                               <a href="#" class="btn-reply">Répondre</a>
