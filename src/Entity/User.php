@@ -111,6 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
      * @var Collection<int, Annonce>
      */
     #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'users')]
+    #[ORM\JoinTable(name: 'user_annonce_favorite')]
     private Collection $annoncesFavorites;
 
     /**
