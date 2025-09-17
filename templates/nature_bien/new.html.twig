@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New NatureBien{% endblock %}
+
+{% block body %}
+    <h1>Create new NatureBien</h1>
+
+    {{ include('nature_bien/_form.html.twig') }}
+
+    <a href="{{ path('app_nature_bien_index') }}">back to list</a>
+{% endblock %}
