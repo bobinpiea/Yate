@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déposer une annonce immobilière - Ayitate{% endblock %}
+
+{% block body %}
+<main class="contenu-annonce">
+
+    <header class="entete-page">
+        <h1 class="titre-principal">Déposer une annonce immobilière</h1>
+        <p class="texte-intro">Remplissez les informations ci-dessous pour proposer votre bien.</p>
+    </header>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-message flash-{{ label }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(form, { attr: { id: 'annonce-form', class: 'formulaire-annonce' } }) }}
+
+        <section class="bloc-formulaire">
+            <div class="ligne-formulaire">
+                <div class="colonne-formulaire">
+                    {{ form_row(form.transaction, {
+                        label: 'Vous souhaitez Effectuer une :',
+                        attr: {'data-ajax-trigger': 1}
+                    }) }}
+                </div>
+                <div class="colonne-formulaire">
+                    {{ form_row(form.nature, {
+                        label: 'Quelle est la nature du bien :',
+                        attr: {'data-ajax-trigger': 1}
+                    }) }}
+                </div>
+            </div>
+
+            <div class="zone-suivant">
+                <button type="button" id="btn-suivant" class="bouton-secondaire">Suivant</button>
+            </div>
+        </section>
+
+        <section id="details" class="bloc-details">
+            {% include 'annonce/_details_fields.html.twig' with { form: form.details } %}
+        </section>
+
+        <div class="zone-bouton">
+            <button type="submit" class="bouton-principal">Publier l'annonce</button>
+        </div>
+
+    {{ form_end(form) }}
+
+</main>
+
+<script>
+(function(){
+  const form = document.getElementById('annonce-form');
+  const details = document.getElementById('details');
+  const boutonSuivant = document.getElementById('btn-suivant');
+
+  function refreshDetails() {
+    const fd = new FormData(form);
+    fetch('{{ path("annonce_preview") }}', {
+      method: 'POST',
+      headers: {'X-Requested-With': 'XMLHttpRequest'},
+      body: fd
+    }).then(r => r.json()).then(({form}) => {
+      details.innerHTML = form;
+      details.scrollIntoView({ behavior: 'smooth' }); // petit scroll fluide vers le bloc
+    });
+  }
+
+  boutonSuivant.addEventListener('click', () => {
+    refreshDetails();
+  });
+})();
+</script>
+{% endblock %}

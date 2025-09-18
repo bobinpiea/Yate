@@ -60,7 +60,7 @@ final class BlogController extends AbstractController // Final car on ne pourra 
         #[Route('/blog/new', name: 'blog_new')]
         public function new(Request $request, EntityManagerInterface $entityManager): Response
         {
-            //1. Création d'un objet blog, car on part d'un article vide
+            // Création d'un objet blog, car on part d'un article vide
             $blog = new Blog();
 
             // 2. On lit le formulaire à notre objet $blog

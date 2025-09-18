@@ -1,0 +1,9 @@
+{% if form is defined %}
+  <section class="sous-formulaire-annonce">
+    {% for champ in form %}
+      <div class="champ-annonce">
+        {{ form_row(champ) }}
+      </div>
+    {% endfor %}
+  </section>
+{% endif %}

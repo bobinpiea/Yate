@@ -1,0 +1,234 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Annonce;
+use App\Entity\NatureBien;
+use App\Entity\Transaction;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type as FormType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class AnnonceAjaxType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $formBuilder, array $options): void
+    {
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $options['entityManager'];
+
+        $formBuilder
+            ->add('transaction', EntityType::class, [
+                'class' => Transaction::class,
+                'choice_label' => 'typeTransaction',
+                'placeholder' => '— Type de transaction —',
+                'required' => true,
+                'attr' => ['data-ajax-trigger' => '1'],
+            ])
+            ->add('nature', EntityType::class, [
+                'class' => NatureBien::class,
+                'choice_label' => 'nom',
+                'placeholder' => '— Nature du bien —',
+                'required' => true,
+                'attr' => ['data-ajax-trigger' => '1'],
+            ])
+            ->add('details', FormType\FormType::class, [
+                'mapped' => false,
+            ]);
+
+        $addAnnonceFields = function (FormInterface $form, string $natureLabel, string $transactionLabel): void {
+            $details = $form->get('details');
+
+            $details
+                ->add('titre', FormType\TextType::class, [
+                    'constraints' => [
+                        new NotBlank(['message' => 'Le titre est obligatoire.']),
+                        new Length([
+                            'min' => 5,
+                            'minMessage' => 'Le titre doit faire au moins {{ limit }} caractères.',
+                        ]),
+                    ],
+                ])
+                ->add('description', FormType\TextareaType::class, [
+                    'attr' => ['rows' => 6],
+                    'constraints' => [
+                        new NotBlank(['message' => 'La description est obligatoire.']),
+                        new Length([
+                            'min' => 20,
+                            'minMessage' => 'La description doit faire au moins {{ limit }} caractères.',
+                        ]),
+                    ],
+                ])
+                ->add('ville', FormType\TextType::class, [
+                    'constraints' => [
+                        new NotBlank(['message' => 'La ville est obligatoire.']),
+                        new Length([
+                            'min' => 2,
+                            'minMessage' => 'Le nom de la ville doit faire au moins {{ limit }} caractères.',
+                        ]),
+                    ],
+                ])
+                ->add('commune', FormType\TextType::class, [
+                    'constraints' => [
+                        new NotBlank(['message' => 'La commune est obligatoire.']),
+                        new Length([
+                            'min' => 2,
+                            'minMessage' => 'La commune doit faire au moins {{ limit }} caractères.',
+                        ]),
+                    ],
+                ])
+                ->add('prix', FormType\MoneyType::class, [
+                    'currency' => 'XOF',
+                    'constraints' => [
+                        new NotBlank(['message' => 'Le prix est obligatoire.']),
+                        new GreaterThan(['value' => 0, 'message' => 'Le prix doit être supérieur à 0 FCFA.']),
+                    ],
+                ])
+                ->add('charge', FormType\MoneyType::class, [
+                    'currency' => 'XOF',
+                    'required' => in_array(strtolower($transactionLabel), ['location', 'colocation'], true),
+                    'constraints' => [
+                        new GreaterThan(['value' => 0, 'message' => 'Les charges doivent être supérieures à 0 FCFA.'])
+                    ]
+                ])
+                ->add('date_debut', FormType\DateType::class, [
+                    'required' => false,
+                    'widget' => 'single_text',
+                    'html5' => true,
+                    'constraints' => [
+                        new GreaterThanOrEqual([
+                            'value' => 'today',
+                            'message' => 'La date de début ne peut pas être antérieure.',
+                        ]),
+                    ],
+                ])
+                ->add('date_fin', FormType\DateType::class, [
+                    'required' => false,
+                    'widget' => 'single_text',
+                    'html5' => true,
+                    'constraints' => [
+                        new GreaterThanOrEqual([
+                            'value' => 'today',
+                            'message' => 'La date de fin ne peut pas être antérieure.',
+                        ]),
+                    ],
+                ]);
+
+            $nature = strtolower($natureLabel);
+
+            if (str_contains($nature, 'maison')) {
+                $details
+                    ->add('superficie', FormType\IntegerType::class, [
+                        'constraints' => [
+                            new NotBlank(['message' => 'La superficie est obligatoire.']),
+                            new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
+                        ]
+                    ])
+                    ->add('surface_habitable', FormType\IntegerType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new GreaterThan(['value' => 0, 'message' => 'La surface habitable doit être positive.'])
+                        ]
+                    ])
+                    ->add('nb_pieces', FormType\IntegerType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new GreaterThan(['value' => 0, 'message' => 'Le nombre de pièces doit être supérieur à 0.'])
+                        ]
+                    ])
+                    ->add('nb_chambres', FormType\IntegerType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new GreaterThan(['value' => 0, 'message' => 'Le nombre de chambres doit être supérieur à 0.'])
+                        ]
+                    ])
+                    ->add('annee_construction', FormType\IntegerType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new GreaterThan(['value' => 1800, 'message' => 'L’année doit être supérieure à 1800.'])
+                        ]
+                    ])
+                    ->add('garage', FormType\CheckboxType::class, ['required' => false])
+                    ->add('jardin', FormType\CheckboxType::class, ['required' => false])
+                    ->add('piscine', FormType\CheckboxType::class, ['required' => false])
+                    ->add('terrasse', FormType\CheckboxType::class, ['required' => false])
+                    ->add('climatisateur', FormType\CheckboxType::class, ['required' => false])
+                    ->add('cuisine', FormType\CheckboxType::class, ['required' => false])
+                    ->add('wc', FormType\CheckboxType::class, ['required' => false])
+                    ->add('salon', FormType\CheckboxType::class, ['required' => false])
+                    ->add('apatam', FormType\CheckboxType::class, ['required' => false]);
+
+            } elseif (str_contains($nature, 'appartement')) {
+                $details
+                    ->add('superficie', FormType\IntegerType::class, [
+                        'constraints' => [
+                            new NotBlank(['message' => 'La superficie est obligatoire.']),
+                            new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
+                        ]
+                    ])
+                    ->add('nb_pieces', FormType\IntegerType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new GreaterThan(['value' => 0, 'message' => 'Le nombre de pièces doit être supérieur à 0.'])
+                        ]
+                    ])
+                    ->add('nb_chambres', FormType\IntegerType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new GreaterThan(['value' => 0, 'message' => 'Le nombre de chambres doit être supérieur à 0.'])
+                        ]
+                    ])
+                    ->add('etage', FormType\IntegerType::class, [
+                        'required' => false,
+                        'constraints' => [
+                            new GreaterThan(['value' => 0, 'message' => 'L’étage doit être supérieur à 0.'])
+                        ]
+                    ])
+                    ->add('ascenseur', FormType\CheckboxType::class, ['required' => false])
+                    ->add('balcon', FormType\CheckboxType::class, ['required' => false])
+                    ->add('terrasse', FormType\CheckboxType::class, ['required' => false])
+                    ->add('cuisine', FormType\CheckboxType::class, ['required' => false]);
+
+            } elseif (str_contains($nature, 'terrain')) {
+
+                $details
+                    ->add('superficie', FormType\IntegerType::class, [
+                        'constraints' => [
+                            new NotBlank(['message' => 'La superficie est obligatoire.']),
+                            new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.']),
+                        ]
+                    ])
+                    ->add('constructible', FormType\CheckboxType::class, ['required' => false])
+                    ->add('viabilise', FormType\CheckboxType::class, ['required' => false]);
+            }
+        };
+
+        $formBuilder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $formEvent) use ($entityManager, $addAnnonceFields) {
+            
+            $formData = $formEvent->getData() ?? [];
+            if (empty($formData['transaction']) || empty($formData['nature'])) return;
+
+            $transaction = $entityManager->getRepository(Transaction::class)->find($formData['transaction']);
+            $natureBien = $entityManager->getRepository(NatureBien::class)->find($formData['nature']);
+
+            if ($transaction && $natureBien) {
+                $addAnnonceFields($formEvent->getForm(), $natureBien->getNom(), $transaction->getTypeTransaction());
+            }
+        });
+    }
+
+    public function configureOptions(OptionsResolver $optionsResolver): void
+    {
+        $optionsResolver->setDefaults(['data_class' => null]);
+        $optionsResolver->setRequired('entityManager');
+    }
+}
