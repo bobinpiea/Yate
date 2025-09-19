@@ -1,9 +1,29 @@
 {% if form is defined %}
   <section class="sous-formulaire-annonce">
-    {% for champ in form %}
-      <div class="champ-annonce">
-        {{ form_row(champ) }}
-      </div>
-    {% endfor %}
+
+    {# Bloc 1 : Champs obligatoires #}
+    <div class="bloc-obligatoire">
+      <h2 class="titre-bloc"> Informations obligatoires</h2>
+      {% for champ in form %}
+        {% if champ.vars.attr['data-obligatoire'] is defined %}
+          <div class="champ-annonce">
+            {{ form_row(champ) }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {# Bloc 2 : Champs optionnels #}
+    <div class="bloc-optionnel">
+      <h2 class="titre-bloc">Informations facultatives</h2>
+      {% for champ in form %}
+        {% if champ.vars.attr['data-obligatoire'] is not defined %}
+          <div class="champ-annonce">
+            {{ form_row(champ) }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
   </section>
 {% endif %}

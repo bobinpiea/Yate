@@ -34,7 +34,7 @@ class Annonce
     #[ORM\Column]
     private ?int $prix = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $datePublication = null;
 
     #[ORM\Column(length: 20, nullable: true)]
@@ -50,7 +50,7 @@ class Annonce
     private ?int $nbChambres = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeInterface $anneeConstruction = null;
+    private ?int $anneeConstruction = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $salleBain = null;
@@ -296,12 +296,12 @@ class Annonce
         return $this;
     }
 
-    public function getAnneeConstruction(): ?\DateTimeInterface
+    public function getAnneeConstruction(): ?int
     {
         return $this->anneeConstruction;
     }
 
-    public function setAnneeConstruction(?\DateTimeInterface $anneeConstruction): static
+    public function setAnneeConstruction(?int $anneeConstruction): static
     {
         $this->anneeConstruction = $anneeConstruction;
         return $this;

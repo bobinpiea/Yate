@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+
+// POUR LES INT PRIX - CHARGES penser a nettoyer les , les . les espaces 
+
 class AnnonceAjaxType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $formBuilder, array $options): void
@@ -30,14 +33,14 @@ class AnnonceAjaxType extends AbstractType
             ->add('transaction', EntityType::class, [
                 'class' => Transaction::class,
                 'choice_label' => 'typeTransaction',
-                'placeholder' => '— Type de transaction —',
+                'placeholder' => 'Type de transaction',
                 'required' => true,
                 'attr' => ['data-ajax-trigger' => '1'],
             ])
             ->add('nature', EntityType::class, [
                 'class' => NatureBien::class,
                 'choice_label' => 'nom',
-                'placeholder' => '— Nature du bien —',
+                'placeholder' => 'Nature du bien',
                 'required' => true,
                 'attr' => ['data-ajax-trigger' => '1'],
             ])
@@ -48,6 +51,7 @@ class AnnonceAjaxType extends AbstractType
         $addAnnonceFields = function (FormInterface $form, string $natureLabel, string $transactionLabel): void {
             $details = $form->get('details');
 
+            // Champs communs à toutes les annonces (obligatoires)
             $details
                 ->add('titre', FormType\TextType::class, [
                     'constraints' => [
@@ -57,9 +61,17 @@ class AnnonceAjaxType extends AbstractType
                             'minMessage' => 'Le titre doit faire au moins {{ limit }} caractères.',
                         ]),
                     ],
+                    'attr' => [
+                        'data-obligatoire' => true,
+                        'placeholder' => 'Ex : Villa moderne avec piscine à Cocody',
+                    ],
                 ])
                 ->add('description', FormType\TextareaType::class, [
-                    'attr' => ['rows' => 6],
+                    'attr' => [
+                        'rows' => 6,
+                        'data-obligatoire' => true,
+                        'placeholder' => 'Décrivez le bien, ses caractéristiques, son environnement...'
+                    ],
                     'constraints' => [
                         new NotBlank(['message' => 'La description est obligatoire.']),
                         new Length([
@@ -76,6 +88,10 @@ class AnnonceAjaxType extends AbstractType
                             'minMessage' => 'Le nom de la ville doit faire au moins {{ limit }} caractères.',
                         ]),
                     ],
+                    'attr' => [
+                        'data-obligatoire' => true,
+                        'placeholder' => 'Ex : Abidjan',
+                    ],
                 ])
                 ->add('commune', FormType\TextType::class, [
                     'constraints' => [
@@ -85,6 +101,10 @@ class AnnonceAjaxType extends AbstractType
                             'minMessage' => 'La commune doit faire au moins {{ limit }} caractères.',
                         ]),
                     ],
+                    'attr' => [
+                        'data-obligatoire' => true,
+                        'placeholder' => 'Ex : Cocody, Yopougon…',
+                    ],
                 ])
                 ->add('prix', FormType\MoneyType::class, [
                     'currency' => 'XOF',
@@ -92,44 +112,75 @@ class AnnonceAjaxType extends AbstractType
                         new NotBlank(['message' => 'Le prix est obligatoire.']),
                         new GreaterThan(['value' => 0, 'message' => 'Le prix doit être supérieur à 0 FCFA.']),
                     ],
-                ])
-                ->add('charge', FormType\MoneyType::class, [
-                    'currency' => 'XOF',
-                    'required' => in_array(strtolower($transactionLabel), ['location', 'colocation'], true),
-                    'constraints' => [
-                        new GreaterThan(['value' => 0, 'message' => 'Les charges doivent être supérieures à 0 FCFA.'])
-                    ]
-                ])
-                ->add('date_debut', FormType\DateType::class, [
-                    'required' => false,
-                    'widget' => 'single_text',
-                    'html5' => true,
-                    'constraints' => [
-                        new GreaterThanOrEqual([
-                            'value' => 'today',
-                            'message' => 'La date de début ne peut pas être antérieure.',
-                        ]),
-                    ],
-                ])
-                ->add('date_fin', FormType\DateType::class, [
-                    'required' => false,
-                    'widget' => 'single_text',
-                    'html5' => true,
-                    'constraints' => [
-                        new GreaterThanOrEqual([
-                            'value' => 'today',
-                            'message' => 'La date de fin ne peut pas être antérieure.',
-                        ]),
+                    'attr' => [
+                        'data-obligatoire' => true,
+                        'placeholder' => 'Ex : 12 000 000', // PENSE A NETTOYER CE CHAMPS
                     ],
                 ]);
+
+            // Champs spécifiques à location / colocation
+            if (in_array(strtolower($transactionLabel), ['location', 'colocation'], true)) {
+                $details
+                    ->add('charge', FormType\MoneyType::class, [
+                        'currency' => 'XOF',
+                        'required' => false,
+                        'attr' => [
+                            'placeholder' => 'Ex : 15 000' // ICI NETTOYER 
+                        ],
+                        'constraints' => [
+                            new GreaterThan([
+                                'value' => 0,
+                                'message' => 'Les charges doivent être supérieures à 0 FCFA.'
+                            ])
+                        ]
+                    ])
+                    ->add('date_debut', FormType\DateType::class, [
+                        'required' => false,
+                        'widget' => 'single_text',
+                        'html5' => true,
+                        'constraints' => [
+                            new GreaterThanOrEqual([
+                                'value' => 'today',
+                                'message' => 'La date de début ne peut pas être antérieure.',
+                            ]),
+                        ],
+                    ])
+                    ->add('date_fin', FormType\DateType::class, [
+                        'required' => false,
+                        'widget' => 'single_text',
+                        'html5' => true,
+                        'constraints' => [
+                            new GreaterThanOrEqual([
+                                'value' => 'today',
+                                'message' => 'La date de fin ne peut pas être antérieure.',
+                            ]),
+                        ],
+                    ]);
+                
+                // Si colocation uniquement : champ nb_colocataires
+                if (strtolower($transactionLabel) === 'colocation') {
+                    $details->add('nb_colocataires', FormType\IntegerType::class, [
+                        'required' => false,
+                                'attr' => [
+                                'placeholder' => 'Ex : 3'
+                            ],
+                        'constraints' => [
+                            new GreaterThan([
+                                'value' => 0,
+                                'message' => 'Le nombre de colocataires doit être supérieur à 0.'
+                            ])
+                        ]
+                    ]);
+                }
+            }
 
             $nature = strtolower($natureLabel);
 
             if (str_contains($nature, 'maison')) {
                 $details
                     ->add('superficie', FormType\IntegerType::class, [
+                        'required' => false,
                         'constraints' => [
-                            new NotBlank(['message' => 'La superficie est obligatoire.']),
                             new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
                         ]
                     ])
@@ -170,46 +221,62 @@ class AnnonceAjaxType extends AbstractType
             } elseif (str_contains($nature, 'appartement')) {
                 $details
                     ->add('superficie', FormType\IntegerType::class, [
-                        'constraints' => [
-                            new NotBlank(['message' => 'La superficie est obligatoire.']),
-                            new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
-                        ]
-                    ])
-                    ->add('nb_pieces', FormType\IntegerType::class, [
-                        'required' => false,
-                        'constraints' => [
-                            new GreaterThan(['value' => 0, 'message' => 'Le nombre de pièces doit être supérieur à 0.'])
-                        ]
-                    ])
-                    ->add('nb_chambres', FormType\IntegerType::class, [
-                        'required' => false,
-                        'constraints' => [
-                            new GreaterThan(['value' => 0, 'message' => 'Le nombre de chambres doit être supérieur à 0.'])
-                        ]
-                    ])
-                    ->add('etage', FormType\IntegerType::class, [
-                        'required' => false,
-                        'constraints' => [
-                            new GreaterThan(['value' => 0, 'message' => 'L’étage doit être supérieur à 0.'])
-                        ]
-                    ])
-                    ->add('ascenseur', FormType\CheckboxType::class, ['required' => false])
-                    ->add('balcon', FormType\CheckboxType::class, ['required' => false])
-                    ->add('terrasse', FormType\CheckboxType::class, ['required' => false])
-                    ->add('cuisine', FormType\CheckboxType::class, ['required' => false]);
+                            'required' => false,
+                            'constraints' => [
+                                new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
+                            ]
+                        ])
+                        ->add('surface_habitable', FormType\IntegerType::class, [
+                            'required' => false,
+                            'constraints' => [
+                                new GreaterThan(['value' => 0, 'message' => 'La surface habitable doit être positive.'])
+                            ]
+                        ])
+                        ->add('nb_pieces', FormType\IntegerType::class, [
+                            'required' => false,
+                            'constraints' => [
+                                new GreaterThan(['value' => 0, 'message' => 'Le nombre de pièces doit être supérieur à 0.'])
+                            ]
+                        ])
+                        ->add('nb_chambres', FormType\IntegerType::class, [
+                            'required' => false,
+                            'constraints' => [
+                                new GreaterThan(['value' => 0, 'message' => 'Le nombre de chambres doit être supérieur à 0.'])
+                            ]
+                        ])
+                        ->add('annee_construction', FormType\IntegerType::class, [
+                            'required' => false,
+                            'constraints' => [
+                                new GreaterThan(['value' => 1800, 'message' => 'L’année doit être supérieure à 1800.'])
+                            ]
+                        ])
+                        ->add('etage', FormType\IntegerType::class, [
+                            'required' => false,
+                            'constraints' => [
+                                new GreaterThan(['value' => 0, 'message' => 'L’étage doit être supérieur à 0.'])
+                            ]
+                        ])
+                        ->add('ascenseur', FormType\CheckboxType::class, ['required' => false])
+                        ->add('balcon', FormType\CheckboxType::class, ['required' => false])
+                        ->add('terrasse', FormType\CheckboxType::class, ['required' => false])
+                        ->add('garage', FormType\CheckboxType::class, ['required' => false])
+                        ->add('climatisateur', FormType\CheckboxType::class, ['required' => false])
+                        ->add('cuisine', FormType\CheckboxType::class, ['required' => false])
+                        ->add('wc', FormType\CheckboxType::class, ['required' => false])
+                        ->add('salon', FormType\CheckboxType::class, ['required' => false]);
 
             } elseif (str_contains($nature, 'terrain')) {
 
                 $details
                     ->add('superficie', FormType\IntegerType::class, [
+                        'required' => true,
                         'constraints' => [
-                            new NotBlank(['message' => 'La superficie est obligatoire.']),
                             new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.']),
                         ]
                     ])
                     ->add('constructible', FormType\CheckboxType::class, ['required' => false])
                     ->add('viabilise', FormType\CheckboxType::class, ['required' => false]);
-            }
+                        }
         };
 
         $formBuilder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $formEvent) use ($entityManager, $addAnnonceFields) {

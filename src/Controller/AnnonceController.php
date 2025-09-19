@@ -33,6 +33,8 @@ class AnnonceController extends AbstractController
             //  connecte les données de la requête HTTP avec mon objet $form.
             $form->handleRequest($request); 
 
+
+
             // Si soumis et valide, on peut enregistrer
             if ($form->isSubmitted() && $form->isValid()) {
             
@@ -55,10 +57,14 @@ class AnnonceController extends AbstractController
                 // On definit la date de publication à mtn 
                 $annonce->setDatePublication(new \DateTime());
 
+                // ✅ On génère une référence unique de type RFXXXXXX (ex: RF5F3D9A7)
+                $reference = $this->generateUniqueReference($entityManager);
+                $annonce->setReference($reference);
+
                 $entityManager->persist($annonce);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('accueil');
+                return $this->redirectToRoute('app_home');
             }
 
             return $this->render('annonce/new.html.twig', [
@@ -67,25 +73,49 @@ class AnnonceController extends AbstractController
         }
 
         #[Route('/annonce/new/preview', name: 'annonce_preview', methods: ['POST'])]
-        public function previewAnnonce(Request $request, EntityManagerInterface $entityManager): Response
+        public function previewAnnonce(Request $request, EntityManagerInterface $entityManager): JsonResponse
         {
-           
             $form = $this->createForm(AnnonceAjaxType::class, null, [
                 'method' => 'POST',
                 'entityManager' => $entityManager,
             ]);
 
-            // On soumet les données reçues dans la requête pour déclencher les événements PRE_SUBMIT
-            $form->submit($request->request->all());
+            // Laisse Symfony binder correctement FormData (inclut CSRF + fichiers si besoin)
+            $form->handleRequest($request);
 
-            // Extraction du bloc "details" mis à jour  selon les choix de l'utilisateur
-            $formulairePartiel = $form->get('details');
+            // Optionnel: si besoin de forcer la (re)construction même sans submit
+            // if (!$form->isSubmitted()) { $form->submit($request->request->get($form->getName(), [])); }
 
-            // Rendu partiel du sous-formulaire (nécessite un fichier Twig _details_fields.html.twig)
+            if (!$form->isSubmitted()) {
+    $form->submit($request->request->all($form->getName()));
+}
+
+            $partial = $form->get('details');
+
             return new JsonResponse([
                 'form' => $this->renderView('annonce/_details_fields.html.twig', [
-                    'form' => $formulairePartiel->createView(),
+                    'form' => $partial->createView(),
                 ]),
             ]);
         }
+ 
+    
+    /*
+     *  Fonction privée qui génère une référence aléatoire UNIQUE
+     * Exemple de format : RF5F3D9A7
+     */
+    private function generateUniqueReference(EntityManagerInterface $entityManager): string
+    {
+        do {
+            
+            $random = strtoupper(bin2hex(random_bytes(4))); 
+            $reference = 'RF' . $random;
+
+            
+            $existingAnnonce = $entityManager->getRepository(Annonce::class)
+                ->findOneBy(['reference' => $reference]);
+        } while ($existingAnnonce !== null); 
+
+        return $reference;
+    }
 }

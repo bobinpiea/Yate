@@ -5,73 +5,80 @@
 {% block body %}
 <main class="contenu-annonce">
 
-    <header class="entete-page">
-        <h1 class="titre-principal">Déposer une annonce immobilière</h1>
-        <p class="texte-intro">Remplissez les informations ci-dessous pour proposer votre bien.</p>
-    </header>
+  <header class="entete-page">
+    <h1 class="titre-principal">Déposer une annonce immobilière</h1>
+    <p class="texte-intro">Remplissez les informations ci-dessous pour proposer votre bien.</p>
+  </header>
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-message flash-{{ label }}">{{ message }}</div>
-        {% endfor %}
+  {% for label, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="flash-message flash-{{ label }}">{{ message }}</div>
     {% endfor %}
+  {% endfor %}
 
-    {{ form_start(form, { attr: { id: 'annonce-form', class: 'formulaire-annonce' } }) }}
+  {{ form_start(form, { attr: { id: 'annonce-form', class: 'formulaire-annonce' } }) }}
 
-        <section class="bloc-formulaire">
-            <div class="ligne-formulaire">
-                <div class="colonne-formulaire">
-                    {{ form_row(form.transaction, {
-                        label: 'Vous souhaitez Effectuer une :',
-                        attr: {'data-ajax-trigger': 1}
-                    }) }}
-                </div>
-                <div class="colonne-formulaire">
-                    {{ form_row(form.nature, {
-                        label: 'Quelle est la nature du bien :',
-                        attr: {'data-ajax-trigger': 1}
-                    }) }}
-                </div>
-            </div>
-
-            <div class="zone-suivant">
-                <button type="button" id="btn-suivant" class="bouton-secondaire">Suivant</button>
-            </div>
-        </section>
-
-        <section id="details" class="bloc-details">
-            {% include 'annonce/_details_fields.html.twig' with { form: form.details } %}
-        </section>
-
-        <div class="zone-bouton">
-            <button type="submit" class="bouton-principal">Publier l'annonce</button>
+    {# 1 - Tout d'abord le choix de la transaciton et de la natutre du bien #}
+    <section class="bloc-formulaire">
+      <div class="ligne-formulaire">
+        <div class="colonne-formulaire">
+          {{ form_row(form.transaction, {
+            label: 'Vous souhaitez effectuer une :',
+            attr: {'data-ajax-trigger': 1}
+          }) }}
         </div>
+        <div class="colonne-formulaire">
+          {{ form_row(form.nature, {
+            label: 'Quelle est la nature du bien :',
+            attr: {'data-ajax-trigger': 1}
+          }) }}
+        </div>
+      </div>
 
-    {{ form_end(form) }}
+      <div class="zone-suivant">
+        <button type="button" id="btn-suivant" class="bouton-secondaire">Suivant</button>
+      </div>
+    </section>
+
+    {#  2- Champs masqués au départ (Obligatoire et Facultatif) #}
+    <section id="details" class="bloc-details" style="display: none;">
+      {% include 'annonce/_details_fields.html.twig' with { form: form.details } %}
+    </section>
+
+    {# Bouton de soumission, masqué au départ #}
+    <div class="zone-bouton" id="submit-zone" style="display: none;">
+      <button type="submit" class="bouton-principal">Publier l'annonce</button>
+    </div>
+
+  {{ form_end(form) }}
 
 </main>
 
+{# Script AJAX + affichage conditionnel #}
 <script>
 (function(){
   const form = document.getElementById('annonce-form');
   const details = document.getElementById('details');
   const boutonSuivant = document.getElementById('btn-suivant');
+  const zoneBouton = document.getElementById('submit-zone');
 
   function refreshDetails() {
-    const fd = new FormData(form);
+    const formData = new FormData(form);
     fetch('{{ path("annonce_preview") }}', {
       method: 'POST',
       headers: {'X-Requested-With': 'XMLHttpRequest'},
-      body: fd
-    }).then(r => r.json()).then(({form}) => {
-      details.innerHTML = form;
-      details.scrollIntoView({ behavior: 'smooth' }); // petit scroll fluide vers le bloc
+      body: formData
+    })
+    .then(response => response.json())
+    .then(({ form: formHtml }) => {
+      details.innerHTML = formHtml;
+      details.style.display = 'block';
+      zoneBouton.style.display = 'block';
+      details.scrollIntoView({ behavior: 'smooth' });
     });
   }
 
-  boutonSuivant.addEventListener('click', () => {
-    refreshDetails();
-  });
+  boutonSuivant.addEventListener('click', refreshDetails);
 })();
 </script>
 {% endblock %}
