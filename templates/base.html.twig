@@ -55,9 +55,9 @@
     <!-- Ligne 2 : Navigation principale -->
     <nav class="main-nav" aria-label="Navigation principale">
         <ul>
-            <li><a href="#achat">Achat</a></li>
-            <li><a href="#location">Location</a></li>
-            <li><a href="#colocation">Colocation</a></li>
+            <li><a href="{{ path('app_annonce_liste_achat') }}">Achat</a></li>
+            <li><a href="{{ path('app_annonce_liste_location') }}">Location</a></li>
+            <li><a href="{{ path('app_annonce_liste_colocation') }}">Colocation</a></li>
             <li><a href="#evenements">Événements</a></li>
             <li><a href="{{ path('conseil_expert') }}">Conseils d'experts</a></li>
             <li><a href="{{ path('conseil_deco') }}">Déco</a></li>

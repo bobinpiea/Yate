@@ -40,4 +40,19 @@ class AnnonceRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+
+
+    // Retrouver les Annonces par Type de transaction 
+        public function findByTransactionNom(string $nom): array
+        {
+            return $this->createQueryBuilder('a')
+                ->join('a.transaction', 't')
+                ->where('LOWER(t.typeTransaction) = :nom')
+                ->setParameter('nom', strtolower($nom))
+                ->orderBy('a.datePublication', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
+
 }

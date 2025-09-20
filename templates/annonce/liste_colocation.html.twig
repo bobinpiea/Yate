@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces en colocation - Ayitate{% endblock %}
+
+{% block body %}
+  <section class="liste-annonces">
+    <h1>Annonces disponibles en colocation</h1>
+
+    {% if annonces is empty %}
+      <p>Aucune annonce en colocation pour le moment.</p>
+    {% else %}
+      <ul class="annonces">
+        {% for annonce in annonces %}
+          <li class="carte-annonce">
+            <h2>{{ annonce.titre }}</h2>
+            <p>{{ annonce.ville }} - {{ annonce.commune }}</p>
+            <p><strong>{{ annonce.prix }} FCFA</strong></p>
+            <a href="#">Voir les détails</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </section>
+{% endblock %}

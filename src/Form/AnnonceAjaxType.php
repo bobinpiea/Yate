@@ -20,8 +20,6 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 
-// POUR LES INT PRIX - CHARGES penser a nettoyer les , les . les espaces 
-
 class AnnonceAjaxType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $formBuilder, array $options): void
@@ -181,32 +179,37 @@ class AnnonceAjaxType extends AbstractType
                     ->add('superficie', FormType\IntegerType::class, [
                         'required' => false,
                         'constraints' => [
-                            new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
-                        ]
+                            new GreaterThan(['value' => 0, 'message' => 'La superficie doit être supérieure à 0.'])
+                        ],
+                        'attr' => ['placeholder' => 'Ex : 600']
                     ])
                     ->add('surface_habitable', FormType\IntegerType::class, [
                         'required' => false,
                         'constraints' => [
-                            new GreaterThan(['value' => 0, 'message' => 'La surface habitable doit être positive.'])
-                        ]
+                            new GreaterThan(['value' => 0, 'message' => 'La surface habitable doit être supérieur à 0.'])
+                        ],
+                        'attr' => ['placeholder' => 'Ex : 120']
                     ])
                     ->add('nb_pieces', FormType\IntegerType::class, [
                         'required' => false,
                         'constraints' => [
                             new GreaterThan(['value' => 0, 'message' => 'Le nombre de pièces doit être supérieur à 0.'])
-                        ]
+                        ],
+                        'attr' => ['placeholder' => 'Ex : 4']
                     ])
                     ->add('nb_chambres', FormType\IntegerType::class, [
                         'required' => false,
                         'constraints' => [
                             new GreaterThan(['value' => 0, 'message' => 'Le nombre de chambres doit être supérieur à 0.'])
-                        ]
+                        ],
+                        'attr' => ['placeholder' => 'Ex : 3']
                     ])
                     ->add('annee_construction', FormType\IntegerType::class, [
                         'required' => false,
                         'constraints' => [
                             new GreaterThan(['value' => 1800, 'message' => 'L’année doit être supérieure à 1800.'])
-                        ]
+                        ],
+                        'attr' => ['placeholder' => 'Ex : 2010']
                     ])
                     ->add('garage', FormType\CheckboxType::class, ['required' => false])
                     ->add('jardin', FormType\CheckboxType::class, ['required' => false])
@@ -220,41 +223,47 @@ class AnnonceAjaxType extends AbstractType
 
             } elseif (str_contains($nature, 'appartement')) {
                 $details
-                    ->add('superficie', FormType\IntegerType::class, [
+                        ->add('superficie', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
-                            ]
+                            ],
+                            'attr' => ['placeholder' => 'Ex : 60 (en m²)']
                         ])
                         ->add('surface_habitable', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'La surface habitable doit être positive.'])
-                            ]
+                            ],
+                            'attr' => ['placeholder' => 'Ex : 45 (en m²)']
                         ])
                         ->add('nb_pieces', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'Le nombre de pièces doit être supérieur à 0.'])
-                            ]
+                            ],
+                            'attr' => ['placeholder' => 'Ex : 3']
                         ])
                         ->add('nb_chambres', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'Le nombre de chambres doit être supérieur à 0.'])
-                            ]
+                            ],
+                            'attr' => ['placeholder' => 'Ex : 2']
                         ])
                         ->add('annee_construction', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 1800, 'message' => 'L’année doit être supérieure à 1800.'])
-                            ]
+                            ],
+                            'attr' => ['placeholder' => 'Ex : 2015']
                         ])
                         ->add('etage', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'L’étage doit être supérieur à 0.'])
-                            ]
+                            ],
+                            'attr' => ['placeholder' => 'Ex : 4']
                         ])
                         ->add('ascenseur', FormType\CheckboxType::class, ['required' => false])
                         ->add('balcon', FormType\CheckboxType::class, ['required' => false])
@@ -269,14 +278,21 @@ class AnnonceAjaxType extends AbstractType
 
                 $details
                     ->add('superficie', FormType\IntegerType::class, [
-                        'required' => true,
+                        'required' => false,
+                        'attr' => [
+                            'placeholder' => 'Ex : 400',
+                            'data-obligatoire' => true
+                        ],
                         'constraints' => [
-                            new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.']),
+                            new GreaterThan([
+                                'value' => 0,
+                                'message' => 'La superficie doit être supérieure à 0.'
+                            ]),
                         ]
                     ])
                     ->add('constructible', FormType\CheckboxType::class, ['required' => false])
                     ->add('viabilise', FormType\CheckboxType::class, ['required' => false]);
-                        }
+            }
         };
 
         $formBuilder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $formEvent) use ($entityManager, $addAnnonceFields) {

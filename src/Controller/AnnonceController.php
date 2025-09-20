@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Annonce;
 use App\Form\AnnonceAjaxType;
+use App\Repository\AnnonceRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AnnonceController extends AbstractController
 {
@@ -57,11 +58,18 @@ class AnnonceController extends AbstractController
                 // On definit la date de publication à mtn 
                 $annonce->setDatePublication(new \DateTime());
 
-                // ✅ On génère une référence unique de type RFXXXXXX (ex: RF5F3D9A7)
+                //  On génère une référence unique de type RFXXXXXX (ex: RF5F3D9A7)
                 $reference = $this->generateUniqueReference($entityManager);
                 $annonce->setReference($reference);
 
+                $annonce->setTransaction($form->get('transaction')->getData());
+
+                $annonce->setNatureBien($form->get('nature')->getData());
+
+                $annonce->setUser($this->getUser());
+
                 $entityManager->persist($annonce);
+     
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_home');
@@ -118,4 +126,49 @@ class AnnonceController extends AbstractController
 
         return $reference;
     }
+
+
+
+
+    /* LISTE DES BIENS PAR TYPES DE TRANSACTION */
+
+    
+        // Affiche toutes les annonces de type Achat
+            #[Route('/annonces/achat', name: 'app_annonce_liste_achat')]
+            public function listeAchat(AnnonceRepository $annonceRepository): Response
+            {
+        
+                $annonces = $annonceRepository->findByTransactionNom('Vente');
+
+                return $this->render('annonce/liste_achat.html.twig', [
+                    'annonces' => $annonces,
+                ]);
+            }
+
+        
+        // Affiche toutes les annonces de type Location
+            #[Route('/annonces/location', name: 'app_annonce_liste_location')]
+            public function listeLocation(AnnonceRepository $annonceRepository): Response
+            {
+                $annonces = $annonceRepository->findByTransactionNom('Location');
+
+                return $this->render('annonce/liste_location.html.twig', [
+                    'annonces' => $annonces,
+                ]);
+            }
+
+
+        // Affiche toutes les annonces de type Colocation
+            #[Route('/annonces/colocation', name: 'app_annonce_liste_colocation')]
+            public function listeColocation(AnnonceRepository $annonceRepository): Response
+            {
+                $annonces = $annonceRepository->findByTransactionNom('Colocation');
+
+                return $this->render('annonce/liste_colocation.html.twig', [
+                    'annonces' => $annonces,
+                ]);
+            }
+
+
+    
 }
