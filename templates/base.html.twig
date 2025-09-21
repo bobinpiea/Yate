@@ -107,10 +107,10 @@
                 <h2>Services</h2>
                 <nav aria-label="Services footer">
                     <ul>
-                        <li><a href="#achat">Acheter</a></li>
-                        <li><a href="#location">Louer</a></li>
-                        <li><a href="#colocation">Colocation</a></li>
-                        <li><a href="#publier">Déposer une annonce</a></li>
+                        <li><a href="{{ path('app_annonce_liste_achat') }}">Acheter</a></li>
+                        <li><a href="{{ path('app_annonce_liste_location') }}">Louer</a></li>
+                        <li><a href="{{ path('app_annonce_liste_colocation') }}">Colocation</a></li>
+                        <li><a href="{{ path('app_annonce_new') }}">Déposer une annonce</a></li>
                     </ul>
                 </nav>
             </section>
@@ -120,8 +120,8 @@
                 <h2>Ressources</h2>
                 <nav aria-label="Ressources footer">
                     <ul>
-                        <li><a href="#conseils">Conseils d'experts</a></li>
-                        <li><a href="#blog">Blog Déco</a></li>
+                        <li><a href="{{ path('conseil_expert') }}">Conseils d'experts</a></li>
+                        <li><a href="{{ path('conseil_deco') }}">Blog Déco</a></li>
                         <li><a href="#annuaire">Annuaire Pro</a></li>
                     </ul>
                 </nav>

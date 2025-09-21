@@ -3,23 +3,105 @@
 {% block title %}Annonces à vendre - Ayitate{% endblock %}
 
 {% block body %}
+
+
   <section class="liste-annonces">
-    <h1>Annonces disponibles à l'achat</h1>
+
+    <h1 class="titre-principal">Annonces Ventes Immobilières</h1>
 
     {% if annonces is empty %}
-      <p>Aucune annonce disponible pour le moment.</p>
+      <p class="message-vide">Aucune annonce disponible pour le moment.</p>
     {% else %}
-      <div class="grille-annonces">
-        {% for annonce in annonces %}
-          <div class="carte-annonce">
-            <h2>{{ annonce.titre }}</h2>
-            <p>{{ annonce.ville }} - {{ annonce.commune }}</p>
-            <p><strong>{{ annonce.prix }} FCFA</strong></p>
-            {# Lien vers page détail (à faire plus tard) #}
-            <a href="#">Voir les détails</a>
+
+      <!-- Section : Terrains à vendre -->
+        <section class="bloc-annonce">
+
+          <div class="en-tete-bloc">
+            <h2>Terrains à vendre</h2>
+            <a href="#" class="voir-plus">Voir tous les terrains</a>
           </div>
-        {% endfor %}
-      </div>
+
+          <div class="grille-annonces">
+            {% set count = 0 %}
+            {% for annonce in annonces %}
+              {% if annonce.natureBien.nom == 'Terrain' and count < 8 %}
+                <div class="carte-annonce">
+                  <div class="image-annonce">
+                  <!-- Pour la phot plus tard -->
+                  </div>
+                  <div class="infos-annonce">
+                    <p><strong>{{ annonce.ville }} – {{ annonce.commune }}</strong></p>
+                    <p>
+                      <strong>{{ annonce.superficie }} m²</strong> | <strong>{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                  </div>
+                </div>
+                {% set count = count + 1 %}
+              {% endif %}
+            {% endfor %}
+          </div>
+          
+        </section>
+
+      <!-- Section : Maisons à vendre -->
+        <section class="bloc-annonce">
+
+          <div class="en-tete-bloc">
+            <h2>Maisons à vendre</h2>
+            <a href="#" class="voir-plus">Voir toutes les maisons</a>
+          </div>
+
+          <div class="grille-annonces">
+            {% set count = 0 %}
+            {% for annonce in annonces %}
+              {% if annonce.natureBien.nom == 'Maison' and count < 6 %}
+                <div class="carte-annonce">
+                  <div class="image-annonce">
+                    <!-- Pour la phot plus tard -->
+                  </div>
+                  <div class="infos-annonce">
+                    <p> <strong>{{ annonce.ville }} – {{ annonce.commune }}</strong></p>
+                    <p>
+                      <strong>{{ annonce.superficie }} m²</strong> | <strong>{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                    </p>
+                  </div>
+                </div>
+                {% set count = count + 1 %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+        </section>
+
+      <!-- Section : Appartements à vendre -->
+        <section class="bloc-annonce">
+
+          <div class="en-tete-bloc">
+            <h2>Appartements à vendre</h2>
+            <a href="#" class="voir-plus">Voir tous les appartements</a>
+          </div>
+
+          <div class="grille-annonces">
+            {% set count = 0 %}
+            {% for annonce in annonces %}
+              {% if annonce.natureBien.nom == 'Appartement' and count < 6 %}
+                <div class="carte-annonce">
+                  <div class="image-annonce">
+                    <!-- Pour la phot plus tard -->
+                  </div>
+                  <div class="infos-annonce">
+                      <p><strong>{{ annonce.ville }} – {{ annonce.commune }}</strong></p>
+                      <p>
+                        <strong>{{ annonce.superficie }} m²</strong> | <strong>{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                    </p>
+                  </div>
+                </div>
+                {% set count = count + 1 %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+        </section>
+
     {% endif %}
   </section>
 {% endblock %}

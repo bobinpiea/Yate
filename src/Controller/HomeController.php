@@ -2,16 +2,33 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\BlogRepository;
+use App\Repository\AnnonceRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    public function index(AnnonceRepository $annonceRepository, BlogRepository $blogRepository): Response
     {
-        return $this->render('home/index.html.twig');
+        $annoncesVente = $annonceRepository->findByTransactionNom('Vente');
+        $annoncesLocation = $annonceRepository->findByTransactionNom('Location');
+        $annoncesColocation = $annonceRepository->findByTransactionNom('Colocation');
+
+        $articlesJuridique = $blogRepository->findBy(['categorie' => 'expertise']);
+        $articlesDeco = $blogRepository->findBy(['categorie' => 'deco']);
+
+        return $this->render('home/index.html.twig', [
+
+            'annoncesVente' => $annoncesVente,
+            'annoncesLocation' => $annoncesLocation,        
+            'annoncesColocation' => $annoncesColocation,
+
+            'articlesJuridique' => $articlesJuridique,
+            'articlesDeco' => $articlesDeco,
+        ]);
     }
 
     #[Route('/about', name: 'app_about')]
