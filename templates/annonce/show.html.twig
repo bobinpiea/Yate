@@ -1,0 +1,88 @@
+{# templates/annonce/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'annonce{% endblock %}
+
+{% block body %}
+
+  <section class="fiche-annonce">
+
+
+      <div>
+        <h1> 
+            {{annonce.commune}} -  
+            {{annonce.natureBien.nom}} -
+            {{annonce.superficie}}m²       
+        </h1>
+         <h2> {{ annonce.ville }}</h2>
+    </div>
+
+    <div>
+         <p>  {{ annonce.prix|number_format(0, '.', ' ') }} F CFA</p>
+          <button>Nous contacter</button>
+          <button>Sauvegarder</button>
+          <button>Partager</button>
+    </div>
+
+    <div>
+        <p> {{annonce.natureBien.nom}}</p>
+        <p>{{annonce.superficie}}m²</p>
+    </div>
+
+    <div>
+        <h3>{{annonce.titre}}</h3>
+        <p> {{annonce.description}}</p>
+        <p> {{annonce.reference}}</p>
+        <p>{{ annonce.datePublication|date('d/m/Y') }}</p>
+
+    </div>
+
+     {# 
+     Pourquoi faire un tableau avec les titres de propriété ACD -
+      Attestation villageoise -  Lettre d'attribution
+     ACP 
+     #}
+
+    {% if annonce.natureBien.nom in ['Maison', 'Appartement'] %}
+
+        <h2>Descriptif détaillé</h2>
+
+        <table class="#">
+            {% if annonce.surfaceHabitable %}
+                <tr>
+                    <th>Surface habitable</th>
+                    <td>{{ annonce.surfaceHabitable}} m²</td>
+                </tr>
+            {% endif %}
+
+            {% if annonce.garage or annonce.terrasse %}
+                <tr>
+                    <th>Garage</th>
+                    <td>{{ annonce.garage ? 'Oui' : 'Non' }}</td>
+                    <th>Terrasse</th>
+                    <td>{{ annonce.terrasse ? 'Oui' : 'Non' }}</td>
+                </tr>
+            {% endif %}
+
+            {% if annonce.anneeConstruction %}
+                <tr>
+                    <th>Année de construction</th>
+                    <td>{{ annonce.anneeConstruction }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    {% endif %}
+
+
+    <h4> Localisation (A voir si c'est possible) </h4> {#A faire plus tard #}
+
+    <h4> Autre(s) annonce(s) de cette personne </h4> {#A faire plus tard #}
+
+    <h4> Ces annonces peuvent vous intéresser </h4> {#A faire plus tard #}
+
+
+
+  </section>
+
+{% endblock %}

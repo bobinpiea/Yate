@@ -169,6 +169,14 @@ class AnnonceController extends AbstractController
                 ]);
             }
 
+    /* DETAILS D'UN BIEN : PAGE D'AFFICHAGE D'UNE ANNONCE  */
 
-    
+        #[Route('/annonce/{id}', name: 'annonce_show')]
+        public function show(Annonce $annonce): Response
+        {
+
+            return $this->render('annonce/show.html.twig', [
+                'annonce' => $annonce,
+            ]);
+        }
 }
