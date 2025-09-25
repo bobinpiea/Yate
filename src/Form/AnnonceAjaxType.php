@@ -5,19 +5,23 @@ namespace App\Form;
 use App\Entity\Annonce;
 use App\Entity\NatureBien;
 use App\Entity\Transaction;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type as FormType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\GreaterThan;
-use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Form\Extension\Core\Type as FormType;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 
 class AnnonceAjaxType extends AbstractType
@@ -42,6 +46,33 @@ class AnnonceAjaxType extends AbstractType
                 'required' => true,
                 'attr' => ['data-ajax-trigger' => '1'],
             ])
+
+            ->add('photosUpload', FileType::class, [
+                'label' => 'Photos du bien',
+                'mapped' => false,
+                'multiple' => true,
+                'required' => true,
+                'attr' => [
+                    'accept' => 'image/jpeg, image/png, image/webp',
+                    'placeholder' => 'Veuillez ajouter 1 à 10 photos',
+                ],
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'max' => 10,
+                        'minMessage' => 'Veuillez ajouter au moins 1 photo',
+                        'maxMessage' => 'Veuillez ne pas dépasser la limite de {{ limit }} photos.'
+                    ]),
+                    new All([
+                        new File([
+                            'maxSize' => '5M',
+                            'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp'],
+                            'mimeTypesMessage' => 'Veuillez ajouter uniquement des formats valides (jpeg, png, webp).'
+                        ])
+                    ])
+                ],
+            ])
+
             ->add('details', FormType\FormType::class, [
                 'mapped' => false,
             ]);
@@ -88,7 +119,7 @@ class AnnonceAjaxType extends AbstractType
                     ],
                     'attr' => [
                         'data-obligatoire' => true,
-                        'placeholder' => 'Ex : Abidjan',
+                        'placeholder' => 'Ex: Abidjan',
                     ],
                 ])
                 ->add('commune', FormType\TextType::class, [
@@ -101,7 +132,7 @@ class AnnonceAjaxType extends AbstractType
                     ],
                     'attr' => [
                         'data-obligatoire' => true,
-                        'placeholder' => 'Ex : Cocody, Yopougon…',
+                        'placeholder' => 'Ex: Cocody',
                     ],
                 ])
                 ->add('prix', FormType\MoneyType::class, [
@@ -112,7 +143,7 @@ class AnnonceAjaxType extends AbstractType
                     ],
                     'attr' => [
                         'data-obligatoire' => true,
-                        'placeholder' => 'Ex : 12 000 000', // PENSE A NETTOYER CE CHAMPS
+                        'placeholder' => 'Ex: 12000000', 
                     ],
                 ]);
 
@@ -123,7 +154,7 @@ class AnnonceAjaxType extends AbstractType
                         'currency' => 'XOF',
                         'required' => false,
                         'attr' => [
-                            'placeholder' => 'Ex : 15 000' // ICI NETTOYER 
+                            'placeholder' => 'Ex: 15000'  
                         ],
                         'constraints' => [
                             new GreaterThan([
@@ -228,42 +259,42 @@ class AnnonceAjaxType extends AbstractType
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'La superficie doit être positive.'])
                             ],
-                            'attr' => ['placeholder' => 'Ex : 60 (en m²)']
+                            'attr' => ['placeholder' => 'Ex: 60 (en m²)']
                         ])
                         ->add('surface_habitable', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'La surface habitable doit être positive.'])
                             ],
-                            'attr' => ['placeholder' => 'Ex : 45 (en m²)']
+                            'attr' => ['placeholder' => 'Ex: 45 (en m²)']
                         ])
                         ->add('nb_pieces', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'Le nombre de pièces doit être supérieur à 0.'])
                             ],
-                            'attr' => ['placeholder' => 'Ex : 3']
+                            'attr' => ['placeholder' => 'Ex: 3']
                         ])
                         ->add('nb_chambres', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'Le nombre de chambres doit être supérieur à 0.'])
                             ],
-                            'attr' => ['placeholder' => 'Ex : 2']
+                            'attr' => ['placeholder' => 'Ex: 2']
                         ])
                         ->add('annee_construction', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 1800, 'message' => 'L’année doit être supérieure à 1800.'])
                             ],
-                            'attr' => ['placeholder' => 'Ex : 2015']
+                            'attr' => ['placeholder' => 'Ex: 2015']
                         ])
                         ->add('etage', FormType\IntegerType::class, [
                             'required' => false,
                             'constraints' => [
                                 new GreaterThan(['value' => 0, 'message' => 'L’étage doit être supérieur à 0.'])
                             ],
-                            'attr' => ['placeholder' => 'Ex : 4']
+                            'attr' => ['placeholder' => 'Ex: 4']
                         ])
                         ->add('ascenseur', FormType\CheckboxType::class, ['required' => false])
                         ->add('balcon', FormType\CheckboxType::class, ['required' => false])
@@ -280,7 +311,7 @@ class AnnonceAjaxType extends AbstractType
                     ->add('superficie', FormType\IntegerType::class, [
                         'required' => false,
                         'attr' => [
-                            'placeholder' => 'Ex : 400',
+                            'placeholder' => 'Ex: 400',
                             'data-obligatoire' => true
                         ],
                         'constraints' => [

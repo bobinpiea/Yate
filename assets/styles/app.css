@@ -279,6 +279,10 @@
           color: #ffffff;
       }
 
+/* ==========  QUI SOMMES NOUS ========== */
+
+
+
 /* ========== Homme - Page D'Accueil ==========*/ 
 
   /****** Premiere Section ******/
@@ -430,6 +434,238 @@
       font-size: 0.95rem;
     }
 
+
+  /*********** Section Terrains à vendre - PAGE D'ACCUEIL ****************/
+
+  .section-terrains {
+    padding: 3rem 1.5rem;
+  }
+
+  .header-terrains {
+    max-width: 75rem;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-terrains h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .lien-tous {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .lien-tous:hover {
+    text-decoration: underline;
+  }
+
+  /* Grille des terrains */
+  .grid-terrains {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  /* Carte terrain */
+  .card-terrain {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+  }
+
+  .card-terrain:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    border-color: #2563eb;
+  }
+
+  .photo-terrain {
+    height: 12.5rem;
+    background: #d1d5db;
+  }
+
+  /* Informations terrain */
+  .info-terrain {
+    padding: 1.5rem;
+  }
+
+  .info-terrain p {
+    margin-bottom: 0.5rem;
+  }
+
+  .info-terrain p {
+    font-size: 1rem;
+  }
+
+/****** Section : Vendez ou louez votre bien facilement ******/
+
+  .section-publication {
+    padding: 3rem 1.5rem;
+    background: #f3f4f6;
+  }
+
+  /* Conteneur principal */
+    .conteneur-publication {
+      max-width: 75rem;
+      margin: 0 auto;
+    }
+
+  /* Carte blanche */
+    .contenu-publication {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+  /* Texte à gauche */
+    .texte-publication {
+      flex: 1;
+    }
+
+    .titre-publication {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 0.75rem;
+    }
+
+    .description-publication {
+      color: #6b7280;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+  /* Bouton à droite */
+    .bouton-publication {
+      background: #059669;
+      color: #ffffff;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .bouton-publication:hover {
+      background: #047857;
+    }
+
+/****** Section Forum ******/
+
+.section-forum {
+  padding: 3rem 1.5rem ;
+  background: #f3f4f6 ;
+}
+
+/* Conteneur principal */
+.section-forum .conteneur-forum {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+/* En-tête de section */
+.section-forum .entete-forum {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-forum .titre-forum {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.section-forum .sous-titre-forum {
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Contenu principal */
+.section-forum .contenu-forum {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Grille des avantages */
+.section-forum .avantages-forum {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-forum .avantage-item {
+  text-align: center;
+}
+
+.section-forum .avantage-item h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.section-forum .avantage-item p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Section action */
+.section-forum .action-forum {
+  text-align: center;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 2rem;
+}
+
+.section-forum .bouton-forum {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 1rem 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.section-forum .bouton-forum:hover {
+  background: #1d4ed8;
+}
+
+.section-forum .info-forum {
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+
 /* ========== FORMULAIRE DE CONNEXION : LOG IN ==========*/ 
 
     .formulaire-connexion {
@@ -547,7 +783,7 @@
       content: "";
       display: block;
       width: 100%;
-      border-bottom: 1px solid #e5e7eb; /* gris clair */
+      border-bottom: 1px solid #e5e7eb;
       margin-top: 1rem;
     }
 
@@ -760,7 +996,7 @@
     }
 
     .forum-sujets li:last-child {
-      border-bottom: none; /* pas de ligne sur le dernier */
+      border-bottom: none; /* pas de ligne sur le dernier dans le forum */
 
     }
 
@@ -901,6 +1137,7 @@
     }
 
     /* En-tête du message  objectif : (auteur à gauche, date à droite) */
+
     .message-header {
       display: flex;
       justify-content: space-between;
@@ -1059,8 +1296,8 @@
   border-radius: 0.75rem;
   box-shadow: 0 10px 20px rgba(0,0,0,.08);
   padding: 2rem 2.5rem;
-  /* plus large et respirant que la version précédente */
-  max-width: 52rem;          /* ~ 832px */
+
+  max-width: 52rem;   
   width: 100%;
 }
 
@@ -1100,7 +1337,7 @@
 
 /* textarea bien haut */
 .forum-sujet-form textarea{
-  min-height: 16rem;   /* plus haut que sur la version étroite */
+  min-height: 16rem;   
   resize: vertical;
 }
 
@@ -1186,3 +1423,802 @@
 .message-formulaire .btn-submit:hover {
   background: #1d4ed8;
 }
+
+/*  ==========  LISTE DES ANNONCES A VENDRE (ACHAT) ==========  */
+
+
+  /* 1 */
+  .liste-annonces {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Titre principal centré */
+    .titre-principal {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 3rem;
+    }
+
+  /* Message si aucune annonce */
+    .message-vide {
+      text-align: center;
+      font-style: italic;
+      color: #555;
+    }
+
+  /* Chaque bloc (terrain, maison, appart) */
+    .bloc-annonce {
+      margin-bottom: 6rem;
+    }
+
+  /* En-tête avec titre + lien "voir plus" */
+    .en-tete-bloc {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .en-tete-bloc h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .voir-plus {
+      font-size: 0.9rem;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .voir-plus:hover {
+      text-decoration: underline;
+    }
+
+  /* Grille d'annonces ( 3 ou 4 par lignes */
+    .grille-annonces {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 2rem;
+      justify-content: start; 
+    }
+
+  /* Carte d’annonce */
+    .carte-annonce {
+      background-color: #f9fafb;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .carte-annonce:hover {
+      transform: translateY(-3px);
+    }
+
+  /* Photo - image  - A REVOIR */
+    .image-annonce {
+      background-color: #d1d5db;
+      height: 160px;
+      width: 100%;
+    }
+
+  /* Infos sous l’image */
+    .infos-annonce {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      background-color: #ffffff;
+    }
+
+  /* Ville – commune */
+    .infos-annonce p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #1f2937;
+    }
+
+  /* Surface et prix en gras */
+    .infos-annonce .surface,
+    .infos-annonce strong {
+      font-weight: 600;
+      color: #111827;
+    }
+
+
+  /* Cliquer pour voir le détail d'une annonce */
+
+  .carte-annonce {
+    text-decoration: none;
+    color: inherit;
+    display: block; 
+  }
+
+/*--------------------------------------------------------------------------------------*/
+
+
+
+/****** Section Blog ******/
+
+.section-blog {
+  padding: 3rem 1.5rem;
+  background: #ffffff;
+}
+
+/* Conteneur principal */
+.conteneur-blog {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+/* En-tête de section */
+.entete-blog {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.titre-blog {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.sous-titre-blog {
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.6;
+  text-align: center !important;
+}
+
+/* Sections par catégorie */
+.section-categorie {
+  margin-bottom: 3rem;
+}
+
+.section-categorie:last-child {
+  margin-bottom: 0;
+}
+
+/* En-tête de chaque catégorie */
+.entete-categorie {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.lien-categorie-header {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.lien-categorie-header:hover {
+  text-decoration: underline;
+}
+
+/* Grille de chaque catégorie */
+.grille-categorie {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* Carte article */
+.carte-article {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.carte-article:hover {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.image-article {
+  height: 10rem;
+  background: #d1d5db;
+  position: relative;
+}
+
+.tag-article {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.tag-expert {
+  background: #2563eb;
+}
+
+.tag-deco {
+  background: #059669;
+}
+
+.contenu-article {
+  padding: 1.5rem;
+}
+
+.titre-article {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.extrait-article {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.meta-article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.date-article {
+  font-weight: 500;
+}
+
+.lien-lire {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.lien-lire:hover {
+  text-decoration: underline;
+}
+
+/*-----------------------------------------*/
+
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #111827;
+    line-height: 1.6;
+    background: #ffffff;
+}
+
+/* Page À propos */
+.page-a-propos {
+    padding: 4rem 1.5rem;
+    background: #f3f4f6;
+}
+
+/* Conteneur principal */
+.conteneur-a-propos {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+/* En-tête de page */
+.entete-page {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.titre-page {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.sous-titre-page {
+    font-size: 1.125rem;
+    color: #6b7280;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Section contenu */
+.section-contenu {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 3rem;
+}
+
+.titre-section {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+}
+
+.texte-contenu {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Section mission/vision */
+.grille-mission {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.carte-mission {
+    background: #f3f4f6;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    text-align: center;
+}
+
+.icone-mission {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.25rem;
+}
+
+.icone-mission.mission {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.icone-mission.vision {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.titre-mission {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.texte-mission {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Section équipe */
+.grille-equipe {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.carte-membre {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carte-membre:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.photo-membre {
+    width: 5rem;
+    height: 5rem;
+    background: #d1d5db;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+}
+
+.nom-membre {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.25rem;
+    text-align: center;
+}
+
+.poste-membre {
+    color: #2563eb;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.bio-membre {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Optimisations SEO pour le contenu */
+strong {
+    font-weight: 600;
+    color: #111827;
+}
+
+em {
+    font-style: italic;
+    color: #374151;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .grille-mission {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .grille-equipe {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .titre-page {
+        font-size: 2rem;
+    }
+
+    .section-contenu {
+        padding: 2rem;
+    }
+
+    .page-a-propos {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grille-equipe {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Améliorations d'accessibilité */
+.carte-membre:focus-within {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Animations subtiles */
+.carte-mission {
+    transition: transform 0.2s ease;
+}
+
+.carte-mission:hover {
+    transform: translateY(-1px);
+}
+
+/* Performance et optimisation */
+.icone-mission {
+    will-change: transform;
+}
+
+.carte-membre {
+    will-change: transform;
+}
+
+
+/*========== BOITE A IDEE ==========*/
+
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #111827;
+    line-height: 1.6;
+    background: #ffffff;
+}
+
+/* Page Boîte à idées */
+.page-boite-idees {
+    padding: 4rem 1.5rem;
+    background: #f3f4f6;
+}
+
+.conteneur-boite-idees {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+/* En-tête */
+.entete-page {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.titre-page {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.sous-titre-page {
+    font-size: 1.125rem;
+    color: #6b7280;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Sections */
+.section-contenu {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 3rem;
+}
+
+.titre-section {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+}
+
+.texte-contenu {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Formulaire */
+.formulaire-idee {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.groupe-champ {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-champ {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.champ-texte, .champ-select, .champ-textarea {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.champ-texte:focus, .champ-select:focus, .champ-textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.champ-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.bouton-envoyer {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-self: flex-start;
+}
+
+.bouton-envoyer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+}
+
+/* Idées populaires */
+.grille-idees-populaires {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.carte-idee {
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.vote-score {
+    background: #2563eb;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    text-align: center;
+    min-width: 60px;
+    height: fit-content;
+}
+
+.nombre-votes {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.label-votes {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.contenu-idee {
+    flex: 1;
+}
+
+.titre-idee-populaire {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.description-idee {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.categorie-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.categorie-badge.fonctionnalite {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.categorie-badge.amelioration {
+    background: #d1fae5;
+    color: #047857;
+}
+
+/* Processus */
+.grille-processus {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.etape-processus {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.numero-etape {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0 auto 1rem;
+}
+
+.titre-etape {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.description-etape {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.note-processus {
+    background: #f3f4f6;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin-top: 2rem;
+    border-left: 4px solid #2563eb;
+}
+
+/* Optimisations SEO pour le contenu */
+strong {
+    font-weight: 600;
+    color: #111827;
+}
+
+em {
+    font-style: italic;
+    color: #374151;
+}
+
+
+/* Améliorations d'accessibilité */
+.bouton-envoyer:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.champ-texte:focus, .champ-select:focus, .champ-textarea:focus {
+    outline: none;
+}
+
+/* Animations subtiles */
+.carte-idee {
+    transition: transform 0.2s ease;
+}
+
+.carte-idee:hover {
+    transform: translateY(-2px);
+}
+
+/* Performance et optimisation */
+.bouton-envoyer {
+    will-change: transform;
+}
+
+.carte-idee {
+    will-change: transform;
+}
+
+
+/* =========== DETAILS DU BIENS ==========*/
+

@@ -6,7 +6,7 @@
       <h2 class="titre-bloc">Informations obligatoires</h2>
       <div class="zone-obligatoire">
         {% for champ in form %}
-          {% if champ.vars.attr['data-obligatoire'] is defined %}
+          {% if champ.vars.name != 'photosUpload' and champ.vars.attr['data-obligatoire'] is defined %}
             <div class="champ-annonce">
               {{ form_row(champ) }}
             </div>
@@ -19,11 +19,11 @@
     <section class="bloc-optionnel">
       <h2 class="titre-bloc">Informations facultatives</h2>
 
-      {# Sous-bloc : champs facultatifs classiques (textes, dates, nombres...) #}
       <section class="zone-facultative-champs">
         <h3 class="sous-titre-facultatif">Détails complémentaires</h3>
         {% for champ in form %}
-          {% if champ.vars.attr['data-obligatoire'] is not defined
+          {% if champ.vars.name != 'photosUpload'
+                and champ.vars.attr['data-obligatoire'] is not defined
                 and 'checkbox' not in champ.vars.block_prefixes %}
             <div class="champ-annonce">
               {{ form_row(champ) }}
@@ -32,13 +32,13 @@
         {% endfor %}
       </section>
 
-      {# Sous-bloc : checkboxes (équipements, caractéristiques...) #}
-      {% set checkboxes = form|filter(champ => champ.vars.attr['data-obligatoire'] is not defined 
-                                          and 'checkbox' in champ.vars.block_prefixes) %}
+      {% set checkboxes = form|filter(champ => champ.vars.name != 'photosUpload'
+                                            and champ.vars.attr['data-obligatoire'] is not defined
+                                            and 'checkbox' in champ.vars.block_prefixes) %}
       {% if checkboxes is not empty %}
         <section class="zone-facultative-checkbox">
           <h3 class="sous-titre-facultatif">Équipements et caractéristiques</h3>
-          <p class="aide-checkbox">Cocher les éléments présents dans votre bien :</p>
+          <p class="aide-checkbox">Cochez les éléments présents dans votre bien :</p>
           <div class="grille-checkbox">
             {% for champ in checkboxes %}
               <div class="champ-checkbox">

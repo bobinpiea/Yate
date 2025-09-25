@@ -10,6 +10,7 @@
     <p class="texte-intro">Remplissez les informations ci-dessous pour proposer votre bien.</p>
   </header>
 
+  {# 🔔 Messages flash (succès / erreur) #}
   {% for label, messages in app.flashes %}
     {% for message in messages %}
       <div class="flash-message flash-{{ label }}">{{ message }}</div>
@@ -18,8 +19,8 @@
 
   {{ form_start(form, { attr: { id: 'annonce-form', class: 'formulaire-annonce' } }) }}
 
-    {# 1 - Tout d'abord le choix de la transaciton et de la natutre du bien #}
-    <section class="bloc-formulaire">
+    {# Étape 1 : choix transaction + nature #}
+    <section class="bloc-formulaire" id="step-1">
       <div class="ligne-formulaire">
         <div class="colonne-formulaire">
           {{ form_row(form.transaction, {
@@ -40,45 +41,61 @@
       </div>
     </section>
 
-    {#  2- Champs masqués au départ (Obligatoire et Facultatif) #}
-    <section id="details" class="bloc-details" style="display: none;">
-      {% include 'annonce/_details_fields.html.twig' with { form: form.details } %}
-    </section>
+    {# Étape 2 : champs + upload photos #}
+    <section class="bloc-formulaire" id="step-2" style="display:none;">
+      
+      <div id="details-fields"></div>
 
-    {# Bouton de soumission, masqué au départ #}
-    <div class="zone-bouton" id="submit-zone" style="display: none;">
-      <button type="submit" class="bouton-principal">Publier l'annonce</button>
-    </div>
+      <section class="bloc-photos-etape2">
+        <h2 class="titre-section">Photos du bien</h2>
+        <p class="texte-aide">Veuillez ajouter entre <strong>1 et 10 photos</strong> (formats : JPG, PNG, WebP).</p>
+        {{ form_row(form.photosUpload, {
+          label: 'Sélectionnez vos photos'
+        }) }}
+      </section>
+
+      <div class="zone-bouton">
+        <button type="submit" class="bouton-principal">Publier l'annonce</button>
+      </div>
+    </section>
 
   {{ form_end(form) }}
 
 </main>
 
-{# Script AJAX + affichage conditionnel #}
+{# Script pour gérer les étapes #}
 <script>
 (function(){
-  const form = document.getElementById('annonce-form');
-  const details = document.getElementById('details');
-  const boutonSuivant = document.getElementById('btn-suivant');
-  const zoneBouton = document.getElementById('submit-zone');
+  const form        = document.getElementById('annonce-form');
+  const selectTrans = document.querySelector('[name$="[transaction]"]');
+  const selectNature= document.querySelector('[name$="[nature]"]');
 
-  function refreshDetails() {
+  const step2       = document.getElementById('step-2');
+  const btnNext     = document.getElementById('btn-suivant');
+  const detailsBox  = document.getElementById('details-fields');
+
+  btnNext.addEventListener('click', function(){
+    if (!selectTrans.value || !selectNature.value) {
+      alert('Merci de sélectionner un type de transaction et une nature de bien.');
+      return;
+    }
+
     const formData = new FormData(form);
     fetch('{{ path("annonce_preview") }}', {
       method: 'POST',
-      headers: {'X-Requested-With': 'XMLHttpRequest'},
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
       body: formData
     })
-    .then(response => response.json())
-    .then(({ form: formHtml }) => {
-      details.innerHTML = formHtml;
-      details.style.display = 'block';
-      zoneBouton.style.display = 'block';
-      details.scrollIntoView({ behavior: 'smooth' });
+    .then(r => r.json())
+    .then(({ form: html }) => {
+      detailsBox.innerHTML = html;
+      step2.style.display = 'block';
+      step2.scrollIntoView({ behavior: 'smooth' });
+    })
+    .catch(() => {
+      alert('Impossible de charger les champs. Réessayez.');
     });
-  }
-
-  boutonSuivant.addEventListener('click', refreshDetails);
+  });
 })();
 </script>
 {% endblock %}
