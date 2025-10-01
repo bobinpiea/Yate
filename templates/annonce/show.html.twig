@@ -7,7 +7,7 @@
 {% block body %}
 <section class="fiche-annonce">
 
-    {# -------------------- 1. Galerie Photos -------------------- #}
+    {#  A METTRE EN PLACE  #}
     <div class="bloc-photos">
         <img src="" alt="Photos du bien">
         <button class="btn-voir-photos">Voir les photos</button>
@@ -15,7 +15,7 @@
         {# ici je veux qu'on voit toutes les photos de l'annonce #}
     </div>
 
-    {# -------------------- 2. En-tête Annonce -------------------- #}
+    {#  2. En-tete (sans le titre de l'annonce #}
     <div class="entete-annonce">
         <h1 class="titre-annonce">
             {{ annonce.commune }} - 
@@ -25,27 +25,28 @@
         <h2 class="ville-annonce">{{ annonce.ville }}</h2>
     </div>
 
-    {# -------------------- 3. Prix + Actions -------------------- #}
+    {#  Action (à mettre) à  Droite  #}
     <div class="bloc-prix-actions">
         <p class="prix-annonce">{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</p>
         <div class="actions-annonce">
-            <button class="btn-contact">Nous contacter</button>
+            <button class="btn-contact">Contacter le vendeur</button>
             <button class="btn-sauvegarde">Sauvegarder</button>
             <button class="btn-partager">Partager</button>
         </div>
     </div>
 
-    {# -------------------- 4. Résumé Infos Rapides -------------------- #}
+    {#  Résumé Infos Rapides + Image #}
     <div class="infos-rapides">
         <p class="type-bien">{{ annonce.natureBien.nom }}</p>
         <p class="superficie">{{ annonce.superficie }} m²</p>
     </div>
 
-    {# -------------------- 5. Description & Détails -------------------- #}
+    {# Descrition / Détail  #}
     <div class="bloc-description">
         <h3 class="titre-description">{{ annonce.titre }}</h3>
         <p class="texte-description">{{ annonce.description }}</p>
         <p class="ref-annonce">Référence : {{ annonce.reference }}</p>
+        <a href=""> Contact : + 225 (Rajouter un champ numéro de télephone dans l'entité Annonce)</a>
         <p class="date-publication">Publié le : {{ annonce.datePublication|date('d/m/Y') }}</p>
     </div>
 
@@ -54,7 +55,7 @@
         ACD - Attestation villageoise - Lettre d'attribution - ACP 
     #}
 
-    {# -------------------- 6. Tableau descriptif (si Maison ou Appartement) -------------------- #}
+    {#  Tableau descriptif (si Maison ou Appartement)  #}
     {% if annonce.natureBien.nom in ['Maison', 'Appartement'] %}
     <div class="bloc-descriptif-detaille">
         <h2 class="titre-descriptif">Descriptif détaillé</h2>
@@ -88,7 +89,7 @@
     </div>
     {% endif %}
 
-    {# -------------------- 7. Blocs à venir -------------------- #}
+    {# ---------- 7. Blocs à venir --------- #}
     <div class="bloc-a-venir">
         <h4>Localisation (A voir si c'est possible)</h4> {# A faire plus tard #}
         <h4>Autre(s) annonce(s) de cette personne</h4> {# A faire plus tard #}

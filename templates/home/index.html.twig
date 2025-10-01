@@ -19,6 +19,7 @@
                         d'achat, de location et de vente.
                     </p>
 
+
                     <!-- Liste de chiffres clés -->
                     <ul class="liste-chiffres">
                         <li class="chiffre">
@@ -112,18 +113,24 @@
     <div class="grid-terrains">
         {% set count = 0 %}
         {% for annonceVente in annoncesVente %}
-        {% if annonceVente.natureBien.nom == 'Terrain' and count < 3 %}
-            <div class="card-terrain">
-            <div class="photo-terrain">
-            <!-- Pour la phot plus tard -->
-            </div>
-            <div class="info-terrain">
-                <p><strong>{{ annonceVente.ville }} – {{ annonceVente.commune }}</strong></p>
-                <p>
-                <strong>{{ annonceVente.superficie }} m²</strong> | <strong>{{ annonceVente.prix|number_format(0, '.', ' ') }} F CFA</strong>
-                </p>
-            </div>
-            </div>
+        {% if annonceVente.natureBien.nom == 'Terrain' and count < 3 %}     
+                <div class="card-terrain">
+                <div class="photo-terrain">
+
+                    {% if annonceVente.photos|length > 0 %}
+                      <img src="{{ asset('uploads/annonces/' ~ annonceVente.photos|first.url) }}" 
+                          alt="Photo de {{ annonceVente.titre }}" 
+                          style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                    {% endif %}
+
+                </div>
+                <div class="info-terrain">
+                    <p><strong>{{ annonceVente.ville }} – {{ annonceVente.commune }}</strong></p>
+                    <p>
+                    <strong>{{ annonceVente.superficie }} m²</strong> | <strong>{{ annonceVente.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                    </p>
+                </div>
+                </div>
             {% set count = count + 1 %}
         {% endif %}
         {% endfor %}
@@ -145,7 +152,13 @@
             {% if annonceLocation.natureBien.nom == 'Appartement' and count < 3 %}
                 <div class="card-terrain">
                 <div class="photo-terrain">
-                <!-- Pour la phot plus tard -->
+ 
+                    {% if annonceLocation.photos|length > 0 %}
+                      <img src="{{ asset('uploads/annonces/' ~ annonceLocation.photos|first.url) }}" 
+                          alt="Photo de {{ annonceLocation.titre }}" 
+                          style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                    {% endif %}    
+
                 </div>
                 <div class="info-terrain">
                     <p><strong>{{ annonceLocation.ville }} – {{ annonceLocation.commune }}</strong></p>
@@ -175,7 +188,13 @@
             {% if annonceColocation.natureBien.nom == 'Maison' and count < 3 %}
                 <div class="card-terrain">
                 <div class="photo-terrain">
-                <!-- Pour la phot plus tard -->
+
+                    {% if annonceColocation.photos|length > 0 %}
+                      <img src="{{ asset('uploads/annonces/' ~ annonceColocation.photos|first.url) }}" 
+                          alt="Photo de {{ annonce.titre }}" 
+                          style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                    {% endif %}
+                    
                 </div>
                 <div class="info-terrain">
                     <p><strong>{{ annonceColocation.ville }} – {{ annonceColocation.commune }}</strong></p>
@@ -215,7 +234,7 @@
 
             <div class="conteneur-blog">
                 <div class="entete-blog">
-                <h2 class="titre-blog">Le Blog Ayitate</h2>
+                <h2 class="titre-blog">Le Blog Ayitate ( METTRE DES IMAGES EN FOND) </h2>
                 <p class="sous-titre-blog">Découvrez nos derniers articles juridiques et nos conseils déco</p>
                 </div>
 

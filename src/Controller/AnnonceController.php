@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Photo;
 use App\Entity\Annonce;
 use App\Form\AnnonceAjaxType;
+use App\Form\TerrainFiltreType;
 use App\Service\PictureService;
 use App\Repository\AnnonceRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -84,7 +85,7 @@ class AnnonceController extends AbstractController
                 $entityManager->persist($annonce);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('app_profile');
             }
 
             return $this->render('annonce/new.html.twig', [
@@ -135,43 +136,140 @@ class AnnonceController extends AbstractController
 
     /* LISTE DES BIENS PAR TYPES DE TRANSACTION */
 
-    #[Route('/annonces/achat', name: 'app_annonce_liste_achat')]
-    public function listeAchat(AnnonceRepository $annonceRepository): Response
-    {
-        $annonces = $annonceRepository->findByTransactionNom('Vente');
+        // Pour Achat
+            #[Route('/annonces/achat', name: 'app_annonce_liste_achat')]
+            public function listeAchat(AnnonceRepository $annonceRepository): Response
+            {
+                $annonces = $annonceRepository->findByTransactionNom('Vente');
 
-        return $this->render('annonce/liste_achat.html.twig', [
-            'annonces' => $annonces,
-        ]);
-    }
+                return $this->render('annonce/liste_achat.html.twig', [
+                    'annonces' => $annonces,
+                ]);
+            }
 
-    #[Route('/annonces/location', name: 'app_annonce_liste_location')]
-    public function listeLocation(AnnonceRepository $annonceRepository): Response
-    {
-        $annonces = $annonceRepository->findByTransactionNom('Location');
+        // Pour Location
+            #[Route('/annonces/location', name: 'app_annonce_liste_location')]
+            public function listeLocation(AnnonceRepository $annonceRepository): Response
+            {
+                $annonces = $annonceRepository->findByTransactionNom('Location');
 
-        return $this->render('annonce/liste_location.html.twig', [
-            'annonces' => $annonces,
-        ]);
-    }
+                return $this->render('annonce/liste_location.html.twig', [
+                    'annonces' => $annonces,
+                ]);
+            }
 
-    #[Route('/annonces/colocation', name: 'app_annonce_liste_colocation')]
-    public function listeColocation(AnnonceRepository $annonceRepository): Response
-    {
-        $annonces = $annonceRepository->findByTransactionNom('Colocation');
+        // Pour Colocation            
+            #[Route('/annonces/colocation', name: 'app_annonce_liste_colocation')]
+            public function listeColocation(AnnonceRepository $annonceRepository): Response
+            {
+                $annonces = $annonceRepository->findByTransactionNom('Colocation');
 
-        return $this->render('annonce/liste_colocation.html.twig', [
-            'annonces' => $annonces,
-        ]);
-    }
+                return $this->render('annonce/liste_colocation.html.twig', [
+                    'annonces' => $annonces,
+                ]);
+            }
 
     /* DETAILS D'UN BIEN : PAGE D'AFFICHAGE D'UNE ANNONCE  */
 
-    #[Route('/annonce/{id}', name: 'annonce_show')]
-    public function show(Annonce $annonce): Response
-    {
-        return $this->render('annonce/show.html.twig', [
-            'annonce' => $annonce,
-        ]);
-    }
+        #[Route('/annonce/{id}', name: 'annonce_show')]
+        public function show(Annonce $annonce): Response
+        {
+            return $this->render('annonce/show.html.twig', [
+                'annonce' => $annonce,
+            ]);
+        }
+
+    /* Modification une annonce */
+        #[Route('/annonce/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
+        public function edit(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
+        {
+        
+            if ($annonce->getUser() !== $this->getUser()) {
+                $this->addFlash('danger', 'Vous ne pouvez pas modifier cette annonce.');
+                return $this->redirectToRoute('app_profile');
+            }
+
+            $form = $this->createForm(AnnonceAjaxType::class, $annonce, [
+                'entityManager' => $entityManager,
+            ]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->flush();
+                $this->addFlash('success', 'Annonce modifiée avec succès.');
+                return $this->redirectToRoute('app_profile');
+            }
+
+            return $this->render('annonce/edit.html.twig', [
+                'form' => $form->createView(),
+                'annonce' => $annonce,
+            ]);
+        }
+
+    /*  Suppression d'une annonce */
+            #[Route('/annonce/{id}/delete', name: 'app_annonce_delete', methods: ['POST'])]
+            public function delete(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
+            {
+                if ($annonce->getUser() !== $this->getUser()) {
+                    $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette annonce.');
+                    return $this->redirectToRoute('app_profile');
+                }
+
+                if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
+                    $entityManager->remove($annonce);
+                    $entityManager->flush();
+                    $this->addFlash('success', 'Annonce supprimée avec succès.');
+                }
+
+                return $this->redirectToRoute('app_profile');
+            }
+
+    // Les différentes vu de vente
+
+        // Liste des terrains en vente avec le filtre
+            #[Route('/annonces/vente/terrains', name: 'app_annonce_liste_vente_terrains')]
+            public function listeVenteTerrains(Request $request, AnnonceRepository $annonceRepository): Response
+            {
+                // Création du formulaire de filtre
+                $form = $this->createForm(TerrainFiltreType::class);
+                $form->handleRequest($request);
+
+                $annonces = [];
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    // On récupère les données du filtre
+                    $filters = $form->getData();
+                    $annonces = $annonceRepository->searchTerrainsVente($filters);
+                } else {
+                    // Par défaut -> on affiche toutes les annonces de terrain en vente
+                    $annonces = $annonceRepository->searchTerrainsVente([]);
+                }
+
+                return $this->render('annonce/liste_vente_terrains.html.twig', [
+                    'form' => $form->createView(),
+                    'annonces' => $annonces,
+                ]);
+            }
+
+        #[Route('/annonces/vente/maisons', name: 'app_annonce_vente_maisons')]
+        public function listeMaisonsVente(AnnonceRepository $annonceRepository): Response
+        {
+            $annonces = $annonceRepository->findByTransactionAndNature('Vente', 'Maison');
+
+            return $this->render('annonce/liste_vente_maisons.html.twig', [
+                'annonces' => $annonces,
+            ]);
+        }
+
+        #[Route('/annonces/vente/appartements', name: 'app_annonce_vente_appartements')]
+        public function listeAppartementsVente(AnnonceRepository $annonceRepository): Response
+        {
+            $annonces = $annonceRepository->findByTransactionAndNature('Vente', 'Appartement');
+
+            return $this->render('annonce/liste_vente_appartements.html.twig', [
+                'annonces' => $annonces,
+            ]);
+        }
+
+
 }

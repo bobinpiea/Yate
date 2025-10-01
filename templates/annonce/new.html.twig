@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Déposer une annonce immobilière - Ayitate{% endblock %}
+{% block title %} Déposer une annonce immobilière - Ayitate{% endblock %}
 
 {% block body %}
 <main class="contenu-annonce">
@@ -10,7 +10,6 @@
     <p class="texte-intro">Remplissez les informations ci-dessous pour proposer votre bien.</p>
   </header>
 
-  {# 🔔 Messages flash (succès / erreur) #}
   {% for label, messages in app.flashes %}
     {% for message in messages %}
       <div class="flash-message flash-{{ label }}">{{ message }}</div>

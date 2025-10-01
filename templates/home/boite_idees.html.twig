@@ -3,8 +3,180 @@
 {% block title %}Boîte à idées{% endblock %}
 
 {% block body %}
-    <section class="container">
-        <h1>Boîte à idées</h1>
-        <p>Partagez vos idées et suggestions pour améliorer Ayitate. Nous sommes à l’écoute de votre créativité !</p>
-    </section>
+<main class="page-boite-idees">
+    <div class="conteneur-boite-idees">
+        
+        <!-- En-tête -->
+        <header class="entete-page">
+            <h1 class="titre-page">Boîte à idées</h1>
+            <p class="sous-titre-page">Partagez vos suggestions pour améliorer Ayitate</p>
+        </header>
+
+        <!-- Introduction -->
+        <section class="section-contenu">
+            <h2 class="titre-section">Votre avis compte</h2>
+            <p class="texte-contenu">
+                Chez <strong>Ayitate</strong>, nous croyons que les meilleures idées viennent de nos utilisateurs. 
+                Que vous soyez acheteur, vendeur, ou professionnel du foncier, vos suggestions nous aident 
+                à améliorer continuellement notre plateforme.
+            </p>
+            <p class="texte-contenu">
+                Partagez vos idées d'<em>amélioration</em>, de <em>nouvelles fonctionnalités</em>, 
+                ou signalez-nous des problèmes rencontrés. Chaque retour est précieux pour nous !
+            </p>
+        </section>
+
+        <!-- Formulaire de suggestion -->
+        <section class="section-contenu">
+            <h2 class="titre-section">Proposer une idée</h2>
+            
+            <form class="formulaire-idee">
+                <div class="groupe-champ">
+                    <label for="nom" class="label-champ">Nom complet</label>
+                    <input type="text" id="nom" name="nom" class="champ-texte" placeholder="Votre nom et prénom" required>
+                </div>
+
+                <div class="groupe-champ">
+                    <label for="email" class="label-champ">Email</label>
+                    <input type="email" id="email" name="email" class="champ-texte" placeholder="votre.email@exemple.com" required>
+                </div>
+
+                <div class="groupe-champ">
+                    <label for="categorie" class="label-champ">Catégorie</label>
+                    <select id="categorie" name="categorie" class="champ-select" required>
+                        <option value="">Choisir une catégorie</option>
+                        <option value="fonctionnalite">Nouvelle fonctionnalité</option>
+                        <option value="amelioration">Amélioration existante</option>
+                        <option value="bug">Signaler un problème</option>
+                        <option value="interface">Interface utilisateur</option>
+                        <option value="securite">Sécurité</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="groupe-champ">
+                    <label for="titre-idee" class="label-champ">Titre de votre idée</label>
+                    <input type="text" id="titre-idee" name="titre-idee" class="champ-texte" 
+                    placeholder="Résumez votre idée en quelques mots" required>
+                </div>
+
+                <div class="groupe-champ">
+                    <label for="description" class="label-champ">Description détaillée</label>
+                    <textarea 
+                        id="description" name="description" class="champ-textarea" 
+                        placeholder="Décrivez votre idée en détail. Quel problème résout-elle ? Comment l'imaginez-vous ?" required>
+                    </textarea>
+                </div>
+
+                <div class="groupe-champ">
+                    <label for="priorite" class="label-champ">Priorité selon vous</label>
+                    <select id="priorite" name="priorite" class="champ-select">
+                        <option value="faible">Faible</option>
+                        <option value="moyenne" selected>Moyenne</option>
+                        <option value="haute">Haute</option>
+                        <option value="critique">Critique</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="bouton-envoyer">
+                    Envoyer ma suggestion
+                </button>
+            </form>
+        </section>
+
+        <!-- Idées populaires -->
+        <section class="section-contenu">
+            <h2 class="titre-section">Idées les plus demandées</h2>
+            
+            <div class="grille-idees-populaires">
+                <article class="carte-idee">
+                    <div class="vote-score">
+                        <span class="nombre-votes">42</span>
+                        <span class="label-votes">votes</span>
+                    </div>
+                    <div class="contenu-idee">
+                        <h3 class="titre-idee-populaire">Système de notation des vendeurs</h3>
+                        <p class="description-idee">Permettre aux acheteurs de noter et commenter leur expérience avec les vendeurs pour renforcer la confiance.</p>
+                        <span class="categorie-badge fonctionnalite">Nouvelle fonctionnalité</span>
+                    </div>
+                </article>
+
+                <article class="carte-idee">
+                    <div class="vote-score">
+                        <span class="nombre-votes">38</span>
+                        <span class="label-votes">votes</span>
+                    </div>
+                    <div class="contenu-idee">
+                        <h3 class="titre-idee-populaire">Application mobile</h3>
+                        <p class="description-idee">Développer une application mobile pour consulter les annonces et gérer son compte plus facilement.</p>
+                        <span class="categorie-badge fonctionnalite">Nouvelle fonctionnalité</span>
+                    </div>
+                </article>
+
+                <article class="carte-idee">
+                    <div class="vote-score">
+                        <span class="nombre-votes">29</span>
+                        <span class="label-votes">votes</span>
+                    </div>
+                    <div class="contenu-idee">
+                        <h3 class="titre-idee-populaire">Carte interactive des terrains</h3>
+                        <p class="description-idee">Intégrer une carte interactive pour visualiser l'emplacement exact
+                             des terrains avec les équipements à proximité.</p>
+                        <span class="categorie-badge amelioration">Amélioration</span>
+                    </div>
+                </article>
+
+                <article class="carte-idee">
+                    <div class="vote-score">
+                        <span class="nombre-votes">24</span>
+                        <span class="label-votes">votes</span>
+                    </div>
+                    <div class="contenu-idee">
+                        <h3 class="titre-idee-populaire">Alertes personnalisées</h3>
+                        <p class="description-idee">Recevoir des notifications par email quand un terrain correspond à ses critères de recherche.</p>
+                        <span class="categorie-badge fonctionnalite">Nouvelle fonctionnalité</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Processus -->
+        <section class="section-contenu">
+            <h2 class="titre-section">Comment vos idées sont traitées</h2>
+            
+            <div class="grille-processus">
+                <div class="etape-processus">
+                    <div class="numero-etape">1</div>
+                    <h3 class="titre-etape">Réception</h3>
+                    <p class="description-etape">Votre idée est reçue et enregistrée dans notre système de suivi.</p>
+                </div>
+
+                <div class="etape-processus">
+                    <div class="numero-etape">2</div>
+                    <h3 class="titre-etape">Analyse</h3>
+                    <p class="description-etape">Notre équipe étudie la faisabilité technique et l'impact utilisateur.</p>
+                </div>
+
+                <div class="etape-processus">
+                    <div class="numero-etape">3</div>
+                    <h3 class="titre-etape">Priorisation</h3>
+                    <p class="description-etape">Les idées sont classées selon leur valeur ajoutée et leur complexité.</p>
+                </div>
+
+                <div class="etape-processus">
+                    <div class="numero-etape">4</div>
+                    <h3 class="titre-etape">Développement</h3>
+                    <p class="description-etape">Les idées retenues sont intégrées à notre roadmap de développement.</p>
+                </div>
+            </div>
+
+            <div class="note-processus">
+                <p><strong>Note :</strong> Nous vous tiendrons informé par l'évolution de votre suggestion. 
+                Toutes les idées ne peuvent pas être implémentées, mais chacune est étudiée avec attention.
+                Nous vous remercions pour votre Retours </p>
+            </div>
+        </section>
+
+    </div>
+</main>
 {% endblock %}

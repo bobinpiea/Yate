@@ -77,6 +77,8 @@ class AnnonceAjaxType extends AbstractType
                 'mapped' => false,
             ]);
 
+            
+
         $addAnnonceFields = function (FormInterface $form, string $natureLabel, string $transactionLabel): void {
             $details = $form->get('details');
 
@@ -145,7 +147,21 @@ class AnnonceAjaxType extends AbstractType
                         'data-obligatoire' => true,
                         'placeholder' => 'Ex: 12000000', 
                     ],
-                ]);
+                ])
+
+                // --------------------------------------------------------------------
+                    ->add('tel', FormType\IntegerType::class, [
+                        'constraints' => [
+                            new NotBlank(['message' => 'Le numéro de téléphone est obligatoire.']),
+
+                            new Length([
+                                'min' => 10, 
+                                'max' => 10 ])
+                        ],
+                        'attr' => ['placeholder' => 'Ex: 0622232253']
+                    ]);
+
+                    
 
             // Champs spécifiques à location / colocation
             if (in_array(strtolower($transactionLabel), ['location', 'colocation'], true)) {

@@ -281,6 +281,504 @@
 
 /* ==========  QUI SOMMES NOUS ========== */
 
+      /* A PROPOS DE NOUS */
+
+/* Page À propos */
+.page-a-propos {
+    padding: 4rem 1.5rem;
+    background: #f3f4f6;
+}
+
+/* Conteneur principal */
+.conteneur-a-propos {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+/* En-tête de page */
+.entete-page {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.titre-page {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111827;
+}
+
+.sous-titre-page {
+    font-size: 1.125rem;
+    color: #6b7280;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Section contenu */
+.section-contenu {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 3rem;
+}
+
+.titre-section {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+}
+
+.texte-contenu {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Section mission/vision */
+.grille-mission {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.carte-mission {
+    background: #f3f4f6;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    text-align: center;
+}
+
+.icone-mission {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.25rem;
+}
+
+.icone-mission.mission {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.icone-mission.vision {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.titre-mission {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.texte-mission {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Section équipe */
+.grille-equipe {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.carte-membre {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carte-membre:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.photo-membre {
+    width: 5rem;
+    height: 5rem;
+    background: #d1d5db;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+}
+
+.nom-membre {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.25rem;
+    text-align: center;
+}
+
+.poste-membre {
+    color: #2563eb;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.bio-membre {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Optimisations SEO pour le contenu */
+strong {
+    font-weight: 600;
+    color: #111827;
+}
+
+em {
+    font-style: italic;
+    color: #374151;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .grille-mission {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .grille-equipe {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .titre-page {
+        font-size: 2rem;
+    }
+
+    .section-contenu {
+        padding: 2rem;
+    }
+
+    .page-a-propos {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grille-equipe {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Améliorations d'accessibilité */
+.carte-membre:focus-within {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Animations subtiles */
+.carte-mission {
+    transition: transform 0.2s ease;
+}
+
+.carte-mission:hover {
+    transform: translateY(-1px);
+}
+
+/* Performance et optimisation */
+.icone-mission {
+    will-change: transform;
+}
+
+.carte-membre {
+    will-change: transform;
+}
+
+/*========== BOITE A IDEE ==========*/
+
+/* Page Boîte à idées */
+.page-boite-idees {
+    padding: 4rem 1.5rem;
+    background: #f3f4f6;
+}
+
+.conteneur-boite-idees {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+/* En-tête */
+.entete-page {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.titre-page {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.sous-titre-page {
+    font-size: 1.125rem;
+    color: #6b7280;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Sections */
+.section-contenu {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 3rem;
+}
+
+.titre-section {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+}
+
+.texte-contenu {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Formulaire */
+.formulaire-idee {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.groupe-champ {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-champ {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.champ-texte, .champ-select, .champ-textarea {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.champ-texte:focus, .champ-select:focus, .champ-textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.champ-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.bouton-envoyer {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-self: flex-start;
+}
+
+.bouton-envoyer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+}
+
+/* Idées populaires */
+.grille-idees-populaires {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.carte-idee {
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.vote-score {
+    background: #2563eb;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    text-align: center;
+    min-width: 60px;
+    height: fit-content;
+}
+
+.nombre-votes {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.label-votes {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.contenu-idee {
+    flex: 1;
+}
+
+.titre-idee-populaire {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.description-idee {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.categorie-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.categorie-badge.fonctionnalite {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.categorie-badge.amelioration {
+    background: #d1fae5;
+    color: #047857;
+}
+
+/* Processus */
+.grille-processus {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.etape-processus {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.numero-etape {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0 auto 1rem;
+}
+
+.titre-etape {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.description-etape {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.note-processus {
+    background: #f3f4f6;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin-top: 2rem;
+    border-left: 4px solid #2563eb;
+}
+
+/* Optimisations SEO pour le contenu */
+strong {
+    font-weight: 600;
+    color: #111827;
+}
+
+em {
+    font-style: italic;
+    color: #374151;
+}
+
+
+/* Améliorations d'accessibilité */
+.bouton-envoyer:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.champ-texte:focus, .champ-select:focus, .champ-textarea:focus {
+    outline: none;
+}
+
+/* Animations subtiles */
+.carte-idee {
+    transition: transform 0.2s ease;
+}
+
+.carte-idee:hover {
+    transform: translateY(-2px);
+}
+
+/* Performance et optimisation */
+.bouton-envoyer {
+    will-change: transform;
+}
+
+.carte-idee {
+    will-change: transform;
+}
 
 
 /* ========== Homme - Page D'Accueil ==========*/ 
@@ -1693,532 +2191,192 @@
 
 /*-----------------------------------------*/
 
-/* Reset et base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color: #111827;
-    line-height: 1.6;
-    background: #ffffff;
-}
-
-/* Page À propos */
-.page-a-propos {
-    padding: 4rem 1.5rem;
-    background: #f3f4f6;
-}
-
-/* Conteneur principal */
-.conteneur-a-propos {
-    max-width: 60rem;
-    margin: 0 auto;
-}
-
-/* En-tête de page */
-.entete-page {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.titre-page {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 1rem;
-}
-
-.sous-titre-page {
-    font-size: 1.125rem;
-    color: #6b7280;
-    line-height: 1.6;
-    text-align: center;
-}
-
-/* Section contenu */
-.section-contenu {
-    background: #ffffff;
-    border-radius: 1rem;
-    padding: 3rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
-    margin-bottom: 3rem;
-}
-
-.titre-section {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 1.5rem;
-}
-
-.texte-contenu {
-    color: #374151;
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-/* Section mission/vision */
-.grille-mission {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.carte-mission {
-    background: #f3f4f6;
-    padding: 2rem;
-    border-radius: 0.75rem;
-    text-align: center;
-}
-
-.icone-mission {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: #ffffff;
-    font-size: 1.25rem;
-}
-
-.icone-mission.mission {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-}
-
-.icone-mission.vision {
-    background: linear-gradient(135deg, #059669, #047857);
-}
-
-.titre-mission {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 1rem;
-}
-
-.texte-mission {
-    color: #6b7280;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-/* Section équipe */
-.grille-equipe {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.carte-membre {
-    background: #ffffff;
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.carte-membre:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.photo-membre {
-    width: 5rem;
-    height: 5rem;
-    background: #d1d5db;
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-}
-
-.nom-membre {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 0.25rem;
-    text-align: center;
-}
-
-.poste-membre {
-    color: #2563eb;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    text-align: center;
-}
-
-.bio-membre {
-    color: #6b7280;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    text-align: center;
-}
-
-/* Optimisations SEO pour le contenu */
-strong {
-    font-weight: 600;
-    color: #111827;
-}
-
-em {
-    font-style: italic;
-    color: #374151;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .grille-mission {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .grille-equipe {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .titre-page {
-        font-size: 2rem;
-    }
 
-    .section-contenu {
-        padding: 2rem;
-    }
+/* =========== LISTE DE TOUS LES VENTES DE TERRAINS ==========*/
 
-    .page-a-propos {
-        padding: 2rem 1rem;
-    }
-}
-
-@media (max-width: 1024px) {
-    .grille-equipe {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Améliorations d'accessibilité */
-.carte-membre:focus-within {
-    outline: 2px solid #2563eb;
-    outline-offset: 2px;
-}
-
-/* Animations subtiles */
-.carte-mission {
-    transition: transform 0.2s ease;
-}
-
-.carte-mission:hover {
-    transform: translateY(-1px);
-}
-
-/* Performance et optimisation */
-.icone-mission {
-    will-change: transform;
-}
-
-.carte-membre {
-    will-change: transform;
-}
-
-
-/*========== BOITE A IDEE ==========*/
-
-/* Reset et base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color: #111827;
-    line-height: 1.6;
-    background: #ffffff;
-}
-
-/* Page Boîte à idées */
-.page-boite-idees {
-    padding: 4rem 1.5rem;
-    background: #f3f4f6;
-}
-
-.conteneur-boite-idees {
-    max-width: 60rem;
-    margin: 0 auto;
-}
-
-/* En-tête */
-.entete-page {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.titre-page {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 1rem;
-}
+/* ----- Sera utilisé pour les autres listes -------*/
 
-.sous-titre-page {
-    font-size: 1.125rem;
-    color: #6b7280;
-    line-height: 1.6;
-    text-align: center;
-}
-
-/* Sections */
-.section-contenu {
-    background: #ffffff;
-    border-radius: 1rem;
-    padding: 3rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
-    margin-bottom: 3rem;
-}
-
-.titre-section {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 1.5rem;
-}
-
-.texte-contenu {
-    color: #374151;
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-/* Formulaire */
-.formulaire-idee {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.groupe-champ {
-    display: flex;
-    flex-direction: column;
-}
-
-.label-champ {
-    font-weight: 600;
-    color: #374151;
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
-}
 
-.champ-texte, .champ-select, .champ-textarea {
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.champ-texte:focus, .champ-select:focus, .champ-textarea:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.champ-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.bouton-envoyer {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 0.75rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    align-self: flex-start;
-}
 
-.bouton-envoyer:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+/* --- Mise en page globale --- */
+.page-liste-annonces {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 120rem; 
+  padding: 0 2rem;
 }
 
-/* Idées populaires */
-.grille-idees-populaires {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+/* --- En-tête --- */
+.entete-liste-annonces {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  background: none;   
+  box-shadow: none;  
+  border: none; 
 }
 
-.carte-idee {
-    background: #f8fafc;
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    border: 1px solid #e5e7eb;
+.entete-liste-annonces h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
 }
-
-.vote-score {
-    background: #2563eb;
-    color: white;
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    text-align: center;
-    min-width: 60px;
-    height: fit-content;
-}
-
-.nombre-votes {
-    display: block;
-    font-size: 1.25rem;
-    font-weight: 700;
+/* --- Conteneur principal : filtres + annonces --- */
+.conteneur-liste-annonces {
+  display: grid;
+  grid-template-columns: 20rem 1fr; 
+  gap: 3rem;
+  align-items: start;
 }
 
-.label-votes {
-    font-size: 0.75rem;
-    opacity: 0.9;
+/* --- Zone des filtres --- */
+.zone-filtres-annonces {
+  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.1rem 0.3rem rgba(0,0,0,0.1);
 }
 
-.contenu-idee {
-    flex: 1;
+.titre-filtres-annonces {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 }
 
-.titre-idee-populaire {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 0.5rem;
+.bloc-filtre {
+  margin-bottom: 1.5rem;
+  border: none;
 }
 
-.description-idee {
-    color: #6b7280;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
+.bloc-filtre legend {
+  font-weight: 600;
+  color: #1d4ed8;
+  margin-bottom: 0.5rem;
 }
 
-.categorie-badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
+.champ-filtre {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-.categorie-badge.fonctionnalite {
-    background: #dbeafe;
-    color: #1d4ed8;
+.champ-filtre input {
+  padding: 0.5rem;
+  border: 0.1rem solid #d1d5db;
+  border-radius: 0.375rem;
 }
 
-.categorie-badge.amelioration {
-    background: #d1fae5;
-    color: #047857;
+.bouton-valider-filtres {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-/* Processus */
-.grille-processus {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+.bouton-valider-filtres:hover {
+  background: #1d4ed8;
 }
 
-.etape-processus {
-    text-align: center;
-    padding: 1.5rem;
+/* --- Zone des annonces --- */
+.zone-grille-annonces {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
-.numero-etape {
-    width: 3rem;
-    height: 3rem;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin: 0 auto 1rem;
+.carte-annonce-liste {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  border: 0.1rem solid transparent;
+  transition: border-color 0.3s ease;
 }
 
-.titre-etape {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 0.5rem;
+.carte-annonce-liste:hover {
+  border-color: #2563eb; 
 }
 
-.description-etape {
-    color: #6b7280;
-    font-size: 0.875rem;
-    line-height: 1.5;
+.bloc-image-annonce img,
+.image-vide-annonce {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  border-bottom: 0.1rem solid #e5e7eb;
 }
 
-.note-processus {
-    background: #f3f4f6;
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    margin-top: 2rem;
-    border-left: 4px solid #2563eb;
+.image-vide-annonce {
+  background: #d1d5db;
 }
 
-/* Optimisations SEO pour le contenu */
-strong {
-    font-weight: 600;
-    color: #111827;
+.bloc-infos-annonce {
+  padding: 1rem;
 }
 
-em {
-    font-style: italic;
-    color: #374151;
+.texte-lieu {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-
-/* Améliorations d'accessibilité */
-.bouton-envoyer:focus {
-    outline: 2px solid #2563eb;
-    outline-offset: 2px;
+.texte-prix {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-.champ-texte:focus, .champ-select:focus, .champ-textarea:focus {
-    outline: none;
+.texte-reference {
+  font-size: 0.875rem;
+  color: #6b7280;
 }
 
-/* Animations subtiles */
-.carte-idee {
-    transition: transform 0.2s ease;
+/* --- Footer liens --- */
+/* --- Voir aussi (léger, centré, sans bandeau) --- */
+.liens-voir-aussi{
+  /* conteneur discret au lieu d'un bloc bleu plein écran */
+  max-width: 72rem;          /* ~1152px */
+  margin: 3rem auto 1.5rem;  /* espace avant le footer */
+  padding: 1rem 1.25rem;
+  background: transparent;   /* pas de fond sombre */
+  border-radius: 0.5rem;
+  text-align: center;
 }
 
-.carte-idee:hover {
-    transform: translateY(-2px);
+.liens-voir-aussi > span{
+  display: block;
+  font-size: 1.125rem;   /* 18px */
+  font-weight: 600;
+  color: #111827;        /* texte neutre */
+  margin-bottom: 0.75rem;
 }
 
-/* Performance et optimisation */
-.bouton-envoyer {
-    will-change: transform;
+.liens-voir-aussi a{
+  display: inline-block;
+  text-decoration: none;         /* pas de souligné */
+  color: #2563eb;                /* bleu marque pour le texte */
+  background: #ffffff;           /* pastille blanche */
+  border: 0.0625rem solid #e5e7eb; /* 1px */
+  border-radius: 9999px;         /* pill */
+  padding: 0.5rem 0.875rem;      /* 8px 14px */
+  font-weight: 600;
+  line-height: 1;
+  margin: 0 0.375rem;            /* petit écart entre pastilles */
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
 
-.carte-idee {
-    will-change: transform;
+.liens-voir-aussi a:hover,
+.liens-voir-aussi a:focus{
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  outline: none;
 }
-
-
-/* =========== DETAILS DU BIENS ==========*/
-

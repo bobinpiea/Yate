@@ -31,6 +31,7 @@ final class ProfileController extends AbstractController
 
             return $this->render('profile/show.html.twig', [
                 'user' => $user,
+                'annonces' => $user->getAnnonces(), // A VERIFIER
             ]);
         }
 

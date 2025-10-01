@@ -3,34 +3,73 @@
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
-    <div>
-        {% if user %}
+<div>
+    {% if user %}
 
-           <div>
-                Avatar :
-                    {% if user.avatar %}
-                        <img src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo ?? user.email }}" width="100">
-                    {% else %}
-                        Pas encore défini
-                    {% endif %}
-                <h1>Mon profil</h1>
+        <div>
+            Avatar :
+            {% if user.avatar %}
+                <img src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo ?? user.email }}" width="100">
+            {% else %}
+                Pas encore défini
+            {% endif %}
+            <h1>Mon profil</h1>
+        </div>
+
+        <div>
+            <a href="{{ path('app_profile_edit') }}">Modifier mon profil</a>
+        </div>
+
+        <ul>
+            <li>Email : {{ user.email }}</li>
+            <li>Nom : {{ user.nom ?? 'Non renseigné' }}</li>
+            <li>Prénom : {{ user.prenom ?? 'Non renseigné' }}</li>
+            <li>Pseudo : {{ user.pseudo ?? 'Non renseigné' }}</li>
+        </ul>
+
+        {# --- Annonces de l'utilisateur --- #}
+        <section class="section-terrains">
+            <div class="header-terrains">
+                <h2>Mes annonces</h2>
+                <a href="{{ path('app_annonce_new') }}" class="lien-tous"> Déposer une nouvelle annonce</a>
             </div>
 
-            <div>
-                <a href="{{ path('app_profile_edit') }}">Modifier mon profil</a>
+            <div class="grid-terrains">
+                {% if annonces is not empty %}
+                    {% for annonce in annonces %}
+                        <div class="card-terrain">
+                            <div class="photo-terrain">
+                                {% if annonce.photos|length > 0 %}
+                                    <img src="{{ asset('uploads/annonces/' ~ annonce.photos|first.url) }}" 
+                                    alt="Photo de {{ annonce.titre }}" 
+                                    style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                                {% endif %}
+                            </div>
+                            <div class="info-terrain">
+                                <p><strong>{{ annonce.ville }} – {{ annonce.commune }}</strong></p>
+                                <p>
+                                    {% if annonce.superficie %}
+                                        <strong>{{ annonce.superficie }} m²</strong> |
+                                    {% endif %}
+                                    <strong>{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                                </p>
+                            </div>
+                            <div class="actions-annonce">
+                                <a href="{{ path('annonce_show', {id: annonce.id}) }}">Voir</a>
+                                <a href="{{ path('app_annonce_edit', {id: annonce.id}) }}"> Modifier</a>
+                                <a href="{{ path('app_annonce_delete', {id: annonce.id}) }}"
+                                   onclick="return confirm('Voulez-vous vraiment supprimer cette annonce ?');">Supprimer</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Vous n’avez pas encore publié d’annonce.</p>
+                {% endif %}
             </div>
-         
+        </section>
 
-            <ul>
-                <li>Email : {{ user.email }}</li>
-                <li>Nom : {{ user.nom ?? 'Non renseigné' }}</li>
-                <li>Prénom : {{ user.prenom ?? 'Non renseigné' }}</li>
-                <li>Pseudo : {{ user.pseudo ?? 'Non renseigné' }}</li>
-            </ul>
-
-
-        {% else %}
-            <p>Vous devez être connecté pour voir votre profil.</p>
-        {% endif %}
-    </div>
+    {% else %}
+        <p>Vous devez être connecté pour voir votre profil.</p>
+    {% endif %}
+</div>
 {% endblock %}

@@ -55,4 +55,79 @@ class AnnonceRepository extends ServiceEntityRepository
                 ->getResult();
         }
 
+    //  Retrouver les annonces par Transactione et NAture du bien
+    public function findByTransactionAndNature(string $transactionNom, string $natureNom): array
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.transaction', 't')
+            ->join('a.natureBien', 'n')
+            ->where('t.typeTransaction = :transaction')
+            ->andWhere('n.nom = :nature')
+            ->setParameter('transaction', $transactionNom)
+            ->setParameter('nature', $natureNom)
+            ->orderBy('a.datePublication', 'DESC')         
+            ->getQuery()
+            ->getResult();
+    }
+
+    // Vente Terrain 
+
+    // src/Repository/AnnonceRepository.php
+        public function searchTerrainsVente(array $filters): array
+        {
+            $qb = $this->createQueryBuilder('a')
+                ->join('a.transaction', 't')
+                ->join('a.natureBien', 'n')
+                ->where('t.typeTransaction = :transaction')
+                ->andWhere('n.nom = :nature')
+                ->setParameter('transaction', 'Vente')
+                ->setParameter('nature', 'Terrain')
+                ->orderBy('a.datePublication', 'DESC');
+
+    
+            if (!empty($filters['prixMin'])) {
+                $qb->andWhere('a.prix >= :prixMin')
+                ->setParameter('prixMin', $filters['prixMin']);
+            }
+
+
+            if (!empty($filters['prixMax'])) {
+                $qb->andWhere('a.prix <= :prixMax')
+                ->setParameter('prixMax', $filters['prixMax']);
+            }
+
+            if (!empty($filters['ville'])) {
+                $qb->andWhere('a.ville LIKE :ville')
+                ->setParameter('ville', '%' . $filters['ville'] . '%');
+            }
+
+            if (!empty($filters['commune'])) {
+                $qb->andWhere('a.commune LIKE :commune')
+                ->setParameter('commune', '%' . $filters['commune'] . '%');
+            }
+
+            if (!empty($filters['superficieMin'])) {
+                $qb->andWhere('a.superficie >= :superficieMin')
+                ->setParameter('superficieMin', $filters['superficieMin']);
+            }
+
+        
+            if (!empty($filters['superficieMax'])) {
+                $qb->andWhere('a.superficie <= :superficieMax')
+                ->setParameter('superficieMax', $filters['superficieMax']);
+            }
+
+            if (!empty($filters['constructible'])) {
+                $qb->andWhere('a.constructible = 1');
+            }
+
+            if (!empty($filters['viabilise'])) {
+                $qb->andWhere('a.viabilise = 1');
+            }
+
+            return $qb->getQuery()->getResult();
+        }
+
+
+
 }
