@@ -72,7 +72,6 @@ class AnnonceRepository extends ServiceEntityRepository
 
     // Vente Terrain 
 
-    // src/Repository/AnnonceRepository.php
         public function searchTerrainsVente(array $filters): array
         {
             $qb = $this->createQueryBuilder('a')
