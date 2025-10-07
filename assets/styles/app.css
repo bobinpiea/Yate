@@ -932,6 +932,12 @@ em {
       color: #374151;
     }
 
+    /* Centrer par sélectionner une ville */
+
+    .sous-titre-section{
+      text-align: center;
+    }
+
   /* carte blanche contenant la grille */
     .conteneur-villes {
       max-width: 75rem;
