@@ -251,16 +251,18 @@ class AnnonceController extends AbstractController
                 ]);
             }
 
-        #[Route('/annonces/vente/maisons', name: 'app_annonce_vente_maisons')]
-        public function listeMaisonsVente(AnnonceRepository $annonceRepository): Response
-        {
-            $annonces = $annonceRepository->findByTransactionAndNature('Vente', 'Maison');
+        // Liste des maisons en vente avec le filtre
+            #[Route('/annonces/vente/maisons', name: 'app_annonce_vente_maisons')]
+            public function listeMaisonsVente(AnnonceRepository $annonceRepository): Response
+            {
+                $annonces = $annonceRepository->findByTransactionAndNature('Vente', 'Maison');
 
-            return $this->render('annonce/liste_vente_maisons.html.twig', [
-                'annonces' => $annonces,
-            ]);
-        }
+                return $this->render('annonce/liste_vente_maisons.html.twig', [
+                    'annonces' => $annonces,
+                ]);
+            }
 
+        // Liste des maisons en vente avec le filtre           
         #[Route('/annonces/vente/appartements', name: 'app_annonce_vente_appartements')]
         public function listeAppartementsVente(AnnonceRepository $annonceRepository): Response
         {

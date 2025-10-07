@@ -17,6 +17,30 @@
           /*  !!!!!!!!!! REVOIR LA POLICE DU SITE   */
       }
 
+
+
+/* ========== Tous les liens ne seront pas soulignés ==========*/
+
+  a {
+    text-decoration: none;       
+    color: inherit;   
+  }
+
+  a:hover {
+    text-decoration: none;     
+    color: #2563eb;       
+    cursor: pointer;  
+  }
+
+
+  /* DESACTIVER TOUTES LES TRANSITIONS NOTAMMENT SUR LES ARTICLES */
+
+  .section-blog .carte-article,
+  .section-blog .carte-article:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+
 /* ========== LAYOUT ==========*/ 
 
   /****** HEADER ******/
@@ -70,11 +94,11 @@
     }
     .user-actions ul li a:hover { color: #2563eb; }
 
-    /* Forum (mis en avant)  A REVOIR */
+    /* Forum (mis en avant)  A REVOIRRRRRRRRRRRRRRRRRRRRRRR */
     .user-actions li.forum a {
       font-weight: 700;
-      color: #2563eb;
-      background: #e5f0ff;
+      color: white;
+      background: #2563eb;
       padding: 0.3rem 0.8rem;
       border-radius: 0.4rem;
     }
@@ -93,7 +117,7 @@
       color: white;
     }
 
-    /* Inscription / Déconnexion (même style bleu plein) */
+    /* Inscription / Déconnexion */
     .user-actions li.inscription a {
       background: #2563eb;
       color: white;
@@ -102,7 +126,35 @@
       font-weight: 600;
       text-decoration: none;
     }
-    .user-actions li.inscription a:hover { background: #1d4ed8; }
+    .user-actions li.inscription a:hover {
+       background: #184ddf;
+       color: white;
+    }
+
+    
+    /* FORUM.                                                                         */
+
+
+    .user-actions li.forum a {
+      background: #2563eb;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .user-actions li.forum a:hover {
+      color: white  ;
+      background: #1556e4;
+      padding: 0.4rem 1rem;
+      border-color: #054be2;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    }
+
+    /* INSCRIPTION  */
+
+
 
     /* 3. Ligne 2 : Navigation principale */
     .main-nav { 
@@ -1364,7 +1416,6 @@ em {
 
   /* Hover */
     .article-card:hover {
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
       cursor: pointer;
     }
 
@@ -1785,7 +1836,7 @@ em {
   /****** MODIFIER LE SUJET ******/
 
 
-/****** MODIFIER LE SUJET — large & aéré, aligné au style “Créer un sujet” ******/
+/****** MODIFIER LE SUJET ******/
 
 /* carte/formulaire à droite */
 .forum-sujet-form{
@@ -1808,7 +1859,7 @@ em {
   margin-bottom: 2rem;
 }
 
-/* espacement uniforme entre les champs, quel que soit le markup généré par form_row */
+/* espacement  */
 .forum-sujet-form .form-container > *{
   margin-bottom: 1.25rem;
 }
@@ -1864,7 +1915,7 @@ em {
   background: #1d4ed8;
 }
 
-/* responsive : sur tablette/mobile, on empile, la carte prend toute la largeur */
+/* responsive $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 @media (max-width: 1024px){
   .forum-container{ grid-template-columns: 1fr; }
   .forum-sujet-form{ max-width: 100%; }
@@ -1994,8 +2045,9 @@ em {
       max-width: 100%;
     }
 
+      /*  AU PASSAGEEEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee */
     .carte-annonce:hover {
-      transform: translateY(-3px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
   /* Photo - image  - A REVOIR */
@@ -2196,8 +2248,6 @@ em {
 
 /* ----- Sera utilisé pour les autres listes -------*/
 
-
-
 /* --- Mise en page globale --- */
 .page-liste-annonces {
   display: flex;
@@ -2303,9 +2353,11 @@ em {
   transition: border-color 0.3s ease;
 }
 
+/*
 .carte-annonce-liste:hover {
   border-color: #2563eb; 
 }
+  */
 
 .bloc-image-annonce img,
 .image-vide-annonce {
@@ -2340,37 +2392,34 @@ em {
 }
 
 /* --- Footer liens --- */
-/* --- Voir aussi (léger, centré, sans bandeau) --- */
 .liens-voir-aussi{
-  /* conteneur discret au lieu d'un bloc bleu plein écran */
-  max-width: 72rem;          /* ~1152px */
-  margin: 3rem auto 1.5rem;  /* espace avant le footer */
+  max-width: 72rem;         
+  margin: 3rem auto 1.5rem;  
   padding: 1rem 1.25rem;
-  background: transparent;   /* pas de fond sombre */
+  background: transparent;   
   border-radius: 0.5rem;
   text-align: center;
 }
 
 .liens-voir-aussi > span{
   display: block;
-  font-size: 1.125rem;   /* 18px */
+  font-size: 1.125rem;   
   font-weight: 600;
-  color: #111827;        /* texte neutre */
+  color: #111827;       
   margin-bottom: 0.75rem;
 }
 
 .liens-voir-aussi a{
   display: inline-block;
-  text-decoration: none;         /* pas de souligné */
-  color: #2563eb;                /* bleu marque pour le texte */
-  background: #ffffff;           /* pastille blanche */
-  border: 0.0625rem solid #e5e7eb; /* 1px */
-  border-radius: 9999px;         /* pill */
-  padding: 0.5rem 0.875rem;      /* 8px 14px */
+  text-decoration: none;       
+  color: #2563eb;   
+  background: #ffffff;      
+  border: 0.0625rem solid #e5e7eb;
+  border-radius: 9999px;         
+  padding: 0.5rem 0.875rem;     
   font-weight: 600;
   line-height: 1;
-  margin: 0 0.375rem;            /* petit écart entre pastilles */
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  margin: 0 0.375rem;          
 }
 
 .liens-voir-aussi a:hover,
@@ -2379,4 +2428,265 @@ em {
   color: #ffffff;
   border-color: #2563eb;
   outline: none;
+}
+
+
+/* ==================== DETAIL D'UNE ANNONCE ==================== */
+
+
+/* ----------- Structure générale ----------- */
+
+.fiche-annonce {
+    max-width: 900px;   
+    margin: 80px auto 160px auto;            
+    padding: 0 60px;    
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* ----------- 1. BANDEAU PHOTOS ----------- */
+
+.bandeau-photos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+/* Une seule photo */
+.grande-photo img {
+    width: 100%;
+    max-width: 850px;          
+    height: 260px;   
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* 2 photos côte à côte */
+.grille-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.grille-2 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 3 photos : grande + 2 petites à droite */
+.grille-3 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+}
+
+.photo-principale img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.colonne-secondaire {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.photo-secondaire img {
+    width: 100%;
+    height: 125px;
+    object-fit: cover;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Bouton "Voir les photos" */
+.btn-voir-photos {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-voir-photos:hover {
+    background-color: #1d4ed8;
+}
+
+/* ----------- 2. CONTENU PRINCIPAL ----------- */
+.contenu-annonce {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* --- Colonne gauche --- */
+.colonne-gauche {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Bloc titre (Cocody – Terrain – 500 m²) */
+.entete-annonce {
+    background: none;       
+    box-shadow: none; 
+    padding: 0;
+    margin: 0;
+}
+
+.titre-annonce {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 5px;
+    box-shadow: none;
+}
+
+.ville-annonce {
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: 500;
+}
+
+/* Bloc description */
+.bloc-description {
+    line-height: 1.6;
+    color: #222;
+    background: none;
+    box-shadow: none;
+}
+
+.bloc-description h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #1d4ed8;
+}
+
+.ref-annonce,
+.contact-annonce,
+.date-publication {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Tableau descriptif */
+.tableau-descriptif {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tableau-descriptif th,
+.tableau-descriptif td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.tableau-descriptif th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+}
+
+/* --- Colonne droite (prix + actions) --- */
+.colonne-droite {
+    position: relative;
+}
+
+.bloc-prix-actions {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: none;      
+}
+
+.prix-annonce {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Boutons d’action */
+.actions-annonce button {
+    display: block;
+    width: 100%;
+    background-color: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.actions-annonce button:hover {
+    background-color: #1d4ed8;
+}
+
+.prix-annonce {
+    font-size: 1.4rem;  
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.2;     
+    word-spacing: 3px;     
+    white-space: nowrap;    
+}
+
+
+
+/* ----------- 3. BLOCS SECONDAIRES ----------- */
+.bloc-secondaire {
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.bloc-secondaire h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #111;
+}
+
+/* ----------- RESPONSIVE ----------- */
+@media (max-width: 900px) {
+    .fiche-annonce {
+        padding: 0 25px; 
+    }
+
+    .contenu-annonce {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .colonne-droite {
+        order: -1;
+    }
+
+    .photo-principale img,
+    .grande-photo img {
+        height: 200px; 
+    }
 }

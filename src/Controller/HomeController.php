@@ -23,7 +23,8 @@ final class HomeController extends AbstractController
         BlogRepository $blogRepository,
         ): Response
         {
-        
+            $villes = $annonceRepository->findHuitDernieresVilles();
+
             $annoncesVente = $annonceRepository->findByTransactionNom('Vente');
             $annoncesLocation = $annonceRepository->findByTransactionNom('Location');
             $annoncesColocation = $annonceRepository->findByTransactionNom('Colocation');
@@ -39,6 +40,8 @@ final class HomeController extends AbstractController
 
                 'articlesJuridique' => $articlesJuridique,
                 'articlesDeco' => $articlesDeco,
+
+                'villes' => $villes,
  
             ]);
         }

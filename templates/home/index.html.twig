@@ -47,57 +47,26 @@
 
     <!-- Section Section : Map/Villes -->
         <section class="section-villes">
-
             <div class="entete-section">
                 <h2 class="titre-section">Explorez par ville</h2>
                 <p class="sous-titre-section">Sélectionnez une ville pour voir les biens disponibles</p>
             </div>
 
             <div class="conteneur-villes">
-
                 <div class="grille-villes">
 
-                    <button class="carte-ville">
-                        <div class="nom-ville">Abidjan</div>
-                        <div class="compte-biens">4,521 biens</div>
-                    </button>
+                    {% if villes is not empty %}
+                        {% for ville in villes %}
+                            <button class="carte-ville">
+                                <div class="nom-ville">{{ ville.ville }}</div>
+                                <div class="compte-biens">{{ ville.nbAnnonces }} bien(s)</div>
+                            </button>
+                        {% endfor %}
+                    {% else %}
+                        <p>Aucune donnée disponible pour le moment.</p>
+                    {% endif %}
 
-                    <button class="carte-ville">
-                        <div class="nom-ville">Yamoussoukro</div>
-                        <div class="compte-biens">892 biens</div>
-                    </button>
-
-                    <button class="carte-ville">
-                        <div class="nom-ville">Bouaké</div>
-                        <div class="compte-biens">1,234 biens</div>
-                    </button>
-
-                    <button class="carte-ville">
-                        <div class="nom-ville">San-Pédro</div>
-                        <div class="compte-biens">756 biens</div>
-                    </button>
-
-                    <button class="carte-ville">
-                        <div class="nom-ville">Korhogo</div>
-                        <div class="compte-biens">543 biens</div>
-                    </button>
-
-                    <button class="carte-ville">
-                        <div class="nom-ville">Daloa</div>
-                        <div class="compte-biens">678 biens</div>
-                    </button>
-
-                    <button class="carte-ville">
-                        <div class="nom-ville">Man</div>
-                        <div class="compte-biens">432 biens</div>
-                    </button>
-
-                    <button class="carte-ville">
-                        <div class="nom-ville">Gagnoa</div>
-                        <div class="compte-biens">389 biens</div>
-                    </button>
                 </div>
-
             </div>
 
         </section>
@@ -106,8 +75,8 @@
     <section class="section-terrains">
 
     <div class="header-terrains">
-        <h2>Terrains à vendre ( J'ai FAIT UNE ERREUR A CORRIGER)</h2>
-        <a href="#" class="lien-tous">Voir tous les terrains</a>
+        <h2>Terrains à vendre</h2>
+        <a href="{{ path('app_annonce_liste_vente_terrains') }}" class="lien-tous">Voir tous les terrains</a>
     </div>
 
     <div class="grid-terrains">
@@ -115,21 +84,23 @@
         {% for annonceVente in annoncesVente %}
         {% if annonceVente.natureBien.nom == 'Terrain' and count < 3 %}     
                 <div class="card-terrain">
-                <div class="photo-terrain">
+                    <a href="{{ path('annonce_show', { id: annonceVente.id }) }}" class="card-terrain"> 
+                        <div class="photo-terrain">
 
-                    {% if annonceVente.photos|length > 0 %}
-                      <img src="{{ asset('uploads/annonces/' ~ annonceVente.photos|first.url) }}" 
-                          alt="Photo de {{ annonceVente.titre }}" 
-                          style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-                    {% endif %}
+                            {% if annonceVente.photos|length > 0 %}
+                            <img src="{{ asset('uploads/annonces/' ~ annonceVente.photos|first.url) }}" 
+                                alt="Photo de {{ annonceVente.titre }}" 
+                                style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                            {% endif %}
 
-                </div>
-                <div class="info-terrain">
-                    <p><strong>{{ annonceVente.ville }} – {{ annonceVente.commune }}</strong></p>
-                    <p>
-                    <strong>{{ annonceVente.superficie }} m²</strong> | <strong>{{ annonceVente.prix|number_format(0, '.', ' ') }} F CFA</strong>
-                    </p>
-                </div>
+                        </div>
+                        <div class="info-terrain">
+                            <p><strong>{{ annonceVente.ville }} – {{ annonceVente.commune }}</strong></p>
+                            <p>
+                            <strong>{{ annonceVente.superficie }} m²</strong> | <strong>{{ annonceVente.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                            </p>
+                        </div>
+                    </a>
                 </div>
             {% set count = count + 1 %}
         {% endif %}
@@ -138,76 +109,78 @@
     
     </section>
 
-    <!-- Section : Maisons à louer -->
+    <!-- Section : Appartement à louer -->
         <section class="section-terrains">
 
-        <div class="header-terrains">
-            <h2>Appartement à louer</h2>
-            <a href="#" class="lien-tous">Voir toutes les maisons</a>
-        </div>
+            <div class="header-terrains">
+                <h2>Appartement à louer</h2>
+                <a href="#" class="lien-tous">Voir tous les appartements</a>
+            </div>
 
-        <div class="grid-terrains">
-            {% set count = 0 %}
-            {% for annonceLocation in annoncesLocation %}
-            {% if annonceLocation.natureBien.nom == 'Appartement' and count < 3 %}
-                <div class="card-terrain">
-                <div class="photo-terrain">
- 
-                    {% if annonceLocation.photos|length > 0 %}
-                      <img src="{{ asset('uploads/annonces/' ~ annonceLocation.photos|first.url) }}" 
-                          alt="Photo de {{ annonceLocation.titre }}" 
-                          style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-                    {% endif %}    
+            <div class="grid-terrains">
+                {% set count = 0 %}
+                {% for annonceLocation in annoncesLocation %}
+                {% if annonceLocation.natureBien.nom == 'Appartement' and count < 3 %}
+                    
+                    <a href="{{ path('annonce_show', { id: annonceLocation.id }) }}" class="card-terrain">
+                        <div class="photo-terrain">
+                            {% if annonceLocation.photos|length > 0 %}
+                                <img src="{{ asset('uploads/annonces/' ~ annonceLocation.photos|first.url) }}" 
+                                    alt="Photo de {{ annonceLocation.titre }}" 
+                                    style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                            {% endif %}
+                        </div>
 
-                </div>
-                <div class="info-terrain">
-                    <p><strong>{{ annonceLocation.ville }} – {{ annonceLocation.commune }}</strong></p>
-                    <p>
-                    <strong>{{ annonceLocation.superficie }} m²</strong> | <strong>{{ annonceLocation.prix|number_format(0, '.', ' ') }} F CFA</strong>
-                    </p>
-                </div>
-                </div>
-                {% set count = count + 1 %}
-            {% endif %}
-            {% endfor %}
-        </div>
-        
+                        <div class="info-terrain">
+                            <p><strong>{{ annonceLocation.ville }} – {{ annonceLocation.commune }}</strong></p>
+                            <p>
+                                <strong>{{ annonceLocation.superficie }} m²</strong> |
+                                <strong>{{ annonceLocation.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                            </p>
+                        </div>
+                    </a>
+
+                    {% set count = count + 1 %}
+                {% endif %}
+                {% endfor %}
+            </div>
         </section>
 
     <!-- Section : Colocation -->
         <section class="section-terrains">
 
-        <div class="header-terrains">
-            <h2>Maison en colocation</h2>
-            <a href="#" class="lien-tous">Voir toutes les colocations</a>
-        </div>
+            <div class="header-terrains">
+                <h2>Maison en colocation</h2>
+                <a href="#" class="lien-tous">Voir toutes les colocations</a>
+            </div>
 
-        <div class="grid-terrains">
-            {% set count = 0 %}
-            {% for annonceColocation in annoncesColocation %}
-            {% if annonceColocation.natureBien.nom == 'Maison' and count < 3 %}
-                <div class="card-terrain">
-                <div class="photo-terrain">
-
-                    {% if annonceColocation.photos|length > 0 %}
-                      <img src="{{ asset('uploads/annonces/' ~ annonceColocation.photos|first.url) }}" 
-                          alt="Photo de {{ annonce.titre }}" 
-                          style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-                    {% endif %}
+            <div class="grid-terrains">
+                {% set count = 0 %}
+                {% for annonceColocation in annoncesColocation %}
+                {% if annonceColocation.natureBien.nom == 'Maison' and count < 3 %}
                     
-                </div>
-                <div class="info-terrain">
-                    <p><strong>{{ annonceColocation.ville }} – {{ annonceColocation.commune }}</strong></p>
-                    <p>
-                    <strong>{{ annonceColocation.superficie }} m²</strong> | <strong>{{ annonceColocation.prix|number_format(0, '.', ' ') }} F CFA</strong>
-                    </p>
-                </div>
-                </div>
-                {% set count = count + 1 %}
-            {% endif %}
-            {% endfor %}
-        </div>
-        
+                    <a href="{{ path('annonce_show', { id: annonceColocation.id }) }}" class="card-terrain">
+                        <div class="photo-terrain">
+                            {% if annonceColocation.photos|length > 0 %}
+                                <img src="{{ asset('uploads/annonces/' ~ annonceColocation.photos|first.url) }}" 
+                                    alt="Photo de {{ annonceColocation.titre }}" 
+                                    style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                            {% endif %}
+                        </div>
+
+                        <div class="info-terrain">
+                            <p><strong>{{ annonceColocation.ville }} – {{ annonceColocation.commune }}</strong></p>
+                            <p>
+                                <strong>{{ annonceColocation.superficie }} m²</strong> |
+                                <strong>{{ annonceColocation.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                            </p>
+                        </div>
+                    </a>
+
+                    {% set count = count + 1 %}
+                {% endif %}
+                {% endfor %}
+            </div>
         </section>
 
     <!-- Section : Vendez ou louez votre bien facilement -->
@@ -232,86 +205,79 @@
     <!-- Section : Blog -->
             <section class="section-blog">
 
-            <div class="conteneur-blog">
-                <div class="entete-blog">
-                <h2 class="titre-blog">Le Blog Ayitate ( METTRE DES IMAGES EN FOND) </h2>
-                <p class="sous-titre-blog">Découvrez nos derniers articles juridiques et nos conseils déco</p>
-                </div>
+                <div class="conteneur-blog">
+                    <div class="entete-blog">
+                        <h2 class="titre-blog">Le Blog Ayitate</h2>
+                        <p class="sous-titre-blog">Découvrez nos derniers articles juridiques et nos conseils déco</p>
+                    </div>
 
-                <!--  Experts -->
-                <div class="section-categorie">
-                <div class="entete-categorie">
-                    <a href="{{ path('conseil_expert') }}" class="lien-categorie-header">Voir tous les conseils →</a>
-                </div>
-                <div class="grille-categorie">
-                    <!-- Article Expert -->
-                 {% if articlesJuridique is empty %}  
-                        <p> Aucun article pour le moment.</p>
-                {% else %}
-
-                    {% for articleJuridique in articlesJuridique %}
-
-                        <article class="carte-article">
-
-                        <div class="image-article">
-                            <span class="tag-article tag-expert">Expert</span>                     
+                    <!--  Experts -->
+                    <div class="section-categorie">
+                        <div class="entete-categorie">
+                            <a href="{{ path('conseil_expert') }}" class="lien-categorie-header">Voir tous les conseils →</a>
                         </div>
 
-                        <div class="contenu-article">
+                        <div class="grille-categorie">
+                            {% if articlesJuridique is empty %}  
+                                <p>Aucun article pour le moment.</p>
+                            {% else %}
+                                {% for articleJuridique in articlesJuridique %}
 
-                            <h3 class="titre-article"> {{ articleJuridique.titre}}</h3>
-                            <p class="extrait-article">{{ articleJuridique.article|slice(0,150)|nl2br ~ '...' }}</p>
-                        
-                            <div class="meta-article">
-                                <span class="date-article">             
-                                  {% if articleJuridique.auteur.pseudo %}
-                                         {{ articleJuridique.auteur.pseudo }}
-                                    {% elseif articleJuridique.auteur.prenom or articleJuridique.auteur.nom %}
-                                        {{ articleJuridique.auteur.prenom }} {{ articleJuridique.auteur.nom }}
-                                    {% else %}
-                                        {{ articleJuridique.auteur.email }}
-                                    {% endif %}                                  
-                                    | {{ articleJuridique.dateCreation|date('d/m/Y')}}</span>
-                                <a href="{{ path('blog_show', {id: articleJuridique.id}) }}" class="lien-lire">Lire l'article</a>
-                            </div>
+                                    <a href="{{ path('blog_show', { id: articleJuridique.id }) }}" class="carte-article">
+
+                                        <div class="image-article">
+                                            <span class="tag-article tag-expert">Expert</span>                     
+                                        </div>
+
+                                        <div class="contenu-article">
+                                            <h3 class="titre-article">{{ articleJuridique.titre }}</h3>
+                                            <p class="extrait-article">{{ articleJuridique.article|slice(0,150)|nl2br ~ '...' }}</p>
+
+                                            <div class="meta-article">
+                                                <span class="date-article">             
+                                                    {% if articleJuridique.auteur.pseudo %}
+                                                        {{ articleJuridique.auteur.pseudo }}
+                                                    {% elseif articleJuridique.auteur.prenom or articleJuridique.auteur.nom %}
+                                                        {{ articleJuridique.auteur.prenom }} {{ articleJuridique.auteur.nom }}
+                                                    {% else %}
+                                                        {{ articleJuridique.auteur.email }}
+                                                    {% endif %}
+                                                    | {{ articleJuridique.dateCreation|date('d/m/Y') }}
+                                                </span>
+                                                <span class="lien-lire">Lire l’article →</span>
+                                            </div>
+                                        </div>
+
+                                    </a>
+
+                                {% endfor %}
+                            {% endif %}
                         </div>
-                    {% endfor %}
-                    </article>
-                {% endif %}
-                </div>
-                </div>
-
-
+                    </div>
 
 
             <!--  Déco -->
                 <div class="section-categorie">
-
-                        <div class="entete-categorie">
-                            <a href="{{ path('conseil_deco') }}" class="lien-categorie-header">Voir tous les articles déco →</a>
-                        </div>
+                    <div class="entete-categorie">
+                        <a href="{{ path('conseil_deco') }}" class="lien-categorie-header">Voir tous les articles déco →</a>
+                    </div>
 
                     <div class="grille-categorie">
-                        
-                        <!-- Article Déco  -->
+
                         {% if articlesDeco is empty %}
-                        
-                            <p> Aucun article pour le moment.</p>
-
+                            <p>Aucun article pour le moment.</p>
                         {% else %}
-
                             {% for articleDeco in articlesDeco %}
-
-                                <article class="carte-article">
+                                
+                                <a href="{{ path('blog_show', { id: articleDeco.id }) }}" class="carte-article">
                                     <div class="image-article">
                                         <span class="tag-article tag-deco">Déco</span>
                                     </div>
 
                                     <div class="contenu-article">
+                                        <h3 class="titre-article">{{ articleDeco.titre }}</h3>
+                                        <p class="extrait-article">{{ articleDeco.article|slice(0,150)|nl2br ~ '...' }}</p>
 
-                                        <h3 class="titre-article">  {{ articleDeco.titre}} </h3>
-                                        <p class="extrait-article"> {{ articleDeco.article|slice(0,150)|nl2br ~ '...' }}</p>
-                                        
                                         <div class="meta-article">
                                             <span class="date-article"> 
                                                 {% if articleDeco.auteur.pseudo %}
@@ -321,25 +287,22 @@
                                                 {% else %}
                                                     {{ articleDeco.auteur.email }}
                                                 {% endif %}
+                                                | {{ articleDeco.dateCreation|date('d/m/Y') }}
+                                            </span>
 
-                                                | {{ articleDeco.dateCreation|date('d/m/Y')}}</span>
-
-                                            <a href="{{ path('blog_show', {id: articleDeco.id}) }}" class="lien-lire">Lire l'article</a>
+                                            <span class="lien-lire">Lire l’article →</span>
                                         </div>
-
                                     </div>
+                                </a>
 
-                                {% endfor %}
-
-                            </article>
-
-                         {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
 
         </div>
 
-        </section>
+    </section>
 
     <!-- Section : Rejoignez notre forum -->
         <section class="section-forum">
