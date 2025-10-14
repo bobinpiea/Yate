@@ -29,22 +29,24 @@
 
         <!-- CTA : Déposer une annonce -->
         <div class="cta-annonce">
-            <a href="{{ path('app_annonce_new') }}" {#class="lien-depot-annonce"#} >Déposer une annonce</a>
+            <a href="{{ path('app_annonce_new') }}">Déposer une annonce</a>
         </div>
+
+        <!-- Bouton menu mobile -->
+        <button class="burger-toggle" aria-label="Ouvrir le menu">&#9776;</button>
 
         <!-- Actions utilisateur -->
         <nav class="user-actions" aria-label="Actions utilisateur">
             <ul>
                 <li class="forum"><a href="{{ path('app_forum')}}">Forum</a></li>
                 <li><a href="#favoris">Favoris</a></li>
-                <li><a href="#messages">Messages</a></li>
+                <li><a href="{{ path('app_message_reception') }}">Messages</a></li>
+                
 
                 {% if app.user %}
-                    <!-- Utilisateur connecté -->
                     <li class="connexion"><a href="{{ path('app_profile')}}">Mon profil</a></li>
                     <li class="inscription"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                 {% else %}
-                    <!-- Utilisateur non connecté -->
                     <li class="connexion"><a href="{{ path('app_login') }}">Connexion</a></li>
                     <li class="inscription"><a href="{{ path('app_register')}}">Inscription</a></li>
                 {% endif %}
@@ -72,15 +74,51 @@
     {% if app.user %}
     <nav class="role-actions" aria-label="Actions rôles">
         <ul>
-            <li><a href="{{ path('blog_new') }}">Écrire un article</a></li>
-            <li><a href="{{ path('app_nature_bien_index') }}">Types de biens</a></li>
-             <li><a href="{{ path('app_transaction_index') }}">Types de transactions</a></li>
+            {% if is_granted('ROLE_AUTEUR') %}
+                <li><a href="{{ path('blog_new') }}">Écrire un article</a></li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('app_nature_bien_index') }}">Types de biens</a></li>
+                <li><a href="{{ path('app_transaction_index') }}">Types de transactions</a></li>
+            {% endif %}
         </ul>
     </nav>
     {% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.querySelector('.burger-toggle');
+    const userActions = document.querySelector('.user-actions');
+    const mainNav = document.querySelector('.main-nav');
+    const roleActions = document.querySelector('.role-actions');
+
+
+    if (toggleButton) {
+      toggleButton.addEventListener('click', function () {
+
+        userActions?.classList.toggle('open');
+        mainNav?.classList.toggle('open');
+        roleActions?.classList.toggle('open');
+      });
+    }
+  });
+</script>
+
 </header>
-        
+
+    {# Bloc global pour afficher les messages flash #}
+    {% for label, messages in app.flashes %}
+        <div class="flash flash-{{ label }}" role="status" aria-live="polite">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    
         {% block body %}
+
+        
         
         {% endblock %}
 

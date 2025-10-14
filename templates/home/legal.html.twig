@@ -1,9 +1,138 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mentions légales{% endblock %}
+{% block title %}Mentions légales et conditions d’utilisation – Ayitate{% endblock %}
 
 {% block body %}
-  <section class="container">
-    <h1>Mentions légales</h1>
-  </section>
+<main class="page-mentions-legales">
+
+    <section class="section-mentions">
+        <h1 class="titre-page">Mentions légales et conditions d’utilisation</h1>
+        <p class="intro-page">
+            Conformément à la législation en vigueur, la présente page décrit les mentions légales 
+            et les conditions d’utilisation du site <strong>Ayitate</strong>, accessible à l’adresse 
+            <a href="https://www.ayitate.com">www.ayitate.com</a>.
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>1. Éditeur du site</h2>
+        <p>
+            Le site <strong>Ayitate</strong> est édité par :<br>
+            <strong>Ayitate</strong> – représenté par <strong>Pierre-André Bobin</strong><br>
+            Adresse : 08 BP 65 Abidjan 08 – Abidjan, Côte d’Ivoire<br>
+            <a href="mailto:myayitate@gmail.com">myayitate@gmail.com</a>
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>2. Hébergement</h2>
+        <p>
+            Le site est hébergé par :<br>
+            <strong>Hostinger International Ltd</strong><br>
+            Siège social : 61 Lordou Vironos Street, 6023 Larnaca, Chypre<br>
+            <a href="https://www.hostinger.com">www.hostinger.com</a>
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>3. Propriété intellectuelle</h2>
+        <p>
+            L’ensemble des éléments figurant sur le site <strong>Ayitate</strong> 
+            (textes, images, graphismes, logos, vidéos, icônes, logiciels, codes sources, etc.)
+            sont la propriété exclusive d’Ayitate, sauf mention contraire.  
+            Toute reproduction, représentation, modification, publication, adaptation de tout ou partie 
+            des éléments du site est interdite, sauf autorisation écrite préalable.
+        </p>
+        <p>
+            Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient
+            sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions
+            des lois en vigueur.
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>4. Conditions d’utilisation du site</h2>
+        <p>
+            L’utilisation du site <strong>Ayitate</strong> implique l’acceptation pleine et entière
+            des présentes conditions d’utilisation.  
+            Ces conditions sont susceptibles d’être modifiées ou complétées à tout moment.
+        </p>
+        <p>
+            Les utilisateurs s’engagent à :
+        </p>
+        <ul>
+            <li>Ne pas publier de contenu illicite, diffamatoire ou contraire à l’ordre public ;</li>
+            <li>Ne pas porter atteinte aux droits de tiers ou à la vie privée d’autrui ;</li>
+            <li>Ne pas tenter d’accéder sans autorisation à des parties du site ou à des données protégées ;</li>
+            <li>Utiliser les services d’Ayitate dans le respect des lois et de la bonne foi.</li>
+        </ul>
+    </section>
+
+    <section class="section-mentions">
+        <h2>5. Responsabilité</h2>
+        <p>
+            <strong>Ayitate</strong> s’efforce d’assurer l’exactitude des informations diffusées sur le site,
+            mais ne saurait être tenue responsable d’éventuelles erreurs, omissions ou interruptions.  
+            L’utilisateur reconnaît utiliser le site sous sa responsabilité exclusive.
+        </p>
+        <p>
+            Ayitate ne pourra être tenue responsable de tout dommage direct ou indirect résultant de
+            l’utilisation du site ou de l’impossibilité d’y accéder (perte de données, bug, incompatibilité…).
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>6. Liens hypertextes</h2>
+        <p>
+            Le site <strong>Ayitate</strong> peut contenir des liens vers d’autres sites.  
+            Ces liens sont proposés à titre informatif et n’impliquent aucun contrôle du contenu 
+            par Ayitate.  
+            L’éditeur du présent site ne saurait être tenu responsable du contenu de ces sites externes.
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>7. Données personnelles</h2>
+        <p>
+            La collecte et le traitement des données personnelles des utilisateurs sont réalisés 
+            conformément à la <a href="{{ path('app_privacy') }}">Politique de confidentialité</a> 
+            disponible sur le site.
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>8. Cookies</h2>
+        <p>
+            Le site peut utiliser des cookies nécessaires à son fonctionnement ou à la mesure d’audience.  
+            Vous pouvez configurer vos préférences dans votre navigateur ou via la bannière de consentement.
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>9. Droit applicable</h2>
+        <p>
+            Les présentes conditions sont régies par le droit ivoirien.  
+            En cas de litige, et à défaut de résolution amiable, les tribunaux compétents 
+            du ressort d’Abidjan seront seuls compétents.
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>10. Contact</h2>
+        <p>
+            Pour toute question relative aux mentions légales ou à l’utilisation du site :<br>
+            <a href="mailto:myayitate@gmail.com">myayitate@gmail.com</a><br>
+            08 BP 65 Abidjan 08 – Abidjan, Côte d’Ivoire
+        </p>
+    </section>
+
+    <section class="section-mentions">
+        <h2>11. Mise à jour</h2>
+        <p>
+            Les présentes mentions légales ont été mises à jour le <strong>8 octobre 2025</strong>.  
+            Ayitate se réserve le droit de les modifier à tout moment.
+        </p>
+    </section>
+
+</main>
 {% endblock %}

@@ -23,16 +23,16 @@
                     <!-- Liste de chiffres clés -->
                     <ul class="liste-chiffres">
                         <li class="chiffre">
-                            <strong class="valeur">12,450</strong>
+                            <strong class="valeur">{{ nombreAnnonces }}</strong>
                             <span class="libelle">Biens disponibles</span>
                         </li>
                         <li class="chiffre">
-                            <strong class="valeur">8,234</strong>
+                            <strong class="valeur">17</strong>
                             <span class="libelle">Clients satisfaits</span>
                         </li>
                         <li class="chiffre">
-                            <strong class="valeur">31</strong>
-                            <span class="libelle">Régions couvertes</span>
+                            <strong class="valeur">{{ nombreVilles }}</strong>
+                            <span class="libelle">Villes couvertes</span>
                         </li>
                     </ul>
                 </article>
@@ -68,7 +68,6 @@
 
                 </div>
             </div>
-
         </section>
 
 <!-- Section : Terrains à vendre -->
@@ -191,7 +190,7 @@
                 <div class="contenu-publication">
                     
                     <div class="texte-publication">
-                        <h2 class="titre-publication">Vendez ou louez votre bien facilement ( A FAIRE Renvoyer page connexion si pas connecter)</h2>
+                        <h2 class="titre-publication">Vendez ou louez votre bien facilement</h2>
                         <p class="description-publication">Publiez votre annonce en moins de 2 minutes et touchez des milliers d'acheteurs potentiels</p>
                     </div>
                         <a href="{{ path('app_annonce_new') }}" class="bouton-publication">

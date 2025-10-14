@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma messagerie{% endblock %}
+
+{% block body %}
+<main class="page-messagerie">
+
+    <h1 class="titre-page-messagerie">Ma messagerie</h1>
+
+    {% if conversations is not empty %}
+        <section class="liste-conversations">
+
+            {% for cle, conversation in conversations %}
+                <article class="conversation-item">
+                    <a href="{{ path('app_message_conversation', {
+                        annonceId: conversation.annonce.id,
+                        expediteurId: conversation.autreUtilisateur.id
+                    }) }}" class="lien-conversation">
+
+                        <h2 class="titre-annonce">
+                            {{ conversation.annonce.titre }}
+                        </h2>
+
+                        <p class="dernier-message">
+                            {{ conversation.dernierMessage.message|slice(0, 120) ~ '...' }}
+                        </p>
+
+                    </a>
+                </article>
+            {% endfor %}
+
+        </section>
+    {% else %}
+        <p class="aucune-conversation">Vous n’avez encore aucun message.</p>
+    {% endif %}
+
+</main>
+{% endblock %}

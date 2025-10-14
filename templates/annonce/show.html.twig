@@ -15,29 +15,29 @@
 
             {% elseif nbPhotos == 1 %}
                 <div class="grande-photo">
-                    <img src="{{ asset('uploads/annonces/' ~ annonce.photos[0].url) }}" alt="Photo du bien">
+                    <img src="{{ asset('uploads/annonces/' ~ annonce.photos[0].url) }}" alt="Photo du bien" loading="lazy">
                 </div>
 
             {% elseif nbPhotos == 2 %}
                 <div class="grille-photos grille-2">
                     {% for photo in annonce.photos|slice(0, 2) %}
-                        <img src="{{ asset('uploads/annonces/' ~ photo.url) }}" alt="Photo du bien">
+                        <img src="{{ asset('uploads/annonces/' ~ photo.url) }}" alt="Photo du bien" loading="lazy">
                     {% endfor %}
                 </div>
 
             {% elseif nbPhotos >= 3 %}
                 <div class="grille-photos grille-3">
                     <div class="photo-principale">
-                        <img src="{{ asset('uploads/annonces/' ~ annonce.photos[0].url) }}" alt="Photo principale du bien">
+                        <img src="{{ asset('uploads/annonces/' ~ annonce.photos[0].url) }}" alt="Photo principale du bien loading="lazy"">
                     </div>
 
                     <div class="colonne-secondaire">
                         <div class="photo-secondaire">
-                            <img src="{{ asset('uploads/annonces/' ~ annonce.photos[1].url) }}" alt="Photo secondaire">
+                            <img src="{{ asset('uploads/annonces/' ~ annonce.photos[1].url) }}" alt="Photo secondaire" loading="lazy">
                         </div>
 
                         <div class="photo-secondaire">
-                            <img src="{{ asset('uploads/annonces/' ~ annonce.photos[2].url) }}" alt="Photo secondaire">
+                            <img src="{{ asset('uploads/annonces/' ~ annonce.photos[2].url) }}" alt="Photo secondaire" loading="lazy">
                             {% if nbPhotos > 3 %}
                                 <button class="btn-voir-photos">Voir les photos</button>
                             {% endif %}
@@ -116,7 +116,10 @@
                 <p class="prix-annonce">{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</p>
 
                 <div class="actions-annonce">
-                    <button class="btn-contact">Contacter le vendeur</button>
+  
+                    <button class="btn-contact">
+                        <a href="{{ path('app_message_envoyer', { id: annonce.id }) }}">Contacter</a>
+                    </button>
                     <button class="btn-sauvegarde">Sauvegarder</button>
                     <button class="btn-partager">Partager</button>
                 </div>

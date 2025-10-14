@@ -23,6 +23,10 @@ final class HomeController extends AbstractController
         BlogRepository $blogRepository,
         ): Response
         {
+
+            $nombreAnnonces = $annonceRepository->compterToutesLesAnnonces();
+            $nombreVilles = $annonceRepository->compterVillesDistinctes();
+
             $villes = $annonceRepository->findHuitDernieresVilles();
 
             $annoncesVente = $annonceRepository->findByTransactionNom('Vente');
@@ -42,6 +46,9 @@ final class HomeController extends AbstractController
                 'articlesDeco' => $articlesDeco,
 
                 'villes' => $villes,
+
+                'nombreAnnonces' => $nombreAnnonces,
+                'nombreVilles' => $nombreVilles,
  
             ]);
         }

@@ -55,8 +55,30 @@ final class ProfileController extends AbstractController
 
             return $this->render('profile/edit.html.twig', [
                 'form' => $form->createView(),
-            ]);
+            ]);           
         
-}
+        }
+
+    /* Pour supprimer le profil */
+        #[Route('/profil/supprimer', name: 'app_user_delete', methods: ['POST'])]
+        public function supprimerCompte(Request $request, EntityManagerInterface $entityManager): Response
+        {
+            $user = $this->getUser();
+            if (!$user) {
+                $this->addFlash('error', 'Vous devez être connecté pour supprimer votre compte.');
+                return $this->redirectToRoute('app_login');
+            }
+
+            if ($this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
+                $entityManager->remove($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre compte a bien été supprimé conformément au RGPD.');
+                return $this->redirectToRoute('app_home');
+            }
+
+            $this->addFlash('error', 'Échec de la suppression de votre compte.');
+            return $this->redirectToRoute('app_profile');
+        }
 
 }

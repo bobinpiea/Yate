@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\NatureBien;
 use App\Form\NatureBienType;
 use App\Repository\NatureBienRepository;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class NatureBienController extends AbstractController
 {
     #[Route(name: 'app_nature_bien_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(NatureBienRepository $natureBienRepository): Response
     {
         return $this->render('nature_bien/index.html.twig', [
@@ -23,6 +25,7 @@ final class NatureBienController extends AbstractController
     }
 
     #[Route('/new', name: 'app_nature_bien_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $natureBien = new NatureBien();
@@ -43,6 +46,7 @@ final class NatureBienController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_nature_bien_show', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function show(NatureBien $natureBien): Response
     {
         return $this->render('nature_bien/show.html.twig', [
@@ -51,6 +55,7 @@ final class NatureBienController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_nature_bien_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, NatureBien $natureBien, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(NatureBienType::class, $natureBien);
@@ -69,6 +74,7 @@ final class NatureBienController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_nature_bien_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, NatureBien $natureBien, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$natureBien->getId(), $request->getPayload()->getString('_token'))) {

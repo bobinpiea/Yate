@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Photo;
 use App\Entity\Annonce;
 use App\Form\AnnonceAjaxType;
+use App\Form\MaisonFiltreType;
 use App\Form\TerrainFiltreType;
 use App\Service\PictureService;
 use App\Repository\AnnonceRepository;
@@ -37,6 +38,7 @@ class AnnonceController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $donneesAnnonce = $form->get('details')->getData();
+                
                 $annonce = new Annonce();
 
                 foreach ($donneesAnnonce as $champ => $valeur) { 
@@ -85,6 +87,8 @@ class AnnonceController extends AbstractController
                 $entityManager->persist($annonce);
                 $entityManager->flush();
 
+                $this->addFlash('success', 'Votre annonce a bien été publiée !');
+
                 return $this->redirectToRoute('app_profile');
             }
 
@@ -130,8 +134,6 @@ class AnnonceController extends AbstractController
 
         return $reference;
     }
-
-
 
 
     /* LISTE DES BIENS PAR TYPES DE TRANSACTION */
@@ -252,26 +254,26 @@ class AnnonceController extends AbstractController
             }
 
         // Liste des maisons en vente avec le filtre
-            #[Route('/annonces/vente/maisons', name: 'app_annonce_vente_maisons')]
-            public function listeMaisonsVente(AnnonceRepository $annonceRepository): Response
+            #[Route('/annonces/ventes/maisons', name: 'app_annonce_liste_vente_maisons')]
+            public function listeMaisonsAVendre(Request $request, AnnonceRepository $annonceRepository): Response
             {
-                $annonces = $annonceRepository->findByTransactionAndNature('Vente', 'Maison');
+                $form = $this->createForm(MaisonFiltreType::class);
+                $form->handleRequest($request);
+
+                $annonces = [];
+
+                if ($form->isSubmitted() && $form->isValid()) {
+    
+                    $criteres = $form->getData();
+                    $annonces = $annonceRepository->findMaisonsAVendreFiltre($criteres);
+                } else {
+                    $annonces = $annonceRepository->findMaisonsAVendreFiltre([]);
+                }
 
                 return $this->render('annonce/liste_vente_maisons.html.twig', [
+                    'form' => $form->createView(),
                     'annonces' => $annonces,
                 ]);
             }
-
-        // Liste des maisons en vente avec le filtre           
-        #[Route('/annonces/vente/appartements', name: 'app_annonce_vente_appartements')]
-        public function listeAppartementsVente(AnnonceRepository $annonceRepository): Response
-        {
-            $annonces = $annonceRepository->findByTransactionAndNature('Vente', 'Appartement');
-
-            return $this->render('annonce/liste_vente_appartements.html.twig', [
-                'annonces' => $annonces,
-            ]);
-        }
-
 
 }

@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
      */
 
     
-    /* #[Assert\NotCompromisedPassword(
+     #[Assert\NotCompromisedPassword(
         message: "Ce mot de passe a été compromis dans une fuite de données. Veuillez en choisir un autre."
     )]
     #[Assert\Length(
@@ -54,9 +54,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     #[Assert\Regex(
         pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).+$/',
         message: "Le mot de passe doit contenir au moins une minuscule, une majuscule et un caractère spécial."
-    )] */
+    )] 
     #[ORM\Column]
-    //  #[Assert\PasswordStrength(minScore: Assert\PasswordStrength::STRENGTH_STRONG)] A Utiliser ou pas ? 
+    #[Assert\PasswordStrength(minScore: Assert\PasswordStrength::STRENGTH_STRONG)]
     private ?string $password = null;
 
     #[ORM\Column(length: 100, nullable: true)]

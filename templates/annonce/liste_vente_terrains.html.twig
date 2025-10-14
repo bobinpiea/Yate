@@ -13,7 +13,7 @@
 
     {# ----------- FILTRES ----------- #}
     <aside class="zone-filtres-annonces">
-      <h2 class="titre-filtres-annonces">Affiner la rechrche</h2>
+      <h2 class="titre-filtres-annonces">Affiner la recherche</h2>
 
       {{ form_start(form, { method: 'GET' }) }}
         <fieldset class="bloc-filtre">
@@ -21,6 +21,7 @@
           <div class="champ-filtre">
             {{ form_label(form.ville, 'Ville') }}
             {{ form_widget(form.ville, {'attr': {'placeholder': 'Ex: Abidjan'}}) }}
+             {{ form_errors(form.ville) }}
           </div>
           <div class="champ-filtre">
             {{ form_label(form.commune, 'Commune') }}
@@ -54,7 +55,11 @@
           <div class="champ-filtre case-cocher">{{ form_row(form.viabilise) }}</div>
         </fieldset>
 
-        <button class="bouton-valider-filtres">Valider</button>
+        <div class="boutons-formulaire">
+            <button type="submit" class="bouton-valider-filtres">Valider</button>
+            <a href="{{ path('app_annonce_liste_vente_terrains') }}" class="bouton-reset-filtres">Effacer</a>
+        </div>
+        
       {{ form_end(form) }}
     </aside>
 
@@ -90,8 +95,8 @@
   </div>
 
   <footer class="liens-voir-aussi">
-    <a href="{{ path('app_annonce_vente_maisons') }}">Maisons à vendre</a> |
-    <a href="{{ path('app_annonce_vente_appartements') }}">Appartements à vendre</a>
+    <a href="{{ path('app_annonce_liste_vente_maisons') }}">Maisons à vendre</a> |
+    <a href="">Appartements à vendre</a>
   </footer>
 
 </section>

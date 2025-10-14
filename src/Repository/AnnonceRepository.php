@@ -178,7 +178,82 @@ class AnnonceRepository extends ServiceEntityRepository
         }
 
 
-    // Vente Appartement 
+    // Vente Maison 
+        public function findMaisonsAVendreFiltre(?array $criteres): array
+        {
+            $qb = $this->createQueryBuilder('a')
+                ->join('a.transaction', 't')
+                ->join('a.natureBien', 'n')
+                ->where('t.typeTransaction = :typeTransaction')
+                ->andWhere('n.nom = :nom')
+                ->setParameter('typeTransaction', 'vente')
+                ->setParameter('nom', 'maison');
+
+            if (!empty($criteres['ville'])) {
+                $qb->andWhere('a.ville LIKE :ville')
+                ->setParameter('ville', '%' . $criteres['ville'] . '%');
+            }
+
+            if (!empty($criteres['commune'])) {
+                $qb->andWhere('a.commune LIKE :commune')
+                ->setParameter('commune', '%' . $criteres['commune'] . '%');
+            }
+
+            if (!empty($criteres['prixMin'])) {
+                $qb->andWhere('a.prix >= :prixMin')
+                ->setParameter('prixMin', $criteres['prixMin']);
+            }
+
+            if (!empty($criteres['prixMax'])) {
+                $qb->andWhere('a.prix <= :prixMax')
+                ->setParameter('prixMax', $criteres['prixMax']);
+            }
+
+            if (!empty($criteres['superficieMin'])) {
+                $qb->andWhere('a.superficie >= :superficieMin')
+                ->setParameter('superficieMin', $criteres['superficieMin']);
+            }
+
+            if (!empty($criteres['superficieMax'])) {
+                $qb->andWhere('a.superficie <= :superficieMax')
+                ->setParameter('superficieMax', $criteres['superficieMax']);
+            }
+
+            if (!empty($criteres['nbPieces'])) {
+                $qb->andWhere('a.nbPieces >= :nbPieces')
+                ->setParameter('nbPieces', $criteres['nbPieces']);
+            }
+
+            if (!empty($criteres['nbChambres'])) {
+                $qb->andWhere('a.nbChambres >= :nbChambres')
+                ->setParameter('nbChambres', $criteres['nbChambres']);
+            }
+
+            if (!empty($criteres['garage'])) {
+                $qb->andWhere('a.garage = :garage')
+                ->setParameter('garage', true);
+            }
+
+            if (!empty($criteres['jardin'])) {
+                $qb->andWhere('a.jardin = :jardin')
+                ->setParameter('jardin', true);
+            }
+
+            if (!empty($criteres['piscine'])) {
+                $qb->andWhere('a.piscine = :piscine')
+                ->setParameter('piscine', true);
+            }
+
+            if (!empty($criteres['apatam'])) {
+                $qb->andWhere('a.apatam = :apatam')
+                ->setParameter('apatam', true);
+            }
+
+            return $qb
+                ->orderBy('a.datePublication', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
 
 
         // Compter le nombre de bien dans une ville 
@@ -194,5 +269,25 @@ class AnnonceRepository extends ServiceEntityRepository
                     ->getResult();
             }
 
+
+
+    // Compte le nombre total d'annonces
+        public function compterToutesLesAnnonces(): int
+        {
+            return (int) $this->createQueryBuilder('a')
+                ->select('COUNT(a.id)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
+    // Compte le nombre de ville
+        public function compterVillesDistinctes(): int
+        {
+            return (int) $this->createQueryBuilder('a')
+                ->select('COUNT(DISTINCT a.ville)')
+                ->where('a.ville IS NOT NULL')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
 
 }

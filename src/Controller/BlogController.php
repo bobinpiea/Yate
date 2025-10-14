@@ -7,6 +7,7 @@ use App\Form\BlogType;
 use App\Repository\BlogRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Routing\Attribute\Route; // Classe à laquelle appartient l’attribut de Route
 use Symfony\Component\HttpFoundation\Response; // Répresente la reponse de HTTP enovoyée au navigateur
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Hérite de cette méthode pour avoir droit à des méthodes (ex: Render)
@@ -58,8 +59,10 @@ final class BlogController extends AbstractController // Final car on ne pourra 
     /* FORMULAIRES */ 
 
         #[Route('/blog/new', name: 'blog_new')]
+        #[IsGranted('ROLE_AUTEUR')]
         public function new(Request $request, EntityManagerInterface $entityManager): Response
         {
+
             // Création d'un objet blog, car on part d'un article vide
             $blog = new Blog();
 

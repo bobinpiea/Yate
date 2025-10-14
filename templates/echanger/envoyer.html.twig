@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacter le vendeur{% endblock %}
+
+{% block body %}
+
+<main class="page-message">
+
+
+  {% set u = annonce.user %}
+  {% set nomAffiche = u.pseudo is not empty 
+      ? u.pseudo 
+      : ((u.prenom is not empty or u.nom is not empty) 
+          ? (u.prenom|default('') ~ ' ' ~ u.nom|default(''))|trim 
+          : u.email) %}
+
+  <section class="message-layout">
+
+    {#  Colonne gauche : formulaire   #}
+    <article class="bloc-gauche">
+
+      <div class="formulaire-message">
+        <h3>Envoyer un message à {{ nomAffiche }}</h3>
+
+        {{ form_start(form) }}
+          <div class="form-group">
+            {{ form_label(form.message) }}
+            {{ form_widget(form.message) }}
+            {{ form_errors(form.message) }}
+          </div>
+
+          <div class="form-submit">
+            {{ form_widget(form.envoyer) }}
+          </div>
+        {{ form_end(form) }}
+      </div>
+
+    </article>
+
+    {#  Colonne droite : résumé de l’annonce  #}
+    <aside class="bloc-droite">
+      <h3>Résumé de l’annonce</h3>
+
+      {% if annonce.titre %}<p><strong>{{ annonce.titre }}</strong></p>{% endif %}
+      {% if annonce.natureBien and annonce.natureBien.nom %}
+        <p> Nature du bien : {{ annonce.natureBien.nom }}</p>
+      {% endif %}
+      {% if annonce.transaction and annonce.transaction.typeTransaction %}
+        <p>{{ annonce.transaction.typeTransaction }}</p>
+      {% endif %}
+      {% if annonce.surfaceHabitable %}
+        <p>Surface habitable : {{ annonce.surfaceHabitable }} m²</p>
+      {% endif %}
+      <p><strong> Loyer/Prix: {{ annonce.prix|number_format(0, '.', ' ') }} F CFA</strong></p>
+      <p> {{ annonce.ville }} – {{ annonce.commune }}</p>
+      {% if annonce.datePublication %}
+        <p>{{ annonce.datePublication|date('d/m/Y') }}</p>
+      {% endif %}
+    </aside>
+
+  </section>
+
+</main>
+{% endblock %}

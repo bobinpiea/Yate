@@ -201,7 +201,104 @@
       color: #2563eb; 
       text-decoration: underline; 
     }
-      
+
+  /*$$$$$$$$$$$$$$$$$$$$ Responsive $$$$$$$$$$$$$$$$$$$$*/ 
+
+/* ---------- RESPONSIVE TABLETTE ---------- */
+@media (max-width: 1024px) {
+    .header-top {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .cta-annonce {
+        order: 2;
+    }
+
+    .burger-toggle {
+        display: block;
+        order: 3;
+    }
+
+    .user-actions,
+    .main-nav,
+    .role-actions {
+        display: none;
+        flex-direction: column;
+        background-color: #f9fafb;
+        padding: 1rem;
+        width: 100%;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .user-actions.show,
+    .main-nav.show,
+    .role-actions.show {
+        display: flex;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .cta-annonce {
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 1025px) {
+  .burger-toggle {
+    display: none;
+  }
+}
+
+/* ---------- RESPONSIVE MOBILE ---------- */
+@media (max-width: 768px) {
+    .header-top {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .logo {
+        flex-grow: 1;
+    }
+
+    .cta-annonce {
+        margin: 0;
+        padding: 0;
+    }
+
+    .cta-annonce a {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+    }
+
+    .burger-toggle {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 1024px) {
+  .user-actions,
+  .main-nav,
+  .role-actions {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .user-actions.open,
+  .main-nav.open,
+  .role-actions.open {
+    display: flex;
+  }
+}
+
+  
   /****** FOOTER ******/
 
     /* 
@@ -330,6 +427,44 @@
       section.footer-bottom a:hover {
           color: #ffffff;
       }
+
+  /*$$$$$$$$$$$$$$$$$$$$ Responsive $$$$$$$$$$$$$$$$$$$$*/ 
+
+/* --- RESPONSIVE FOOTER --- */
+
+/* TABLETTE : max-width 1024px : 2 colonnes */
+@media screen and (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* MOBILE : max-width 768px : 1 colonne */
+@media screen and (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  section.footer-section h2 {
+    text-align: center;
+  }
+
+  section.footer-section ul,
+  section.footer-section nav ul,
+  section.footer-section address ul {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  section.footer-bottom {
+    padding: 1rem 1rem 0;
+    font-size: 0.85rem;
+  }
+}
+
 
 /* ==========  QUI SOMMES NOUS ========== */
 
@@ -899,7 +1034,11 @@ em {
         margin-top: 0.3rem;
       }
 
-    /* Bloc pour le futur formulaire */
+
+          /* Bloc pour le futur formulaire *******************************************************************************************************/
+   /* 
+ 
+
       .bloc-formulaire {
         background: #ffffff; 
         border-radius: 1rem;
@@ -907,7 +1046,9 @@ em {
         padding: 2rem;
         min-height: 18rem;
       }
-
+    
+     ************************************************************************************************************** */  
+    
   /****** Seconde Section "Explorez par ville" ******/
 
     .section-villes {
@@ -2437,6 +2578,50 @@ em {
 }
 
 
+/* Renitialiser et Valider */ 
+
+/* --- Boutons du formulaire --- */
+.boutons-formulaire {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.1rem;
+  margin-top: 1.5rem;
+}
+
+/* Bouton Valider */
+.bouton-valider-filtres {
+  background-color: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+}
+
+.bouton-valider-filtres:hover {
+  background-color: #1d4ed8;
+}
+
+/* Bouton Réinitialiser */
+.bouton-reset-filtres {
+  background-color: #fff;
+  color: #2563eb;
+  border: 0.1rem solid #2563eb;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  padding: 0.7rem 1.6rem;
+  cursor: pointer;
+}
+
+.bouton-reset-filtres:hover {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+
+
+
 /* ==================== DETAIL D'UNE ANNONCE ==================== */
 
 
@@ -2695,4 +2880,331 @@ em {
     .grande-photo img {
         height: 200px; 
     }
+}
+
+
+  /****************   ENVOYER UN MESSAGE : CONTACT VENDEUR ****************/
+
+.page-message {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 40px;
+}
+
+/* ----- Disposition principale : desktop ----- */
+.message-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  flex-direction: row; 
+}
+
+/* ----- Bloc message (à gauche) ----- */
+.bloc-gauche {
+  flex: 1.1;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.formulaire-message h3 {
+  font-size: 1.4rem;
+  color: #1e3a8a;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.form-submit {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.bouton-envoyer-message {
+  background-color: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.bouton-envoyer-message:hover {
+  background-color: #1d4ed8;
+}
+
+/* ----- Bloc résumé (à droite) ----- */
+.bloc-droite {
+  flex: 0.9;
+  background-color: #f9fafb;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.bloc-droite h3 {
+  font-size: 1.3rem;
+  color: #111827;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.bloc-droite p {
+  margin: 6px 0;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.bloc-droite strong {
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* ----- Responsive tablette et mobile ----- */
+@media (max-width: 992px) {
+  .page-message {
+    padding: 0 20px;
+  }
+
+  .message-layout {
+    flex-direction: column; 
+    align-items: center;
+    gap: 30px;
+  }
+
+  .bloc-droite,
+  .bloc-gauche {
+    width: 100%;
+    max-width: 700px;
+  }
+}
+
+/* ----- Très petits écrans ----- */
+@media (max-width: 600px) {
+  .page-message {
+    padding: 0 10px;
+  }
+
+  .formulaire-message h3,
+  .bloc-droite h3 {
+    font-size: 1.2rem;
+  }
+
+  textarea {
+    font-size: 0.95rem;
+  }
+}
+
+
+  /**************** Politique de confidentialité ****************/
+
+
+.page-politique {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: justify;
+  line-height: 1.7;
+  background-color: #fff;
+}
+
+.titre-page {
+  text-align: center;
+  color: #2563eb;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.section-politique {
+  margin-bottom: 2rem;
+}
+
+.section-politique h2 {
+  color: #1d4ed8;
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.section-politique ul {
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.section-politique a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.section-politique a:hover {
+  text-decoration: underline;
+}
+
+/*  Responsive Design */
+
+/* Tablettes */
+@media (max-width: 768px) {
+  .page-politique {
+    max-width: 95%;
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  .titre-page {
+    font-size: 1.6rem;
+  }
+
+  .section-politique h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+  .page-politique {
+    padding: 1rem;
+    margin: 1rem;
+    text-align: left;
+  }
+
+  .titre-page {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-politique h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-politique p,
+  .section-politique ul {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+
+  /****************   Page : Mentions légales et CGU – AYITATE  ****************/
+
+.page-mentions-legales {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: justify;
+  line-height: 1.7;
+  background-color: #fff;
+  color: #111;
+}
+
+.titre-page {
+  text-align: center;
+  color: #2563eb;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.section-mentions {
+  margin-bottom: 2rem;
+}
+
+.section-mentions h2 {
+  color: #1d4ed8;
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  border-left: 4px solid #2563eb;
+  padding-left: 0.6rem;
+}
+
+.section-mentions p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.section-mentions ul {
+  padding-left: 1.5rem;
+  list-style: disc;
+  margin-bottom: 1rem;
+}
+
+.section-mentions li {
+  margin-bottom: 0.4rem;
+}
+
+.section-mentions a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.section-mentions a:hover {
+  text-decoration: underline;
+}
+
+/* ---------------- Responsive Design ------------------- */
+
+/* Tablette  */
+@media (max-width: 768px) {
+  .page-mentions-legales {
+    max-width: 95%;
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  .titre-page {
+    font-size: 1.6rem;
+  }
+
+  .section-mentions h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile  */
+@media (max-width: 480px) {
+  .page-mentions-legales {
+    padding: 1rem;
+    margin: 1rem;
+    text-align: left;
+  }
+
+  .titre-page {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-mentions h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-mentions p,
+  .section-mentions ul {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
 }

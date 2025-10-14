@@ -3,60 +3,63 @@
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
-<div>
+<div class="profil-container">
     {% if user %}
+    
+        <div class="profil-header">
+            <div class="profil-avatar">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo ?? user.email }}">
+                {% else %}
+                    <span class="avatar-placeholder">Pas encore défini</span>
+                {% endif %}
+            </div>
 
-        <div>
-            Avatar :
-            {% if user.avatar %}
-                <img src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo ?? user.email }}" width="100">
-            {% else %}
-                Pas encore défini
-            {% endif %}
-            <h1>Mon profil</h1>
+            <h1 class="profil-titre">Mon profil</h1>
+
+            <div class="profil-edit">
+                <a href="{{ path('app_profile_edit') }}">Éditer mon profil</a>
+            </div>
         </div>
 
-        <div>
-            <a href="{{ path('app_profile_edit') }}">Modifier mon profil</a>
+        <div class="profil-infos">
+            <p><strong>Email :</strong> {{ user.email }}</p>
+            <p><strong>Nom :</strong> {{ user.nom ?? 'Non renseigné' }}</p>
+            <p><strong>Prénom :</strong> {{ user.prenom ?? 'Non renseigné' }}</p>
+            <p><strong>Pseudo :</strong> {{ user.pseudo ?? 'Non renseigné' }}</p>
         </div>
 
-        <ul>
-            <li>Email : {{ user.email }}</li>
-            <li>Nom : {{ user.nom ?? 'Non renseigné' }}</li>
-            <li>Prénom : {{ user.prenom ?? 'Non renseigné' }}</li>
-            <li>Pseudo : {{ user.pseudo ?? 'Non renseigné' }}</li>
-        </ul>
-
-        {# --- Annonces de l'utilisateur --- #}
         <section class="section-terrains">
             <div class="header-terrains">
                 <h2>Mes annonces</h2>
-                <a href="{{ path('app_annonce_new') }}" class="lien-tous"> Déposer une nouvelle annonce</a>
+                <a href="{{ path('app_annonce_new') }}" class="lien-tous">Déposer une nouvelle annonce</a>
             </div>
 
             <div class="grid-terrains">
                 {% if annonces is not empty %}
                     {% for annonce in annonces %}
                         <div class="card-terrain">
-                            <div class="photo-terrain">
-                                {% if annonce.photos|length > 0 %}
-                                    <img src="{{ asset('uploads/annonces/' ~ annonce.photos|first.url) }}" 
-                                    alt="Photo de {{ annonce.titre }}" 
-                                    style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-                                {% endif %}
-                            </div>
-                            <div class="info-terrain">
-                                <p><strong>{{ annonce.ville }} – {{ annonce.commune }}</strong></p>
-                                <p>
-                                    {% if annonce.superficie %}
-                                        <strong>{{ annonce.superficie }} m²</strong> |
+                            <a href="{{ path('annonce_show', {id: annonce.id}) }}" class="lien-carte-annonce">
+                                <div class="photo-terrain">
+                                    {% if annonce.photos|length > 0 %}
+                                        <img src="{{ asset('uploads/annonces/' ~ annonce.photos|first.url) }}"
+                                             alt="Photo de {{ annonce.titre }}"
+                                             style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
                                     {% endif %}
-                                    <strong>{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</strong>
-                                </p>
-                            </div>
+                                </div>
+                                <div class="info-terrain">
+                                    <p><strong>{{ annonce.ville }} – {{ annonce.commune }}</strong></p>
+                                    <p>
+                                        {% if annonce.superficie %}
+                                            <strong>{{ annonce.superficie }} m²</strong> |
+                                        {% endif %}
+                                        <strong>{{ annonce.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                                    </p>
+                                </div>
+                            </a>
+
                             <div class="actions-annonce">
-                                <a href="{{ path('annonce_show', {id: annonce.id}) }}">Voir</a>
-                                <a href="{{ path('app_annonce_edit', {id: annonce.id}) }}"> Modifier</a>
+                                <a href="{{ path('app_annonce_edit', {id: annonce.id}) }}">Modifier</a>
                                 <a href="{{ path('app_annonce_delete', {id: annonce.id}) }}"
                                    onclick="return confirm('Voulez-vous vraiment supprimer cette annonce ?');">Supprimer</a>
                             </div>
@@ -71,5 +74,23 @@
     {% else %}
         <p>Vous devez être connecté pour voir votre profil.</p>
     {% endif %}
+
+    <section class="section-suppression-compte">
+        <h2>Suppression de mon compte</h2>
+        <p>
+            Conformément au Règlement Général sur la Protection des Données (RGPD),
+            vous pouvez supprimer définitivement votre compte Ayitate et l’ensemble
+            de vos données personnelles.
+        </p>
+
+        <form method="post" action="{{ path('app_user_delete') }}" 
+            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
+            <button type="submit" class="bouton-suppression">
+                Supprimer mon compte
+            </button>
+        </form>
+    </section>
+
 </div>
 {% endblock %}

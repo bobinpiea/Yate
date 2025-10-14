@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversation{% endblock %}
+
+{% block body %}
+
+<main class="page-conversation" aria-labelledby="titre-conversation">
+
+  <section class="entete-conversation">
+    <h1 id="titre-conversation">
+      Conversation à propos de :
+      <span class="titre-annonce">{{ annonce.titre ?? 'Annonce supprimée' }}</span>
+    </h1>
+    <p class="sous-titre">
+      Avec {{ autreUtilisateur.pseudo ?? autreUtilisateur.email }}
+    </p>
+  </section>
+
+  <section class="fil-conversation">
+    {% if messages is not empty %}
+      {% for message in messages %}
+        <article
+          class="bulle-message {% if message.expediteur == app.user %}moi{% else %}autre{% endif %}"
+        >
+          <p class="contenu-message">{{ message.message }}</p>
+          <time datetime="{{ message.dateEnvoi|date('c') }}" class="date-message">
+            {{ message.dateEnvoi|date('d/m/Y à H:i') }}
+          </time>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p class="aucun-message">Aucun message pour cette conversation.</p>
+    {% endif %}
+  </section>
+
+  <section class="zone-reponse">
+    {{ form_start(form, {'attr': {'class': 'form-envoi-message'}}) }}
+      {{ form_widget(form.message, {'attr': {'placeholder': 'Écrivez votre message...'}}) }}
+    {{ form_end(form) }}
+  </section>
+
+</main>
+
+{% endblock %}
