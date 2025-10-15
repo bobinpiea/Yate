@@ -1,60 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Déposer une annonce immobilière - Ayitate{% endblock %}
+{% block title %}Déposer une annonce immobilière - Ayitate{% endblock %}
 
 {% block body %}
-<main class="contenu-annonce">
+<main class="page-annonce">
 
-  <header class="entete-page">
-    <h1 class="titre-principal">Déposer une annonce immobilière</h1>
-    <p class="texte-intro">Remplissez les informations ci-dessous pour proposer votre bien.</p>
-  </header>
+  <section class="zone-intro-annonce">
+    <h1 class="titre-annonce">Déposer une annonce immobilière</h1>
+    <p class="texte-annonce">Remplissez les informations ci-dessous pour proposer votre bien.</p>
+  </section>
 
   {% for label, messages in app.flashes %}
     {% for message in messages %}
-      <div class="flash-message flash-{{ label }}">{{ message }}</div>
+      <div class="alerte-message alerte-{{ label }}">{{ message }}</div>
     {% endfor %}
   {% endfor %}
 
-  {{ form_start(form, { attr: { id: 'annonce-form', class: 'formulaire-annonce' } }) }}
+  {{ form_start(form, { attr: { id: 'formulaire-annonce', class: 'bloc-formulaire-annonce' } }) }}
 
     {# Étape 1 : choix transaction + nature #}
-    <section class="bloc-formulaire" id="step-1">
-      <div class="ligne-formulaire">
-        <div class="colonne-formulaire">
-          {{ form_row(form.transaction, {
-            label: 'Vous souhaitez effectuer une :',
-            attr: {'data-ajax-trigger': 1}
-          }) }}
+    <section class="etape-formulaire" id="etape-1">
+      <div class="zone-selecteurs">
+
+        <div class="bloc-selecteur">
+          {{ form_label(form.transaction, 'Vous souhaitez effectuer une :') }}
+          {{ form_widget(form.transaction, { attr: {'data-ajax-trigger': 1} }) }}
+          <div class="message-erreur" style="display:none;">
+            {{ form_errors(form.transaction) }}
+          </div>
         </div>
-        <div class="colonne-formulaire">
-          {{ form_row(form.nature, {
-            label: 'Quelle est la nature du bien :',
-            attr: {'data-ajax-trigger': 1}
-          }) }}
+
+        <div class="bloc-selecteur">
+          {{ form_label(form.nature, 'Quelle est la nature du bien :') }}
+          {{ form_widget(form.nature, { attr: {'data-ajax-trigger': 1} }) }}
+          <div class="message-erreur" style="display:none;">
+            {{ form_errors(form.nature) }}
+          </div>
         </div>
+
       </div>
 
-      <div class="zone-suivant">
-        <button type="button" id="btn-suivant" class="bouton-secondaire">Suivant</button>
+      <div class="zone-bouton-suivant">
+        <button type="button" id="btn-suivant" class="btn-secondaire">Suivant</button>
       </div>
     </section>
 
     {# Étape 2 : champs + upload photos #}
-    <section class="bloc-formulaire" id="step-2" style="display:none;">
-      
-      <div id="details-fields"></div>
+    <section class="etape-formulaire" id="etape-2" style="display:none;">
+      <div id="zone-details"></div>
 
-      <section class="bloc-photos-etape2">
+      <section class="bloc-photos">
         <h2 class="titre-section">Photos du bien</h2>
-        <p class="texte-aide">Veuillez ajouter entre <strong>1 et 10 photos</strong> (formats : JPG, PNG, WebP).</p>
-        {{ form_row(form.photosUpload, {
-          label: 'Sélectionnez vos photos'
-        }) }}
+        <p class="texte-aide">
+          Veuillez ajouter entre <strong>1 et 10 photos</strong> 
+          (formats : JPG, PNG, WebP).
+        </p>
+
+        <div class="zone-upload">
+          {{ form_label(form.photosUpload, 'Sélectionnez vos photos') }}
+          {{ form_widget(form.photosUpload) }}
+          <div class="message-erreur" style="display:none;">
+            {{ form_errors(form.photosUpload) }}
+          </div>
+        </div>
       </section>
 
-      <div class="zone-bouton">
-        <button type="submit" class="bouton-principal">Publier l'annonce</button>
+      <div class="zone-bouton-publier">
+        <button type="submit" class="btn-principal">Publier l'annonce</button>
       </div>
     </section>
 
@@ -62,16 +74,15 @@
 
 </main>
 
-{# Script pour gérer les étapes #}
+{# Script pour gérer les étapes et l’affichage des erreurs uniquement après validation #}
 <script>
 (function(){
-  const form        = document.getElementById('annonce-form');
+  const form        = document.getElementById('formulaire-annonce');
   const selectTrans = document.querySelector('[name$="[transaction]"]');
   const selectNature= document.querySelector('[name$="[nature]"]');
-
-  const step2       = document.getElementById('step-2');
+  const etape2      = document.getElementById('etape-2');
   const btnNext     = document.getElementById('btn-suivant');
-  const detailsBox  = document.getElementById('details-fields');
+  const detailsBox  = document.getElementById('zone-details');
 
   btnNext.addEventListener('click', function(){
     if (!selectTrans.value || !selectNature.value) {
@@ -88,12 +99,20 @@
     .then(r => r.json())
     .then(({ form: html }) => {
       detailsBox.innerHTML = html;
-      step2.style.display = 'block';
-      step2.scrollIntoView({ behavior: 'smooth' });
+      etape2.style.display = 'block';
+      etape2.scrollIntoView({ behavior: 'smooth' });
     })
-    .catch(() => {
-      alert('Impossible de charger les champs. Réessayez.');
-    });
+    .catch(() => alert('Impossible de charger les champs. Réessayez.'));
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+
+    document.querySelectorAll('.message-erreur').forEach(el => el.style.display = 'none');
+
+ 
+    form.submit();
   });
 })();
 </script>
