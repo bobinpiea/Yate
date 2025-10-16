@@ -3,25 +3,25 @@
 {% block title %}Ma messagerie{% endblock %}
 
 {% block body %}
-<main class="page-messagerie">
+<main class="messagerie-page">
 
-    <h1 class="titre-page-messagerie">Ma messagerie</h1>
+    <h1 class="messagerie-titre">Ma messagerie</h1>
 
     {% if conversations is not empty %}
-        <section class="liste-conversations">
+        <section class="messagerie-liste">
 
             {% for cle, conversation in conversations %}
-                <article class="conversation-item">
+                <article class="messagerie-item">
                     <a href="{{ path('app_message_conversation', {
                         annonceId: conversation.annonce.id,
                         expediteurId: conversation.autreUtilisateur.id
-                    }) }}" class="lien-conversation">
+                    }) }}" class="messagerie-lien">
 
-                        <h2 class="titre-annonce">
+                        <h2 class="messagerie-annonce">
                             {{ conversation.annonce.titre }}
                         </h2>
 
-                        <p class="dernier-message">
+                        <p class="messagerie-apercu">
                             {{ conversation.dernierMessage.message|slice(0, 120) ~ '...' }}
                         </p>
 
@@ -31,7 +31,7 @@
 
         </section>
     {% else %}
-        <p class="aucune-conversation">Vous n’avez encore aucun message.</p>
+        <p class="messagerie-vide">Vous n’avez encore aucun message.</p>
     {% endif %}
 
 </main>

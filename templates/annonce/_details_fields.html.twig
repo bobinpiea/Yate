@@ -13,7 +13,7 @@
               {{ form_label(champ) }}
               {{ form_widget(champ) }}
 
-              {# On affiche les erreurs UNIQUEMENT s'il y en a #}
+              {# On affiche les erreurs  #}
               {% if form_errors(champ) %}
                 <div class="message-erreur">{{ form_errors(champ) }}</div>
               {% endif %}
