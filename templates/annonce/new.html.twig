@@ -56,11 +56,16 @@
     <button type="submit">Publier l'annonce</button>
   </section>
 
-  {{ form_end(form) }}
-</main>
+<div style="display:none;">
+  {{ form_widget(form.details) }}
+</div>
+{{ form_end(form) }}
 
+</main>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+  console.log('DEBUG: Script charge');
+  
   const form = document.getElementById('formulaire-annonce');
   const etape1 = document.getElementById('etape-1');
   const etape2 = document.getElementById('etape-2');
@@ -69,54 +74,68 @@ document.addEventListener('DOMContentLoaded', function() {
   const selectTransaction = document.querySelector('[name*="[transaction]"]');
   const selectNature = document.querySelector('[name*="[nature]"]');
 
+  console.log('DEBUG: Bouton trouve =', boutonSuivant !== null);
+  console.log('DEBUG: Form trouve =', form !== null);
+
+  if (!boutonSuivant) {
+    console.error('ERREUR: Bouton Suivant introuvable');
+    return;
+  }
+
   boutonSuivant.addEventListener('click', function(e) {
+    console.log('DEBUG: Clic detecte');
     e.preventDefault();
     e.stopPropagation();
     
     if (!selectTransaction.value || !selectNature.value) {
-      alert("Merci de sélectionner un type de transaction et une nature de bien.");
+      alert("Merci de selectionner un type de transaction et une nature de bien.");
       return;
     }
 
-    zoneDetails.innerHTML = "<p>⏳ Chargement des champs...</p>";
+    console.log('DEBUG: Envoi requete Ajax');
+    zoneDetails.innerHTML = "<p>Chargement des champs...</p>";
     etape2.style.display = "block";
     boutonSuivant.disabled = true;
 
     const formData = new FormData(form);
 
-    // Utiliser XMLHttpRequest au lieu de fetch pour éviter Turbo
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '{{ path("annonce_preview") }}', true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     
     xhr.onload = function() {
+      console.log('DEBUG: Reponse recue, status =', xhr.status);
       if (xhr.status === 200) {
         try {
           const data = JSON.parse(xhr.responseText);
+          console.log('DEBUG: JSON parse OK');
           if (data.form) {
             zoneDetails.innerHTML = data.form;
             etape1.style.display = "none";
+            console.log('DEBUG: Formulaire charge avec succes');
           } else {
-            throw new Error('Pas de formulaire dans la réponse');
+            throw new Error('Pas de formulaire dans la reponse');
           }
         } catch(err) {
-          console.error('Erreur parsing JSON:', err);
-          zoneDetails.innerHTML = "<p style='color:red'>❌ Erreur de format de réponse</p>";
+          console.error('ERREUR parsing JSON:', err);
+          zoneDetails.innerHTML = "<p style='color:red'>Erreur de format de reponse</p>";
           boutonSuivant.disabled = false;
         }
       } else {
-        zoneDetails.innerHTML = "<p style='color:red'>❌ Erreur serveur: " + xhr.status + "</p>";
+        console.error('ERREUR serveur, status =', xhr.status);
+        zoneDetails.innerHTML = "<p style='color:red'>Erreur serveur: " + xhr.status + "</p>";
         boutonSuivant.disabled = false;
       }
     };
     
     xhr.onerror = function() {
-      zoneDetails.innerHTML = "<p style='color:red'>❌ Erreur réseau</p>";
+      console.error('ERREUR: Erreur reseau');
+      zoneDetails.innerHTML = "<p style='color:red'>Erreur reseau</p>";
       boutonSuivant.disabled = false;
     };
     
     xhr.send(formData);
   });
-});
+})();
 </script>
 {% endblock %}
