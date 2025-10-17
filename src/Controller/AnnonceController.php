@@ -100,31 +100,30 @@ class AnnonceController extends AbstractController
         }
 
 
-    #[Route('/annonce/new/preview', name: 'annonce_preview', methods: ['POST'])]
-    public function previewAnnonce(Request $request, EntityManagerInterface $entityManager): JsonResponse
-    {
+#[Route('/annonce/new/preview', name: 'annonce_preview', methods: ['POST'])]
+public function previewAnnonce(Request $request, EntityManagerInterface $entityManager): JsonResponse
+{
+    $form = $this->createForm(AnnonceAjaxType::class, null, [
+        'method' => 'POST',
+        'entityManager' => $entityManager,
+    ]);
 
-        
+    $form->handleRequest($request);
 
-        $form = $this->createForm(AnnonceAjaxType::class, null, [
-            'method' => 'POST',
-            'entityManager' => $entityManager,
-        ]);
-
-        $form->handleRequest($request);
-
-        if (!$form->isSubmitted()) {
-            $form->submit($request->request->all($form->getName()));
-        }
-
-        $partial = $form->get('details');
-
-        return new JsonResponse([
-            'form' => $this->renderView('annonce/_details_fields.html.twig', [
-                'form' => $partial->createView(),
-            ]),
-        ]);
+    if (!$form->isSubmitted()) {
+        $donnees = $request->request->all();
+        $nomForm = $form->getName();
+        $form->submit($donnees[$nomForm] ?? $donnees);
     }
+    
+    $partial = $form->get('details');
+
+return new JsonResponse([
+    'form' => $this->renderView('annonce/_details_fields.html.twig', [
+        'form' => $partial->createView(),
+    ]),
+]);
+}
  
 
     private function generateUniqueReference(EntityManagerInterface $entityManager): string

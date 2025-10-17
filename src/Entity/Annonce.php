@@ -161,8 +161,8 @@ class Annonce
     #[ORM\OneToMany(targetEntity: Signalement::class, mappedBy: 'annonce')]
     private Collection $signalements;
 
-    #[ORM\Column]
-    private ?int $Tel = null;
+    #[ORM\Column(type: 'string', length: 15)]
+    private ?string $Tel = null;
 
     public function __construct()
     {
@@ -752,12 +752,12 @@ class Annonce
         return $this;
     }
 
-    public function getTel(): ?int
+    public function getTel(): ?string
     {
         return $this->Tel;
     }
 
-    public function setTel(int $Tel): static
+    public function setTel(string $Tel): static
     {
         $this->Tel = $Tel;
 

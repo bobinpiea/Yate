@@ -150,16 +150,17 @@ class AnnonceAjaxType extends AbstractType
                 ])
 
                 // --------------------------------------------------------------------
-                    ->add('tel', FormType\IntegerType::class, [
-                        'constraints' => [
-                            new NotBlank(['message' => 'Le numéro de téléphone est obligatoire.']),
-
-                            new Length([
-                                'min' => 10, 
-                                'max' => 10 ])
-                        ],
-                        'attr' => ['placeholder' => 'Ex: 0622232253']
-                    ]);
+                ->add('tel', FormType\TextType::class, [
+                    'constraints' => [
+                        new NotBlank(['message' => 'Le numéro de téléphone est obligatoire.']),
+                        new Length([
+                            'min' => 10, 
+                            'max' => 10,
+                            'exactMessage' => 'Le numéro doit faire exactement {{ limit }} caractères.'
+                        ])
+                    ],
+                    'attr' => ['placeholder' => 'Ex: 0622232253']
+                ]);
 
                     
 
