@@ -1,3 +1,5 @@
 {% if form is defined %}
-  {{ form_widget(form) }}
+  {% for champ in form %}
+    {{ form_row(champ) }}
+  {% endfor %}
 {% endif %}
