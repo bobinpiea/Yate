@@ -74,17 +74,17 @@
 
 </main>
 
-{# Script pour gérer les étapes et l’affichage des erreurs uniquement après validation #}
 <script>
-(function(){
-  const form        = document.getElementById('formulaire-annonce');
+(function() {
+  const form = document.getElementById('formulaire-annonce');
+  const btnNext = document.getElementById('btn-suivant');
+  const etape2 = document.getElementById('etape-2');
+  const detailsBox = document.getElementById('zone-details');
   const selectTrans = document.querySelector('[name$="[transaction]"]');
-  const selectNature= document.querySelector('[name$="[nature]"]');
-  const etape2      = document.getElementById('etape-2');
-  const btnNext     = document.getElementById('btn-suivant');
-  const detailsBox  = document.getElementById('zone-details');
+  const selectNature = document.querySelector('[name$="[nature]"]');
 
-  btnNext.addEventListener('click', function(){
+  // Étape 1
+  btnNext.addEventListener('click', function() {
     if (!selectTrans.value || !selectNature.value) {
       alert('Merci de sélectionner un type de transaction et une nature de bien.');
       return;
@@ -96,7 +96,7 @@
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
       body: formData
     })
-    .then(r => r.json())
+    .then(response => response.json())
     .then(({ form: html }) => {
       detailsBox.innerHTML = html;
       etape2.style.display = 'block';
@@ -105,14 +105,11 @@
     .catch(() => alert('Impossible de charger les champs. Réessayez.'));
   });
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-
+  // Étape 2 : soumission complète du formulaire
+  form.addEventListener('submit', function(event) {
+    console.log("🟢 Soumission du formulaire Ayitate détectée");
     document.querySelectorAll('.message-erreur').forEach(el => el.style.display = 'none');
-
- 
-    form.submit();
+    // Rien ne bloque : le navigateur envoie le POST normalement à Symfony
   });
 })();
 </script>

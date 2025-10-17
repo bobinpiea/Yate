@@ -204,7 +204,8 @@ final class ForumController extends AbstractController
     // MODIFIER LE message
 
     #[Route('/forum/message/{id}/edit', name: 'app_forum_message_edit')]
-    public function editMessage( Message $message, Request $request, EntityManagerInterface $entityManager, CategorieRepository $categorieRepository): Response {
+    public function editMessage( Message $message, Request $request, EntityManagerInterface 
+    $entityManager, CategorieRepository $categorieRepository): Response {
 
         // Obligation de vérifiacaiton si la pers est connecté
         if (!$this->getUser()) {
@@ -246,8 +247,10 @@ final class ForumController extends AbstractController
     }
 
     // DELETE MESSAGE
-        #[Route('/forum/message/{id}/delete', name: 'app_forum_message_delete', methods: ['POST'])]
-        public function deleteMessage(Request $request, Message $message, EntityManagerInterface $entityManager): Response {
+        #[Route('/forum/message/{id}/delete', 
+        name: 'app_forum_message_delete', methods: ['POST'])]
+        public function deleteMessage(Request $request, 
+        Message $message, EntityManagerInterface $entityManager): Response {
 
             if (!$this->getUser()) {
                 $this->addFlash('error', 'Vous devez être connecté pour supprimer un message.');

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Photo;
 use App\Entity\Annonce;
+use App\Entity\NatureBien;
+use App\Entity\Transaction;
 use App\Form\AnnonceAjaxType;
 use App\Form\MaisonFiltreType;
 use App\Form\TerrainFiltreType;
@@ -19,85 +21,116 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AnnonceController extends AbstractController
 {
 
-    /*
-     * Méthode qui affiche et gère le formulaire de création d'une annonce nouvelle
+    /**
+     * Création d'une nouvelle annonce
      */
-        #[Route('/annonce/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-        public function newAnnonce(Request $request, EntityManagerInterface $entityManager, PictureService $pictureService): Response
-        {
-            if (!$this->getUser()) {
-                $this->addFlash('warning', 'Veuillez vous connecter afin de pouvoir publier une annonce.');
-                return $this->redirectToRoute('app_login');
-            }
-
-            $form = $this->createForm(AnnonceAjaxType::class, null, [
-                'entityManager' => $entityManager,
-            ]);
-
-            $form->handleRequest($request); 
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $donneesAnnonce = $form->get('details')->getData();
-                
-                $annonce = new Annonce();
-
-                foreach ($donneesAnnonce as $champ => $valeur) { 
-                    $setter = 'set' . ucfirst($champ);
-                    if (method_exists($annonce, $setter)) {
-                        $annonce->$setter($valeur);
-                    }
-                }
-
-                $annonce->setDatePublication(new \DateTime());
-                $reference = $this->generateUniqueReference($entityManager);
-                $annonce->setReference($reference);
-                $annonce->setTransaction($form->get('transaction')->getData());
-                $annonce->setNatureBien($form->get('nature')->getData());
-                $annonce->setUser($this->getUser());
-
-                /* Gestion des photos */
-                $photos = $form->get('photosUpload')->getData();
-
-                if (!$photos || count($photos) < 1) {
-                    $this->addFlash('danger', 'Vous devez ajouter au moins une photo.');
-                    return $this->render('annonce/new.html.twig', [
-                        'form' => $form->createView(),
-                    ]);
-                }
-
-                if (count($photos) > 10) {
-                    $this->addFlash('danger', 'Vous ne pouvez pas ajouter plus de 10 photos.');
-                    return $this->render('annonce/new.html.twig', [
-                        'form' => $form->createView(),
-                    ]);
-                }
-
-                foreach ($photos as $photo) {
-                    if ($photo && $photo->isValid()) {
-                        $nomFichier = $pictureService->add($photo, 'annonces');
-
-                        $image = new Photo();
-                        $image->setUrl($nomFichier);
-                        $image->setAnnonce($annonce);
-
-                        $entityManager->persist($image);
-                    }
-                }
-
-                $entityManager->persist($annonce);
-                $entityManager->flush();
-
-                $this->addFlash('success', 'Votre annonce a bien été publiée !');
-
-                return $this->redirectToRoute('app_profile');
-            }
-
-            return $this->render('annonce/new.html.twig', [
-                'form' => $form->createView(),
-            ]);
+    #[Route('/annonce/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
+    public function newAnnonce(Request $request, EntityManagerInterface $entityManager, PictureService $pictureService): Response
+    {
+        // 🔒 1. Vérification de connexion
+        if (!$this->getUser()) {
+            $this->addFlash('warning', 'Veuillez vous connecter afin de pouvoir publier une annonce.');
+            return $this->redirectToRoute('app_login');
         }
 
+        // 🧩 2. Création du formulaire
+        $form = $this->createForm(AnnonceAjaxType::class, null, [
+            'entityManager' => $entityManager,
+        ]);
 
+        /**
+         * ⚙️ 3. Reconstruction des champs dynamiques avant handleRequest
+         *    → Permet à Symfony de connaître les bons champs selon transaction/nature
+         */
+        $formData = $request->request->all($form->getName());
+        if (!empty($formData['transaction']) && !empty($formData['nature'])) {
+            $transaction = $entityManager->getRepository(Transaction::class)->find($formData['transaction']);
+            $natureBien  = $entityManager->getRepository(NatureBien::class)->find($formData['nature']);
+
+            if ($transaction && $natureBien) {
+                // Simule un PRE_SUBMIT pour injecter les champs dynamiques
+                $form->getConfig()->getEventDispatcher()->dispatch(
+                    new \Symfony\Component\Form\FormEvent($form, $formData),
+                    \Symfony\Component\Form\FormEvents::PRE_SUBMIT
+                );
+            }
+        }
+
+        // 📩 4. Gestion de la requête
+        $form->handleRequest($request);
+
+        /**
+         * ✅ 5. Soumission du formulaire complète
+         */
+        if ($form->isSubmitted() && $form->isValid()) {
+            $donneesAnnonce = $form->get('details')->getData();
+
+            $annonce = new Annonce();
+
+            // Hydratation des champs dynamiques
+            foreach ($donneesAnnonce as $champ => $valeur) {
+                $setter = 'set' . ucfirst($champ);
+                if (method_exists($annonce, $setter)) {
+                    $annonce->$setter($valeur);
+                }
+            }
+
+            // Données fixes
+            $annonce->setDatePublication(new \DateTime());
+            $reference = $this->generateUniqueReference($entityManager);
+            $annonce->setReference($reference);
+            $annonce->setTransaction($form->get('transaction')->getData());
+            $annonce->setNatureBien($form->get('nature')->getData());
+            $annonce->setUser($this->getUser());
+
+            /**
+             * 📸 6. Gestion des photos uploadées
+             */
+            $photos = $form->get('photosUpload')->getData();
+
+            if (!$photos || count($photos) < 1) {
+                $this->addFlash('danger', 'Vous devez ajouter au moins une photo.');
+                return $this->render('annonce/new.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
+
+            if (count($photos) > 10) {
+                $this->addFlash('danger', 'Vous ne pouvez pas ajouter plus de 10 photos.');
+                return $this->render('annonce/new.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
+
+            foreach ($photos as $photo) {
+                if ($photo && $photo->isValid()) {
+                    $nomFichier = $pictureService->add($photo, 'annonces');
+
+                    $image = new Photo();
+                    $image->setUrl($nomFichier);
+                    $image->setAnnonce($annonce);
+
+                    $entityManager->persist($image);
+                }
+            }
+
+            // 💾 7. Enregistrement en base
+            $entityManager->persist($annonce);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre annonce a bien été publiée !');
+            return $this->redirectToRoute('app_profile');
+        }
+
+        // 🧱 8. Affichage du formulaire initial
+        return $this->render('annonce/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * ⚡ Prévisualisation dynamique via AJAX
+     */
     #[Route('/annonce/new/preview', name: 'annonce_preview', methods: ['POST'])]
     public function previewAnnonce(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -120,21 +153,21 @@ class AnnonceController extends AbstractController
             ]),
         ]);
     }
- 
 
+    /**
+     * Génère une référence unique d’annonce
+     */
     private function generateUniqueReference(EntityManagerInterface $entityManager): string
     {
         do {
-            $random = strtoupper(bin2hex(random_bytes(4))); 
+            $random = strtoupper(bin2hex(random_bytes(4)));
             $reference = 'RF' . $random;
-
             $existingAnnonce = $entityManager->getRepository(Annonce::class)
                 ->findOneBy(['reference' => $reference]);
-        } while ($existingAnnonce !== null); 
+        } while ($existingAnnonce !== null);
 
         return $reference;
     }
-
 
     /* LISTE DES BIENS PAR TYPES DE TRANSACTION */
 
