@@ -1,116 +1,122 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Déposer une annonce immobilière - Ayitate{% endblock %}
+{% block title %}Déposer une annonce immobilière{% endblock %}
 
 {% block body %}
-<main class="page-annonce">
+<main>
 
-  <section class="zone-intro-annonce">
-    <h1 class="titre-annonce">Déposer une annonce immobilière</h1>
-    <p class="texte-annonce">Remplissez les informations ci-dessous pour proposer votre bien.</p>
-  </section>
+  <h1>Déposer une annonce immobilière</h1>
 
   {% for label, messages in app.flashes %}
     {% for message in messages %}
-      <div class="alerte-message alerte-{{ label }}">{{ message }}</div>
+      <div>{{ message }}</div>
     {% endfor %}
   {% endfor %}
 
-  {{ form_start(form, { attr: { id: 'formulaire-annonce', class: 'bloc-formulaire-annonce' } }) }}
+  {{ form_start(form, {
+    method: 'POST',
+    attr: { 
+      id: 'formulaire-annonce', 
+      enctype: 'multipart/form-data',
+      'data-turbo': 'false'
+    }
+  }) }}
 
-    {# Étape 1 : choix transaction + nature #}
-    <section class="etape-formulaire" id="etape-1">
-      <div class="zone-selecteurs">
+  <!-- Étape 1 -->
+  <section id="etape-1">
+    <h2>Étape 1 : Sélection</h2>
 
-        <div class="bloc-selecteur">
-          {{ form_label(form.transaction, 'Vous souhaitez effectuer une :') }}
-          {{ form_widget(form.transaction, { attr: {'data-ajax-trigger': 1} }) }}
-          <div class="message-erreur" style="display:none;">
-            {{ form_errors(form.transaction) }}
-          </div>
-        </div>
+    <div>
+      {{ form_label(form.transaction, 'Type de transaction :') }}
+      {{ form_widget(form.transaction, { attr: {'data-ajax-trigger': 1} }) }}
+      {{ form_errors(form.transaction) }}
+    </div>
 
-        <div class="bloc-selecteur">
-          {{ form_label(form.nature, 'Quelle est la nature du bien :') }}
-          {{ form_widget(form.nature, { attr: {'data-ajax-trigger': 1} }) }}
-          <div class="message-erreur" style="display:none;">
-            {{ form_errors(form.nature) }}
-          </div>
-        </div>
+    <div>
+      {{ form_label(form.nature, 'Nature du bien :') }}
+      {{ form_widget(form.nature, { attr: {'data-ajax-trigger': 1} }) }}
+      {{ form_errors(form.nature) }}
+    </div>
 
-      </div>
+    <button type="button" id="bouton-suivant" data-turbo="false">Suivant</button>
+  </section>
 
-      <div class="zone-bouton-suivant">
-        <button type="button" id="btn-suivant" class="btn-secondaire">Suivant</button>
-      </div>
-    </section>
+  <!-- Étape 2 -->
+  <section id="etape-2" style="display:none;">
+    <h2>Étape 2 : Détails du bien</h2>
 
-    {# Étape 2 : champs + upload photos #}
-    <section class="etape-formulaire" id="etape-2" style="display:none;">
-      <div id="zone-details"></div>
+    <div id="zone-details"></div>
 
-      <section class="bloc-photos">
-        <h2 class="titre-section">Photos du bien</h2>
-        <p class="texte-aide">
-          Veuillez ajouter entre <strong>1 et 10 photos</strong> 
-          (formats : JPG, PNG, WebP).
-        </p>
+    <h3>Photos</h3>
+    <div>
+      {{ form_label(form.photosUpload, 'Photos :') }}
+      {{ form_widget(form.photosUpload) }}
+      {{ form_errors(form.photosUpload) }}
+    </div>
 
-        <div class="zone-upload">
-          {{ form_label(form.photosUpload, 'Sélectionnez vos photos') }}
-          {{ form_widget(form.photosUpload) }}
-          <div class="message-erreur" style="display:none;">
-            {{ form_errors(form.photosUpload) }}
-          </div>
-        </div>
-      </section>
-
-      <div class="zone-bouton-publier">
-        <button type="submit" class="btn-principal">Publier l'annonce</button>
-      </div>
-    </section>
+    <button type="submit">Publier l'annonce</button>
+  </section>
 
   {{ form_end(form) }}
-
 </main>
 
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('formulaire-annonce');
-  const btnNext = document.getElementById('btn-suivant');
+  const etape1 = document.getElementById('etape-1');
   const etape2 = document.getElementById('etape-2');
-  const detailsBox = document.getElementById('zone-details');
-  const selectTrans = document.querySelector('[name$="[transaction]"]');
-  const selectNature = document.querySelector('[name$="[nature]"]');
+  const zoneDetails = document.getElementById('zone-details');
+  const boutonSuivant = document.getElementById('bouton-suivant');
+  const selectTransaction = document.querySelector('[name*="[transaction]"]');
+  const selectNature = document.querySelector('[name*="[nature]"]');
 
-  // Étape 1
-  btnNext.addEventListener('click', function() {
-    if (!selectTrans.value || !selectNature.value) {
-      alert('Merci de sélectionner un type de transaction et une nature de bien.');
+  boutonSuivant.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (!selectTransaction.value || !selectNature.value) {
+      alert("Merci de sélectionner un type de transaction et une nature de bien.");
       return;
     }
 
-    const formData = new FormData(form);
-    fetch('{{ path("annonce_preview") }}', {
-      method: 'POST',
-      headers: { 'X-Requested-With': 'XMLHttpRequest' },
-      body: formData
-    })
-    .then(response => response.json())
-    .then(({ form: html }) => {
-      detailsBox.innerHTML = html;
-      etape2.style.display = 'block';
-      etape2.scrollIntoView({ behavior: 'smooth' });
-    })
-    .catch(() => alert('Impossible de charger les champs. Réessayez.'));
-  });
+    zoneDetails.innerHTML = "<p>⏳ Chargement des champs...</p>";
+    etape2.style.display = "block";
+    boutonSuivant.disabled = true;
 
-  // Étape 2 : soumission complète du formulaire
-  form.addEventListener('submit', function(event) {
-    console.log("🟢 Soumission du formulaire Ayitate détectée");
-    document.querySelectorAll('.message-erreur').forEach(el => el.style.display = 'none');
-    // Rien ne bloque : le navigateur envoie le POST normalement à Symfony
+    const formData = new FormData(form);
+
+    // Utiliser XMLHttpRequest au lieu de fetch pour éviter Turbo
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '{{ path("annonce_preview") }}', true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        try {
+          const data = JSON.parse(xhr.responseText);
+          if (data.form) {
+            zoneDetails.innerHTML = data.form;
+            etape1.style.display = "none";
+          } else {
+            throw new Error('Pas de formulaire dans la réponse');
+          }
+        } catch(err) {
+          console.error('Erreur parsing JSON:', err);
+          zoneDetails.innerHTML = "<p style='color:red'>❌ Erreur de format de réponse</p>";
+          boutonSuivant.disabled = false;
+        }
+      } else {
+        zoneDetails.innerHTML = "<p style='color:red'>❌ Erreur serveur: " + xhr.status + "</p>";
+        boutonSuivant.disabled = false;
+      }
+    };
+    
+    xhr.onerror = function() {
+      zoneDetails.innerHTML = "<p style='color:red'>❌ Erreur réseau</p>";
+      boutonSuivant.disabled = false;
+    };
+    
+    xhr.send(formData);
   });
-})();
+});
 </script>
 {% endblock %}
