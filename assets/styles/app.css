@@ -337,7 +337,7 @@ header {
     background: #2563eb;
   }
 
-  /* Séparateurs entre sections */
+  /* Séparateurs entre sections 
   .main-nav.open::before,
   .role-actions.open::before {
     content: '';
@@ -347,6 +347,7 @@ header {
     margin: 0 auto 1.5rem;
     width: 80%;
   }
+    */
 
   /* Effet active sur les boutons */
   .user-actions.open ul li a:active {
