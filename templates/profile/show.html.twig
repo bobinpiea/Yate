@@ -3,51 +3,53 @@
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
-<div class="profil-container">
+<main class="bloc-profil">
     {% if user %}
     
-        <div class="profil-header">
-            <div class="profil-avatar">
+         <h1 class="titre-profil">Mon profil</h1>
+         
+        <div class="entete-profil">
+            <div class="photo-profil">
                 {% if user.avatar %}
                     <img src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo ?? user.email }}">
                 {% else %}
-                    <span class="avatar-placeholder">Pas encore défini</span>
+                    <span class="image-defaut">Pas encore défini</span>
                 {% endif %}
             </div>
 
-            <h1 class="profil-titre">Mon profil</h1>
+         
 
-            <div class="profil-edit">
+            <div class="bouton-modif-profil">
                 <a href="{{ path('app_profile_edit') }}">Éditer mon profil</a>
             </div>
         </div>
 
-        <div class="profil-infos">
+        <div class="infos-profil">
             <p><strong>Email :</strong> {{ user.email }}</p>
             <p><strong>Nom :</strong> {{ user.nom ?? 'Non renseigné' }}</p>
             <p><strong>Prénom :</strong> {{ user.prenom ?? 'Non renseigné' }}</p>
             <p><strong>Pseudo :</strong> {{ user.pseudo ?? 'Non renseigné' }}</p>
         </div>
 
-        <section class="section-terrains">
-            <div class="header-terrains">
+        <section class="bloc-annonces-profil">
+            <div class="entete-annonces-profil">
                 <h2>Mes annonces</h2>
-                <a href="{{ path('app_annonce_new') }}" class="lien-tous">Déposer une nouvelle annonce</a>
+  
             </div>
 
-            <div class="grid-terrains">
+            <div class="grille-annonces-profil">
                 {% if annonces is not empty %}
                     {% for annonce in annonces %}
-                        <div class="card-terrain">
-                            <a href="{{ path('annonce_show', {id: annonce.id}) }}" class="lien-carte-annonce">
-                                <div class="photo-terrain">
+                        <div class="carte-annonce-profil">
+                            <a href="{{ path('annonce_show', {id: annonce.id}) }}" class="lien-annonce-profil">
+                                <div class="visuel-annonce-profil">
                                     {% if annonce.photos|length > 0 %}
                                         <img src="{{ asset('uploads/annonces/' ~ annonce.photos|first.url) }}"
                                              alt="Photo de {{ annonce.titre }}"
                                              style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
                                     {% endif %}
                                 </div>
-                                <div class="info-terrain">
+                                <div class="details-annonce-profil">
                                     <p><strong>{{ annonce.ville }} – {{ annonce.commune }}</strong></p>
                                     <p>
                                         {% if annonce.superficie %}
@@ -58,10 +60,16 @@
                                 </div>
                             </a>
 
-                            <div class="actions-annonce">
-                                <a href="{{ path('app_annonce_edit', {id: annonce.id}) }}">Modifier</a>
-                                <a href="{{ path('app_annonce_delete', {id: annonce.id}) }}"
-                                   onclick="return confirm('Voulez-vous vraiment supprimer cette annonce ?');">Supprimer</a>
+                            <div class="actions-annonce-profil">
+                                <a href="{{ path('app_annonce_edit', {id: annonce.id}) }}" class="lien-modifier">Modifier</a>
+                                <form method="post" action="{{ path('app_annonce_delete', {id: annonce.id}) }}"
+                                      onsubmit="return confirm('Voulez-vous vraiment supprimer cette annonce ?');"
+                                      style="display:inline;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+                                    <button type="submit" class="bouton-supprimer">
+                                        Supprimer
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     {% endfor %}
@@ -75,22 +83,15 @@
         <p>Vous devez être connecté pour voir votre profil.</p>
     {% endif %}
 
-    <section class="section-suppression-compte">
-        <h2>Suppression de mon compte</h2>
-        <p>
-            Conformément au Règlement Général sur la Protection des Données (RGPD),
-            vous pouvez supprimer définitivement votre compte Ayitate et l’ensemble
-            de vos données personnelles.
-        </p>
-
+    <section class="bloc-suppression-compte">
         <form method="post" action="{{ path('app_user_delete') }}" 
-            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
             <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
-            <button type="submit" class="bouton-suppression">
+            <button type="submit" class="bouton-suppression-compte">
                 Supprimer mon compte
             </button>
         </form>
     </section>
 
-</div>
+</main>
 {% endblock %}

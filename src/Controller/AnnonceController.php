@@ -212,22 +212,28 @@ return new JsonResponse([
         }
 
     /*  Suppression d'une annonce */
-            #[Route('/annonce/{id}/delete', name: 'app_annonce_delete', methods: ['POST'])]
-            public function delete(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
-            {
-                if ($annonce->getUser() !== $this->getUser()) {
-                    $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette annonce.');
-                    return $this->redirectToRoute('app_profile');
-                }
+        #[Route('/annonce/{id}/delete', name: 'app_annonce_delete', methods: ['POST'])]
+        public function delete(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
+        {
+            $user = $this->getUser();
 
-                if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
-                    $entityManager->remove($annonce);
-                    $entityManager->flush();
-                    $this->addFlash('success', 'Annonce supprimée avec succès.');
-                }
 
+            if (!$user || $annonce->getUser() !== $user) {
+                $this->addFlash('danger', 'Vous n’êtes pas autorisé à supprimer cette annonce.');
                 return $this->redirectToRoute('app_profile');
             }
+
+            if (!$this->isCsrfTokenValid('delete' . $annonce->getId(), $request->request->get('_token'))) {
+                $this->addFlash('danger', 'Échec de la suppression (sécurité CSRF).');
+                return $this->redirectToRoute('app_profile');
+            }
+
+            $entityManager->remove($annonce);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre annonce a bien été supprimée.');
+            return $this->redirectToRoute('app_profile');
+        }
 
     // Les différentes vu de vente
 
@@ -278,5 +284,6 @@ return new JsonResponse([
                     'annonces' => $annonces,
                 ]);
             }
+
 
 }
