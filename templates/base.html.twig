@@ -102,22 +102,49 @@
     {% endif %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+(function() {
+  'use strict';
+  
+  function initMenu() {
     const toggleButton = document.querySelector('.burger-toggle');
     const userActions = document.querySelector('.user-actions');
     const mainNav = document.querySelector('.main-nav');
     const roleActions = document.querySelector('.role-actions');
 
-
-    if (toggleButton) {
-      toggleButton.addEventListener('click', function () {
-
-        userActions?.classList.toggle('open');
-        mainNav?.classList.toggle('open');
-        roleActions?.classList.toggle('open');
-      });
+    if (!toggleButton) {
+      console.error('Burger toggle not found');
+      return;
     }
-  });
+
+    console.log('Menu initialized');
+
+    toggleButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Burger clicked');
+      
+      const isOpen = userActions?.classList.contains('open');
+      
+      if (isOpen) {
+        userActions?.classList.remove('open');
+        mainNav?.classList.remove('open');
+        roleActions?.classList.remove('open');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      } else {
+        userActions?.classList.add('open');
+        mainNav?.classList.add('open');
+        roleActions?.classList.add('open');
+        toggleButton.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+
+  // Attendre que le DOM soit complètement chargé
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMenu);
+  } else {
+    initMenu();
+  }
+})();
 </script>
 
 </header>
