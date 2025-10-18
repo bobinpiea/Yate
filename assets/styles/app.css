@@ -3700,3 +3700,16 @@ textarea {
     padding: 10px 25px;
   }
 }
+
+
+
+/* Masquer les messages d'aide "est obligatoire" */
+.champ-form ul li {
+  display: none;
+}
+
+/* Ou plus ciblé si nécessaire */
+.section-obligatoire .champ-form ul,
+.section-facultatif .champ-form ul {
+  display: none;
+}

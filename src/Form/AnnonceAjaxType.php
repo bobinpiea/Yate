@@ -83,84 +83,88 @@ class AnnonceAjaxType extends AbstractType
             $details = $form->get('details');
 
             // Champs communs à toutes les annonces (obligatoires)
-            $details
-                ->add('titre', FormType\TextType::class, [
-                    'constraints' => [
-                        new NotBlank(['message' => 'Le titre est obligatoire.']),
-                        new Length([
-                            'min' => 5,
-                            'minMessage' => 'Le titre doit faire au moins {{ limit }} caractères.',
-                        ]),
-                    ],
-                    'attr' => [
-                        'data-obligatoire' => true,
-                        'placeholder' => 'Ex : Villa moderne avec piscine à Cocody',
-                    ],
-                ])
-                ->add('description', FormType\TextareaType::class, [
-                    'attr' => [
-                        'rows' => 6,
-                        'data-obligatoire' => true,
-                        'placeholder' => 'Décrivez le bien, ses caractéristiques, son environnement...'
-                    ],
-                    'constraints' => [
-                        new NotBlank(['message' => 'La description est obligatoire.']),
-                        new Length([
-                            'min' => 20,
-                            'minMessage' => 'La description doit faire au moins {{ limit }} caractères.',
-                        ]),
-                    ],
-                ])
-                ->add('ville', FormType\TextType::class, [
-                    'constraints' => [
-                        new NotBlank(['message' => 'La ville est obligatoire.']),
-                        new Length([
-                            'min' => 2,
-                            'minMessage' => 'Le nom de la ville doit faire au moins {{ limit }} caractères.',
-                        ]),
-                    ],
-                    'attr' => [
-                        'data-obligatoire' => true,
-                        'placeholder' => 'Ex: Abidjan',
-                    ],
-                ])
-                ->add('commune', FormType\TextType::class, [
-                    'constraints' => [
-                        new NotBlank(['message' => 'La commune est obligatoire.']),
-                        new Length([
-                            'min' => 2,
-                            'minMessage' => 'La commune doit faire au moins {{ limit }} caractères.',
-                        ]),
-                    ],
-                    'attr' => [
-                        'data-obligatoire' => true,
-                        'placeholder' => 'Ex: Cocody',
-                    ],
-                ])
-                ->add('prix', FormType\MoneyType::class, [
-                    'currency' => 'XOF',
-                    'constraints' => [
-                        new NotBlank(['message' => 'Le prix est obligatoire.']),
-                        new GreaterThan(['value' => 0, 'message' => 'Le prix doit être supérieur à 0 FCFA.']),
-                    ],
-                    'attr' => [
-                        'data-obligatoire' => true,
-                        'placeholder' => 'Ex: 12000000', 
-                    ],
-                ])
-
-                // --------------------------------------------------------------------
-                ->add('tel', FormType\TextType::class, [
-                    'constraints' => [
-                        new NotBlank(['message' => 'Le numéro de téléphone est obligatoire.']),
-                        new Length([
-                            'min' => 10, 
-                            'max' => 10,
-                            'exactMessage' => 'Le numéro doit faire exactement {{ limit }} caractères.'
-                        ])
-                    ],
-                    'attr' => ['placeholder' => 'Ex: 0622232253']
-                ]);
+$details
+    ->add('titre', FormType\TextType::class, [
+        'label' => 'Titre',
+        'constraints' => [
+            new NotBlank(['message' => 'Le titre est obligatoire.']),
+            new Length([
+                'min' => 5,
+                'minMessage' => 'Le titre doit faire au moins {{ limit }} caractères.',
+            ]),
+        ],
+        'attr' => [
+            'data-obligatoire' => true,
+            'placeholder' => 'Ex : Villa moderne avec piscine à Cocody',
+        ],
+    ])
+    ->add('description', FormType\TextareaType::class, [
+        'label' => 'Description',
+        'attr' => [
+            'rows' => 6,
+            'data-obligatoire' => true,
+            'placeholder' => 'Décrivez le bien, ses caractéristiques, son environnement...'
+        ],
+        'constraints' => [
+            new NotBlank(['message' => 'La description est obligatoire.']),
+            new Length([
+                'min' => 20,
+                'minMessage' => 'La description doit faire au moins {{ limit }} caractères.',
+            ]),
+        ],
+    ])
+    ->add('ville', FormType\TextType::class, [
+        'label' => 'Ville',
+        'constraints' => [
+            new NotBlank(['message' => 'La ville est obligatoire.']),
+            new Length([
+                'min' => 2,
+                'minMessage' => 'Le nom de la ville doit faire au moins {{ limit }} caractères.',
+            ]),
+        ],
+        'attr' => [
+            'data-obligatoire' => true,
+            'placeholder' => 'Ex: Abidjan',
+        ],
+    ])
+    ->add('commune', FormType\TextType::class, [
+        'label' => 'Commune',
+        'constraints' => [
+            new NotBlank(['message' => 'La commune est obligatoire.']),
+            new Length([
+                'min' => 2,
+                'minMessage' => 'La commune doit faire au moins {{ limit }} caractères.',
+            ]),
+        ],
+        'attr' => [
+            'data-obligatoire' => true,
+            'placeholder' => 'Ex: Cocody',
+        ],
+    ])
+    ->add('prix', FormType\MoneyType::class, [
+        'label' => 'Prix',
+        'currency' => 'XOF',
+        'constraints' => [
+            new NotBlank(['message' => 'Le prix est obligatoire.']),
+            new GreaterThan(['value' => 0, 'message' => 'Le prix doit être supérieur à 0 FCFA.']),
+        ],
+        'attr' => [
+            'data-obligatoire' => true,
+            'placeholder' => 'Ex: 12000000', 
+        ],
+    ])
+    ->add('tel', FormType\TextType::class, [
+        'label' => 'Téléphone',
+        'constraints' => [
+            new NotBlank(['message' => 'Le numéro de téléphone est obligatoire.']),
+            new Length([
+                'min' => 10, 
+                'max' => 10,
+                'exactMessage' => 'Le numéro doit faire exactement {{ limit }} caractères.'
+            ])
+        ],
+        'attr' => ['placeholder' => 'Ex: 0622232253']
+    ]);
 
                     
 

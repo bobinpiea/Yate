@@ -1,5 +1,43 @@
 {% if form is defined %}
-  {% for champ in form %}
-    {{ form_row(champ) }}
-  {% endfor %}
+  <div class="section-obligatoire">
+    <h3>Champs obligatoires</h3>
+    {% for champ in form %}
+      {% if champ.vars.attr['data-obligatoire'] is defined or champ.vars.name == 'tel' %}
+        <div class="champ-form">
+          {{ form_label(champ) }}
+          {{ form_widget(champ, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(champ) }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="section-facultatif">
+    <h3>Champs facultatifs</h3>
+    {% for champ in form %}
+      {% if champ.vars.attr['data-obligatoire'] is not defined 
+         and champ.vars.name != 'tel'
+         and 'checkbox' not in champ.vars.block_prefixes %}
+        <div class="champ-form">
+          {{ form_label(champ) }}
+          {{ form_widget(champ, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(champ) }}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% set checkboxes = form|filter(champ => champ.vars.attr['data-obligatoire'] is not defined
+                                          and 'checkbox' in champ.vars.block_prefixes) %}
+    {% if checkboxes is not empty %}
+      <h4>Équipements et caractéristiques</h4>
+      <div class="equipements-grid">
+        {% for champ in checkboxes %}
+          <div class="equipement-item">
+            {{ form_widget(champ) }}
+            {{ form_label(champ) }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
 {% endif %}
