@@ -1356,6 +1356,245 @@ em {
   text-align: center;
 }
 
+
+/***************************************
+ * 📱 RESPONSIVE — TABLETTE & MOBILE
+ ***************************************/
+/* === MOBILE : max 767px === */
+@media (max-width: 767px) {
+
+  /* === SECTION ACCUEIL === */
+  .conteneur-accueil {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .texte-accueil {
+    text-align: center;
+  }
+
+  .titre-accueil {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .sous-titre-accueil {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .liste-chiffres {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* === SECTION VILLES === */
+  .conteneur-villes {
+    padding: 1.5rem;
+  }
+
+  .grille-villes {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .carte-ville {
+    padding: 1.2rem;
+  }
+
+  /* === SECTION TERRAINS / APPARTEMENTS / COLOC === */
+  .header-terrains {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .grid-terrains {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .card-terrain {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  .photo-terrain {
+    height: 10rem;
+  }
+
+  /* === SECTION PUBLICATION === */
+  .contenu-publication {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .titre-publication {
+    font-size: 1.4rem;
+  }
+
+  .bouton-publication {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* === SECTION FORUM === */
+  .section-forum .contenu-forum {
+    padding: 2rem 1.2rem;
+  }
+
+  .section-forum .avantages-forum {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .section-forum .action-forum {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.5rem;
+  }
+
+  .section-forum .bouton-forum {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .section-forum .info-forum {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  /* === SECTION BLOG === */
+  .grille-categorie {
+    display: block !important;           /* pleine largeur */
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .grille-categorie .carte-article {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 12px;                 /* joli rayon si tu veux */
+  }
+
+  /* On garde uniquement le 1er article visible sur mobile */
+  .grille-categorie .carte-article:nth-child(n+2) {
+    display: none !important;
+  }
+
+  .entete-categorie {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .lien-categorie-header {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+}
+/* === TABLETTE : entre 768px et 1023px === */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  /* === SECTION ACCUEIL === */
+  .conteneur-accueil {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .texte-accueil {
+    text-align: center;
+  }
+
+  .titre-accueil {
+    font-size: 2.2rem;
+  }
+
+  .sous-titre-accueil {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .liste-chiffres {
+    justify-content: center;
+  }
+
+  /* === SECTION VILLES === */
+  .grille-villes {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .carte-ville {
+    padding: 1.5rem;
+  }
+
+  /* === SECTION TERRAINS === */
+  .header-terrains {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .grid-terrains {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .photo-terrain {
+    height: 11rem;
+  }
+
+  /* === SECTION PUBLICATION === */
+  .contenu-publication {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .bouton-publication {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+
+  /* === SECTION FORUM === */
+  .section-forum .contenu-forum {
+    padding: 2.5rem;
+  }
+
+  .section-forum .avantages-forum {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .section-forum .bouton-forum {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  /* === SECTION BLOG === */
+  .grille-categorie {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    justify-items: center;
+  }
+
+  /* On garde seulement 2 articles visibles */
+  .grille-categorie .carte-article:nth-child(n+3) {
+    display: none;
+  }
+
+  .carte-article {
+    max-width: 22rem;
+  }
+}
+
   /*-----------------------------------------------------------------------------------------------------------------------------------------------*/
                                                        /* ========== FORMULAIRE DE CONNEXION : LOG IN ==========*/ 
 
@@ -3205,5 +3444,259 @@ textarea {
 }
 
   /*-----------------------------------------------------------------------------------------------------------------------------------------------*/
-                                             /****************  DEPOSER UNE ANNONCE   ****************/
+                                             /****************  PROFIL UTILISATEUR  *******. RESPONSIVE OK   *********/ 
 
+       
+ /* ---------------------------------------------------
+   PAGE PROFIL — STYLE COMPLET ISOLÉ
+   (aucune interférence avec les autres pages)
+--------------------------------------------------- */
+
+.bloc-profil {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  color: #111827;
+}
+
+/* ---------- EN-TÊTE DU PROFIL ---------- */
+
+.entete-profil {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.photo-profil img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.image-defaut {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.titre-profil {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bouton-modif-profil a {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid #2563eb; /* même bordure en permanence */
+}
+
+.bouton-modif-profil a:hover {
+  background-color: #fff;
+  color: #2563eb;
+  border: 2px solid #2563eb; /* identique, rien ne bouge */
+}
+
+/* ---------- INFORMATIONS UTILISATEUR ---------- */
+
+.infos-profil {
+  margin-bottom: 40px;
+}
+
+.infos-profil p {
+  margin: 6px 0;
+}
+
+/* ---------- ANNONCES DU PROFIL ---------- */
+
+.bloc-annonces-profil {
+  margin-top: 40px;
+}
+
+.entete-annonces-profil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lien-ajout-annonce {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.lien-ajout-annonce:hover {
+  background-color: #1d4ed8;
+}
+
+/* ---------- GRILLE DES ANNONCES ---------- */
+
+.grille-annonces-profil {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.carte-annonce-profil {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.carte-annonce-profil:hover {
+  transform: none; 
+}
+
+.visuel-annonce-profil {
+  background-color: #e5e7eb;
+  height: 220px;
+}
+
+.details-annonce-profil {
+  padding: 15px;
+}
+
+.details-annonce-profil p {
+  margin: 6px 0;
+  color: #111827;
+}
+
+.actions-annonce-profil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 15px;
+}
+
+.actions-annonce-profil a,
+.actions-annonce-profil button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #111827;
+  transition: color 0.3s ease;
+}
+
+.actions-annonce-profil .lien-modifier:hover {
+  color: #2563eb;
+}
+
+.actions-annonce-profil .bouton-supprimer:hover {
+  color: #dc2626;
+}
+
+/* ---------- BOUTONS DU PROFIL ---------- */
+
+/* bouton Éditer mon profil → principal */
+.bouton-modif-profil a {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.bouton-modif-profil a:hover {
+  background-color: #fff;
+  color: #2563eb;
+  border: 2px solid #2563eb;
+}
+
+/* bouton Déposer une nouvelle annonce → secondaire */
+.lien-ajout-annonce {
+  background-color: transparent;
+  color: #2563eb;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.lien-ajout-annonce:hover {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+/* ---------- SUPPRESSION DU COMPTE ---------- */
+
+.bloc-suppression-compte {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.bouton-suppression-compte {
+  color: #dc2626;
+  background-color: transparent;
+  border: 2px solid #dc2626;
+  padding: 12px 35px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bouton-suppression-compte:hover {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+
+@media (max-width: 768px) {
+  .entete-profil {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .photo-profil img,
+  .image-defaut {
+    margin-bottom: 10px;
+  }
+
+  .grille-annonces-profil {
+    grid-template-columns: 1fr;
+  }
+
+  .actions-annonce-profil {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bouton-suppression-compte {
+    padding: 10px 25px;
+  }
+}
