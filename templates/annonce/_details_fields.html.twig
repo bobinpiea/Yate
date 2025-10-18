@@ -1,43 +1,72 @@
 {% if form is defined %}
-  <div class="section-obligatoire">
-    <h3>Champs obligatoires</h3>
-    {% for champ in form %}
-      {% if champ.vars.attr['data-obligatoire'] is defined or champ.vars.name == 'tel' %}
-        <div class="champ-form">
-          {{ form_label(champ) }}
-          {{ form_widget(champ, {'attr': {'class': 'form-control'}}) }}
-          {{ form_errors(champ) }}
-        </div>
-      {% endif %}
-    {% endfor %}
-  </div>
+  <section class="sous-formulaire-annonce">
 
-  <div class="section-facultatif">
-    <h3>Champs facultatifs</h3>
-    {% for champ in form %}
-      {% if champ.vars.attr['data-obligatoire'] is not defined 
-         and champ.vars.name != 'tel'
-         and 'checkbox' not in champ.vars.block_prefixes %}
-        <div class="champ-form">
-          {{ form_label(champ) }}
-          {{ form_widget(champ, {'attr': {'class': 'form-control'}}) }}
-          {{ form_errors(champ) }}
-        </div>
-      {% endif %}
-    {% endfor %}
+    {# BLOC 1 : CHAMPS OBLIGATOIRES #}
+    <section class="bloc-obligatoire">
+      <h2 class="titre-bloc">Informations obligatoires</h2>
 
-    {% set checkboxes = form|filter(champ => champ.vars.attr['data-obligatoire'] is not defined
-                                          and 'checkbox' in champ.vars.block_prefixes) %}
-    {% if checkboxes is not empty %}
-      <h4>Équipements et caractéristiques</h4>
-      <div class="equipements-grid">
-        {% for champ in checkboxes %}
-          <div class="equipement-item">
-            {{ form_widget(champ) }}
-            {{ form_label(champ) }}
-          </div>
+      <div class="zone-obligatoire">
+        {% for champ in form %}
+          {% if champ.vars.name != 'photosUpload' 
+                and (champ.vars.attr['data-obligatoire'] is defined or champ.vars.name == 'tel') %}
+            <div class="champ-annonce">
+              {{ form_label(champ) }}
+              {{ form_widget(champ) }}
+              {% if form_errors(champ) %}
+                <div class="message-erreur">{{ form_errors(champ) }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
-    {% endif %}
-  </div>
+    </section>
+
+    {# BLOC 2 : CHAMPS FACULTATIFS #}
+    <section class="bloc-optionnel">
+      <h2 class="titre-bloc">Informations facultatives</h2>
+
+      <section class="zone-facultative-champs">
+        <h3 class="sous-titre-facultatif">Détails complémentaires</h3>
+
+        {% for champ in form %}
+          {% if champ.vars.name != 'photosUpload'
+                and champ.vars.name != 'tel'
+                and champ.vars.attr['data-obligatoire'] is not defined
+                and 'checkbox' not in champ.vars.block_prefixes %}
+            <div class="champ-annonce">
+              {{ form_label(champ) }}
+              {{ form_widget(champ) }}
+              {% if form_errors(champ) %}
+                <div class="message-erreur">{{ form_errors(champ) }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </section>
+
+      {# BLOC CHECKBOXES FACULTATIFS #}
+      {% set checkboxes = form|filter(champ => champ.vars.name != 'photosUpload'
+                                            and champ.vars.attr['data-obligatoire'] is not defined
+                                            and 'checkbox' in champ.vars.block_prefixes) %}
+      {% if checkboxes is not empty %}
+        <section class="zone-facultative-checkbox">
+          <h3 class="sous-titre-facultatif">Équipements et caractéristiques</h3>
+          <p class="aide-checkbox">Cochez les éléments présents dans votre bien :</p>
+
+          <div class="grille-checkbox">
+            {% for champ in checkboxes %}
+              <div class="champ-checkbox">
+                {{ form_widget(champ) }}
+                {{ form_label(champ) }}
+                {% if form_errors(champ) %}
+                  <div class="message-erreur">{{ form_errors(champ) }}</div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    </section>
+
+  </section>
 {% endif %}
