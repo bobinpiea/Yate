@@ -215,6 +215,8 @@ header {
   text-decoration: underline; 
 }
 
+
+
 /* ===== RESPONSIVE ===== */
 
 /* Desktop : cacher le burger */
@@ -410,6 +412,13 @@ header {
     padding: 0.7rem 1rem;
     font-size: 0.95rem;
   }
+
+  /* HOOVER*/
+
+.forum:hover {
+color: white !important;
+}
+
 }
   /*-----------------------------------------------------------------------------------------------------------------------------------------------*/  
                                                          /****** FOOTER ******/
