@@ -134,7 +134,8 @@ header {
   transition: all 0.3s ease;
 }
 .user-actions li.forum a:hover {
-  background: #1556e4;
+  background: #1651cf;
+  color: white;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
@@ -164,7 +165,8 @@ header {
   transition: all 0.3s ease;
 }
 .user-actions li.inscription a:hover {
-  background: #184ddf;
+  background: #1651cf;
+  color: white;
 }
 
 /* ===== 3. Navigation principale ===== */
@@ -421,6 +423,40 @@ color: white !important;
 }
 
 }
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+
+@media (max-width: 1024px) {
+  /* Favoris et Messages boutons style carte */
+  .user-actions.open ul li:not(.forum):not(.connexion):not(.inscription) a {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    color: #374151;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+
+  .user-actions.open ul li:not(.forum):not(.connexion):not(.inscription) a:hover {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+  }
+}
+
+/* Si tu veux adapter aussi pour <768px ou <480px, adapte le padding et font-size comme pour .main-nav.open */
+@media (max-width: 480px) {
+  .user-actions.open ul li:not(.forum):not(.connexion):not(.inscription) a {
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+
   /*-----------------------------------------------------------------------------------------------------------------------------------------------*/  
                                                          /****** FOOTER ******/
 

@@ -39,6 +39,7 @@ class AnnonceController extends AbstractController
             $form->handleRequest($request); 
 
             if ($form->isSubmitted() && $form->isValid()) {
+                
                 $donneesAnnonce = $form->get('details')->getData();
                 
                 $annonce = new Annonce();
@@ -67,8 +68,8 @@ class AnnonceController extends AbstractController
                     ]);
                 }
 
-                if (count($photos) > 10) {
-                    $this->addFlash('danger', 'Vous ne pouvez pas ajouter plus de 10 photos.');
+                if (count($photos) > 3) {
+                    $this->addFlash('danger', 'Vous ne pouvez pas ajouter plus de 3 photos.');
                     return $this->render('annonce/new.html.twig', [
                         'form' => $form->createView(),
                     ]);
@@ -100,30 +101,30 @@ class AnnonceController extends AbstractController
         }
 
 
-#[Route('/annonce/new/preview', name: 'annonce_preview', methods: ['POST'])]
-public function previewAnnonce(Request $request, EntityManagerInterface $entityManager): JsonResponse
-{
-    $form = $this->createForm(AnnonceAjaxType::class, null, [
-        'method' => 'POST',
-        'entityManager' => $entityManager,
-    ]);
+        #[Route('/annonce/new/preview', name: 'annonce_preview', methods: ['POST'])]
+        public function previewAnnonce(Request $request, EntityManagerInterface $entityManager): JsonResponse
+        {
+            $form = $this->createForm(AnnonceAjaxType::class, null, [
+                'method' => 'POST',
+                'entityManager' => $entityManager,
+            ]);
 
-    $form->handleRequest($request);
+            $form->handleRequest($request);
 
-    if (!$form->isSubmitted()) {
-        $donnees = $request->request->all();
-        $nomForm = $form->getName();
-        $form->submit($donnees[$nomForm] ?? $donnees);
-    }
-    
-    $partial = $form->get('details');
+            if (!$form->isSubmitted()) {
+                $donnees = $request->request->all();
+                $nomForm = $form->getName();
+                $form->submit($donnees[$nomForm] ?? $donnees);
+            }
+            
+            $partial = $form->get('details');
 
-return new JsonResponse([
-    'form' => $this->renderView('annonce/_details_fields.html.twig', [
-        'form' => $partial->createView(),
-    ]),
-]);
-}
+        return new JsonResponse([
+            'form' => $this->renderView('annonce/_details_fields.html.twig', [
+                'form' => $partial->createView(),
+            ]),
+        ]);
+        }
  
 
     private function generateUniqueReference(EntityManagerInterface $entityManager): string
