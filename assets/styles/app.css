@@ -9,12 +9,14 @@
         box-sizing: border-box;
       }
 
-    /* Style global des pages */
+ 
       body {
           background-color: white;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+          font-family: -apple-system,
+          BlinkMacSystemFont, 
+          "Segoe UI", Arial, 
+          sans-serif;
           color: black;
-          /*  !!!!!!!!!! REVOIR LA POLICE DU SITE   */
       }
 
 

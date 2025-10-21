@@ -1,4 +1,4 @@
-security:
+security: #  OWASP, ANSSI et CNIL
     # Hiérarchie des rôles
     role_hierarchy:
         ROLE_AUTEUR: ROLE_USER
@@ -6,7 +6,7 @@ security:
         ROLE_ADMIN: [ROLE_MODERATEUR, ROLE_AUTEUR, ROLE_USER]
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto' # Algo de Hashage : bcrypt ou argon2id
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -19,6 +19,8 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            # Le firewall principal protège l'ensemble des routes
+            # Délègue l'authentification à la classe UserAuthenticator
             lazy: true
             provider: app_user_provider
             logout:
@@ -33,6 +35,8 @@ security:
                 always_remember_me: true
             custom_authenticator: App\Security\UserAuthenticator
 
+            # Protection attaques par force brute
+            # Le rate limiting bloque après 5 échecs en 1 minute
             login_throttling:
                 max_attempts: 5 
                 interval: '1 minute'
