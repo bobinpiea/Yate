@@ -143,11 +143,7 @@ class Annonce
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'annoncesCertifiees')]
     private Collection $certificateurs;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'annoncesFavorites')]
-    private Collection $users;
+
 
     /**
      * @var Collection<int, Echanger>
@@ -164,14 +160,25 @@ class Annonce
     #[ORM\Column(type: 'string', length: 15)]
     private ?string $Tel = null;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris')]
+    private Collection $users;
+
+  
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
         $this->photos = new ArrayCollection();
         $this->certificateurs = new ArrayCollection();
-        $this->users = new ArrayCollection();
+        
         $this->messages = new ArrayCollection();
         $this->signalements = new ArrayCollection();
+        $this->users = new ArrayCollection();
+
+
     }
 
     public function getId(): ?int
@@ -665,32 +672,10 @@ class Annonce
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
 
-    public function addUser(User $user): static
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addAnnoncesFavorite($this);
-        }
 
-        return $this;
-    }
 
-    public function removeUser(User $user): static
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeAnnoncesFavorite($this);
-        }
 
-        return $this;
-    }
 
     /**
      * @return Collection<int, Echanger>
@@ -763,4 +748,33 @@ class Annonce
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavori($this);
+        }
+
+        return $this;
+    }
+
+
 }

@@ -5,8 +5,9 @@
 {% block body %}
 
 <main class="page-conversation" aria-labelledby="titre-conversation">
+<div id="conteneur-padding">
 
-  <section class="entete-conversation">
+    <section class="entete-conversation">
     <h1 id="titre-conversation">
       Conversation à propos de :
       <span class="titre-annonce">{{ annonce.titre ?? 'Annonce supprimée' }}</span>
@@ -38,6 +39,10 @@
       {{ form_widget(form.message, {'attr': {'placeholder': 'Écrivez votre message...'}}) }}
     {{ form_end(form) }}
   </section>
+  
+</div>
+ 
+
 
 </main>
 

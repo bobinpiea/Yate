@@ -59,7 +59,7 @@ class AnnonceAjaxType extends AbstractType
                 'constraints' => [
                     new Count([
                         'min' => 1,
-                        'max' => 10,
+                        'max' => 3,
                         'minMessage' => 'Veuillez ajouter au moins 1 photo',
                         'maxMessage' => 'Veuillez ne pas dépasser la limite de {{ limit }} photos.'
                     ]),

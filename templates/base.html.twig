@@ -51,7 +51,7 @@
     
                 {% if app.user is defined and app.user %}
                     <li class="connexion">
-                        <a href="{{ path('app_profile') }}">Mon profil</a>
+                        <a href="{{ path('app_profile') }}"> {{app.user.email}}</a>
                     </li>
                     <li class="inscription">
                         <a href="{{ path('app_logout') }}">Déconnexion</a>

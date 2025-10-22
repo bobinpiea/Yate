@@ -18,7 +18,7 @@ final class ProfileController extends AbstractController
             #[Route('/profile', name: 'app_profile')]
         public function show(): Response
         {
-            $user = $this->getUser();
+            $user = $this->getUser(); 
 
             if (!$user) {
                 return $this->redirectToRoute('app_login');
@@ -27,6 +27,7 @@ final class ProfileController extends AbstractController
             return $this->render('profile/show.html.twig', [
                 'user' => $user,
                 'annonces' => $user->getAnnonces(), // A VERIFIER
+                'favoris' =>$user->getFavoris(),
             ]);
         }
 

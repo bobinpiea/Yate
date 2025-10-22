@@ -67,14 +67,12 @@ class AnnonceController extends AbstractController
                         'form' => $form->createView(),
                     ]);
                 }
-
                 if (count($photos) > 3) {
                     $this->addFlash('danger', 'Vous ne pouvez pas ajouter plus de 3 photos.');
                     return $this->render('annonce/new.html.twig', [
                         'form' => $form->createView(),
                     ]);
                 }
-
                 foreach ($photos as $photo) {
                     if ($photo && $photo->isValid()) {
                         $nomFichier = $pictureService->add($photo, 'annonces');
@@ -86,7 +84,6 @@ class AnnonceController extends AbstractController
                         $entityManager->persist($image);
                     }
                 }
-
                 $entityManager->persist($annonce);
                 $entityManager->flush();
 
@@ -185,7 +182,7 @@ class AnnonceController extends AbstractController
             ]);
         }
 
-    /* Modification une annonce */
+    /* Modification une annonce  à corriger */
         #[Route('/annonce/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
         public function edit(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
         {

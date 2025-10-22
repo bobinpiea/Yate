@@ -7,6 +7,8 @@
     {% if user %}
     
          <h1 class="titre-profil">Mon profil</h1>
+
+         
          
         <div class="entete-profil">
             <div class="photo-profil">
@@ -77,7 +79,27 @@
                     <p>Vous n’avez pas encore publié d’annonce.</p>
                 {% endif %}
             </div>
+
+                        <div class="grille-annonces-profil">
+                {% if favoris is not empty %}
+                    {% for fav in favoris %}
+                        <div class="carte-annonce-profil">
+                          <a href="{{ path('annonce_show', {id: fav.id}) }}" class="lien-annonce-profil">
+                              
+                            {{fav.reference}}
+       
+                            </a>
+
+                           
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Vous n’avez pas encore de favoris.</p>
+                {% endif %}
+            </div>
         </section>
+
+
 
     {% else %}
         <p>Vous devez être connecté pour voir votre profil.</p>

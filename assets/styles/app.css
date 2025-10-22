@@ -1,3 +1,7 @@
+
+#conteneur-padding {padding : 10em;
+}
+
 /* ========== COMMUN A TOUTES LES PAGES ========== */
 
   /****** Reset *****/
@@ -4346,3 +4350,6 @@ textarea {
     font-size: 0.95rem;
   }
 } 
+
+/*/
+

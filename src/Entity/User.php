@@ -107,17 +107,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'certificateurs')]
     private Collection $annoncesCertifiees;
 
-    /**
-     * @var Collection<int, Annonce>
-     */
-    #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'users')]
-    #[ORM\JoinTable(name: 'user_annonce_favorite')]
-    private Collection $annoncesFavorites;
-
+ 
     /**
      * @var Collection<int, Echanger>
      */
     #[ORM\OneToMany(targetEntity: Echanger::class, mappedBy: 'expediteur')]
+    
     private Collection $messagesEnvoyes;
 
     /**
@@ -132,6 +127,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
     #[ORM\OneToMany(targetEntity: Signalement::class, mappedBy: 'auteur')]
     private Collection $signalements;
 
+    /**
+     * @var Collection<int, Annonce>
+     */
+    #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'users')]
+    private Collection $favoris;
+
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
@@ -140,10 +142,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
         $this->categories = new ArrayCollection();
         $this->annonces = new ArrayCollection();
         $this->annoncesCertifiees = new ArrayCollection();
-        $this->annoncesFavorites = new ArrayCollection();
+ 
         $this->messagesEnvoyes = new ArrayCollection();
         $this->messagesRecus = new ArrayCollection();
         $this->signalements = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
+  
     }
 
     // Getter pour récupérer lid de l'utilisateur (Clé primaire)
@@ -451,29 +455,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
         return $this;
     }
 
-    /**
-     * @return Collection<int, Annonce>
-     */
-    public function getAnnoncesFavorites(): Collection
-    {
-        return $this->annoncesFavorites;
-    }
 
-    public function addAnnoncesFavorite(Annonce $annoncesFavorite): static
-    {
-        if (!$this->annoncesFavorites->contains($annoncesFavorite)) {
-            $this->annoncesFavorites->add($annoncesFavorite);
-        }
 
-        return $this;
-    }
 
-    public function removeAnnoncesFavorite(Annonce $annoncesFavorite): static
-    {
-        $this->annoncesFavorites->removeElement($annoncesFavorite);
-
-        return $this;
-    }
+ 
 
     /**
      * @return Collection<int, Echanger>
@@ -564,4 +549,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface // Décl
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Annonce>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Annonce $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Annonce $favori): static
+    {
+        $this->favoris->removeElement($favori);
+
+        return $this;
+    }
+
 }
