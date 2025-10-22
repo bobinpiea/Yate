@@ -51,7 +51,15 @@
     
                 {% if app.user is defined and app.user %}
                     <li class="connexion">
-                        <a href="{{ path('app_profile') }}"> {{app.user.email}}</a>
+                        <a href="{{ path('app_profile') }}"> 
+                            {% if app.user.pseudo is not empty %}
+                                {{ app.user.pseudo }}
+                            {% elseif app.user.prenom is not empty or app.user.nom is not empty %}
+                                {{ app.user.prenom }} {{ app.user.nom }}
+                            {% else %}
+                                {{ app.user.email }}
+                            {% endif %}                       
+                        </a>
                     </li>
                     <li class="inscription">
                         <a href="{{ path('app_logout') }}">Déconnexion</a>
