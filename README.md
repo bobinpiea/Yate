@@ -1,3 +1,28 @@
+🗂️ Structure du projet
+
+ayitate/
+│
+├── assets/                # Fichiers front-end
+├── config/                # Configuration du projet
+├── migrations/            # Migrations Doctrine
+├── public/                # Point d'entrée (index.php, assets compilés)
+├── src/                   # Code source Symfony
+│   ├── Controller/
+│   ├── Entity/
+│   ├── Form/
+│   ├── Repository/
+│   └── Service/
+│
+├── templates/             # Templates Twig
+│   ├── annonce/
+│   ├── profile/
+│   ├── blog/
+│   ├── forum/
+│   └── base.html.twig
+│
+└── README.md
+
+
 🏠 Ayitate – Plateforme immobilière
 
 Ayitate est une plateforme web immobilière développée avec Symfony permettant aux utilisateurs d’acheter, louer ou partager des biens immobiliers en Côte d’Ivoire.
@@ -16,7 +41,7 @@ Elle vise à digitaliser les interactions immobilières tout en respectant les n
 
 🏡 Module immobilier
 	•	Création, publication et gestion d’annonces (achat, location, colocation)
-	•	Upload multiple de photos (jusqu’à 5 images par annonce)
+	•	Upload multiple de photos (jusqu’à 3 images par annonce actuellement)
 	•	Champs dynamiques selon la nature du bien (maison, appartement, terrain)
 	•	Validation Symfony avec contraintes personnalisées
 	•	Interface claire et responsive pour publier une annonce en 3 étapes
@@ -74,7 +99,7 @@ PictureService - Upload, redimensionnement et conversion d’images .webp
 🔧 Installation
 
 1️⃣ Prérequis
-	•	PHP 8.2+
+  	•	Symfony  
 	•	Composer
 	•	MySQL
 
