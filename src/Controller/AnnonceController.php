@@ -283,5 +283,39 @@ class AnnonceController extends AbstractController
                 ]);
             }
 
+    // Ajouter et Retirer un favori
+        #[Route('/annonce/favori/{id}', name: 'app_annonce_favori')]
+        public function ajouterFavori(
+        Annonce $annonce, EntityManagerInterface $entityManager ): Response {
+
+            $user = $this->getUser();
+            if (!$user) {
+                $this->addFlash('error', 'Veuillez vous connecter pour ajouter une annonce en favori.');
+                return $this->redirectToRoute('app_login');
+            }
+
+            if ($annonce->getUser() === $user) {
+                $this->addFlash('error', 'Vous ne pouvez pas rajouter votre annonce en favori');
+                return $this->redirectToRoute('annonce_show', ['id' => $annonce->getId()]);
+            }
+
+            if ($user->getFavoris()->contains($annonce)) {
+
+                $user->removeFavori($annonce);
+                $message = 'Annonce retirée de vos favoris.';
+            } else {
+
+                $user->addFavori($annonce);
+                $message = 'Annonce ajoutée à vos favoris.';
+            }
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', $message);
+
+            return $this->redirectToRoute('annonce_show', ['id' => $annonce->getId()]);
+        }
+
 
 }

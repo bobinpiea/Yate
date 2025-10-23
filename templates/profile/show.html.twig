@@ -15,7 +15,7 @@
                 {% if user.avatar %}
                     <img src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo ?? user.email }}">
                 {% else %}
-                    <span class="image-defaut">Pas encore défini</span>
+                    <span class="image-defaut">A faire</span>
                 {% endif %}
             </div>
 
@@ -80,7 +80,7 @@
                 {% endif %}
             </div>
 
-                        <div class="grille-annonces-profil">
+            <div class="grille-annonces-profil">
                 {% if favoris is not empty %}
                     {% for fav in favoris %}
                         <div class="carte-annonce-profil">
@@ -97,6 +97,8 @@
                     <p>Vous n’avez pas encore de favoris.</p>
                 {% endif %}
             </div>
+
+            
         </section>
 
 

@@ -72,9 +72,9 @@ final class ProfileController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete_account', $request->request->get('_token'))) {
 
-            //  Déconnexion propre avant suppression
+            //  Déconnexion avant suppression
             $tokenStorage->setToken(null); //  supprime l’utilisateur 
-            $requestStack->getSession()->invalidate(); //détruit la session (cookies inclus).
+            $requestStack->getSession()->invalidate(); //détruit la session
 
             // Suppression de l’utilisateur
             $entityManager->remove($user);

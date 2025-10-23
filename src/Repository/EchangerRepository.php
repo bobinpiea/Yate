@@ -98,5 +98,24 @@ class EchangerRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function isUserInConversation(int $userId, int $annonceId, int $autreId): bool
+    {
+        $result = $this->createQueryBuilder('m')
+            ->select('COUNT(m.id)')
+            ->where('m.annonce = :annonceId')
+            ->andWhere('
+                (m.expediteur = :userId AND m.destinataire = :autreId)
+                OR
+                (m.expediteur = :autreId AND m.destinataire = :userId)
+            ')
+            ->setParameter('annonceId', $annonceId)
+            ->setParameter('userId', $userId)
+            ->setParameter('autreId', $autreId)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $result > 0;
+    }
+
 
 }

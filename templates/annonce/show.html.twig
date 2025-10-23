@@ -122,7 +122,19 @@
                     <button class="btn-contact">
                         <a href="{{ path('app_message_envoyer', { id: annonce.id }) }}">Contacter</a>
                     </button>
-                    <button class="btn-sauvegarde">Sauvegarder</button>
+                        {% if app.user and app.user != annonce.user %}
+                            <button class="btn-sauvegarde">
+                                {% if app.user and app.user != annonce.user %}
+                                    <a href="{{ path('app_annonce_favori', { id: annonce.id }) }}" class="btn-sauvegarde">
+                                        {% if app.user.getFavoris().contains(annonce) %}
+                                            Retirer des favoris
+                                        {% else %}
+                                            Sauvegarder
+                                        {% endif %}
+                                    </a>
+                                {% endif %}
+                            </button>
+                        {% endif %}
                     <button class="btn-partager">Partager</button>
                 </div>
             </div>

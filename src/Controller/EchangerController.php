@@ -73,22 +73,29 @@ class EchangerController extends AbstractController
 
     //  Pour voir une conversation complète par annonce + expéditeur et avoir un fil 
         #[Route('/conversation/{annonceId}/{expediteurId}', name: 'app_message_conversation', methods: ['GET', 'POST'])]
-        public function voirConversation(
-            int $annonceId, int $expediteurId,
-            EchangerRepository $echangerRepository, EntityManagerInterface $entityManager,
-            Request $request ): Response 
-        {
+        public function voirConversation( int $annonceId,  int $expediteurId,
+            EchangerRepository $echangerRepository, EntityManagerInterface $entityManager, Request $request ): Response {
             $user = $this->getUser();
+
             if (!$user) {
-                $this->addFlash('error', 'Vous devez être connecté pour accéder à cette conversation.');
+                $this->addFlash('error', 'Veuillez vous connecter');
                 return $this->redirectToRoute('app_login');
             }
 
-
-            $messages = $echangerRepository->findConversationMessages($annonceId, $user->getId(), $expediteurId);
-
             $annonce = $entityManager->getRepository(Annonce::class)->find($annonceId);
             $autreUtilisateur = $entityManager->getRepository(User::class)->find($expediteurId);
+
+            if (!$annonce || !$autreUtilisateur) {
+                throw $this->createNotFoundException('Conversation introuvable.');
+            }
+
+            $estParticipant = $echangerRepository->isUserInConversation($user->getId(), $annonceId, $expediteurId);
+            if (!$estParticipant) {
+                $this->addFlash('error', 'Cette action ne vous est pas autorisée..');
+                return $this->redirectToRoute('app_profile');
+            }
+        
+            $messages = $echangerRepository->findConversationMessages($annonceId, $user->getId(), $expediteurId);
 
 
             $nouveauMessage = new Echanger();
@@ -96,7 +103,6 @@ class EchangerController extends AbstractController
             $nouveauMessage->setExpediteur($user);
             $nouveauMessage->setDestinataire($autreUtilisateur);
             $nouveauMessage->setDateEnvoi(new \DateTime());
-
 
             $form = $this->createForm(EchangerType::class, $nouveauMessage);
             $form->handleRequest($request);
@@ -118,5 +124,5 @@ class EchangerController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
-        
+
 }
