@@ -21,6 +21,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AnnonceController extends AbstractController
 {
 
+    /** PENSER A FAIRE UN SERVICE POUR SANETISER POUT LES ENTRANTS */
+
+
     /*
      * Méthode qui affiche et gère le formulaire de création d'une annonce nouvelle
      */
@@ -84,6 +87,9 @@ class AnnonceController extends AbstractController
                         $entityManager->persist($image);
                     }
                 }
+
+
+                
                 $entityManager->persist($annonce);
                 $entityManager->flush();
 

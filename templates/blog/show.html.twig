@@ -32,7 +32,7 @@
         </em></p>
 
         <div class="contenu">
-            {{ blog.article|raw }}
+            {{ blog.article|e|nl2br }}
         </div>
 
         {% if blog.url %}

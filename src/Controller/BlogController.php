@@ -29,7 +29,7 @@ final class BlogController extends AbstractController // Final car on ne pourra 
         /* PAGE : CONSEIL D'EXPERT - ( Elle sera publique ) */
             
             //  Cette méthode affichera tous les articles de la catégorie expertise
-                    #[Route('/conseil_expert', name: 'conseil_expert')] // = 2 arguments minimaux 
+                    #[Route('/conseil_expert', name: 'conseil_expert')] 
                 public function showExpertArticles(BlogRepository $blogRepository): Response
                 {
                     // On récupère les articles dont la catégorie est "expertise"
@@ -63,26 +63,23 @@ final class BlogController extends AbstractController // Final car on ne pourra 
         public function new(Request $request, EntityManagerInterface $entityManager): Response
         {
 
-            // Création d'un objet blog, car on part d'un article vide
             $blog = new Blog();
 
-            // 2. On lit le formulaire à notre objet $blog
             $form = $this->createForm(BlogType::class, $blog);
 
-            // 3. on remplit avec les données du formulaire (Hydratation) 
             $form->handleRequest($request);
 
-            // 4. Vérification si formulaire soumis et valide (qu'il respecte les contraintes)
             if ($form->isSubmitted() && $form->isValid()) {
-                // 5. L'auteur connecté
                 $blog->setAuteur($this->getUser());
 
-                // 6. Enregistrer ds la bdd
+                $contenu = $blog->getArticle();
+                $contenuNettoye = strip_tags($contenu);
+
+                $blog->setArticle($contenuNettoye);           
+
                 $entityManager->persist($blog);
                 $entityManager->flush();
 
-                // 7. Redirection
-                // selon la catégorie choisie
                     if ($blog->getCategorie() === 'expertise') {
                         return $this->redirectToRoute('conseil_expert');
                     } else {
@@ -90,7 +87,6 @@ final class BlogController extends AbstractController // Final car on ne pourra 
                     }
                 }
 
-            // 8. Sinon, on affiche le formulaire à nouveau
             return $this->render('blog/new.html.twig', [
                 'form' => $form->createView(),
             ]);
@@ -123,6 +119,13 @@ final class BlogController extends AbstractController // Final car on ne pourra 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+
+            $contenu = $blog->getArticle();
+    
+            $contenuNettoye = strip_tags($contenu);
+            $blog->setArticle($contenuNettoye);
+
+
                 $entityManager->flush(); 
 
                 if ($blog->getCategorie() === 'expertise') {
