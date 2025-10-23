@@ -76,35 +76,54 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>Vous n’avez pas encore publié d’annonce.</p>
+        
                 {% endif %}
             </div>
 
-            <div class="grille-annonces-profil">
-                {% if favoris is not empty %}
+            <div class="bloc-favoris-profil" style="margin-top: 3rem;">
+                <div class="entete-favoris-profil">
+                    <h2>Mes favoris</h2>
+                </div>
+
+                <div class="grille-annonces-profil">
                     {% for fav in favoris %}
                         <div class="carte-annonce-profil">
-                          <a href="{{ path('annonce_show', {id: fav.id}) }}" class="lien-annonce-profil">
-                              
-                            {{fav.reference}}
-       
+                            <a href="{{ path('annonce_show', {id: fav.id}) }}" class="lien-annonce-profil">
+                                <div class="visuel-annonce-profil">
+                                    {% if fav.photos|length > 0 %}
+                                        <img src="{{ asset('uploads/annonces/' ~ fav.photos|first.url) }}"
+                                            alt="Photo de {{ fav.titre }}"
+                                            style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                                    {% endif %}
+                                </div>
+
+                                <div class="details-annonce-profil">
+                                    <p><strong>{{ fav.ville }} – {{ fav.commune }}</strong></p>
+                                    <p>
+                                        {% if fav.superficie %}
+                                            <strong>{{ fav.superficie }} m²</strong> |
+                                        {% endif %}
+                                        <strong>{{ fav.prix|number_format(0, '.', ' ') }} F CFA</strong>
+                                    </p>
+                                </div>
                             </a>
 
-                           
+                            <div class="actions-annonce-profil">
+                                <a href="{{ path('app_annonce_favori', {id: fav.id}) }}" class="lien-modifier">
+                                    Retirer des favoris
+                                </a>
+                            </div>
                         </div>
                     {% endfor %}
-                {% else %}
-                    <p>Vous n’avez pas encore de favoris.</p>
-                {% endif %}
+                </div>
             </div>
-
             
         </section>
 
 
 
     {% else %}
-        <p>Vous devez être connecté pour voir votre profil.</p>
+      
     {% endif %}
 
     <section class="bloc-suppression-compte">
