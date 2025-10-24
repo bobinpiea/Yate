@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <div class="formulaire-connexion">
+    <main class="formulaire-connexion">
 
         <form method="post"> {# Pour envoyer les données au serveur#}
             {% if error %} {# Si une erreur est détectée alors, elle est affichée ex: erreur de MDP #}
@@ -40,5 +40,5 @@
         <p class="texte-inscription">
             <a href="{{ path('app_register') }}">Créer un compte</a>
         </p>
-    </div>
+    </main>
 {% endblock %}

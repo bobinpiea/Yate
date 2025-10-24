@@ -357,13 +357,13 @@ header {
   }
     */
 
-  /* Effet active sur les boutons */
+
   .user-actions.open ul li a:active {
     transform: scale(0.98);
   }
 }
 
-/* Mobile spécifique (< 768px) */
+/* Mobile  (768px) */
 @media (max-width: 768px) {
   .header-top {
     padding: 0.8rem 1rem;
@@ -390,7 +390,6 @@ header {
   }
 }
 
-/* Très petit mobile (< 480px) */
 @media (max-width: 480px) {
   .header-top {
     padding: 0.6rem 0.8rem;
@@ -454,7 +453,7 @@ color: white !important;
   }
 }
 
-/* Si tu veux adapter aussi pour <768px ou <480px, adapte le padding et font-size comme pour .main-nav.open */
+
 @media (max-width: 480px) {
   .user-actions.open ul li:not(.forum):not(.connexion):not(.inscription) a {
     padding: 0.7rem 1rem;
@@ -465,8 +464,6 @@ color: white !important;
 
   /*-----------------------------------------------------------------------------------------------------------------------------------------------*/  
                                                          /****** FOOTER ******/
-
-
 
     /* 1. CONTAINER PRINCIPAL */
       /* Footer commun */
@@ -560,7 +557,7 @@ color: white !important;
 
 /* 7. COPYRIGHT (footer-bottom) */
     section.footer-bottom {
-        width: 100%; /* Prend toute la largeur */
+        width: 100%; 
         text-align: center;
         padding-top: 1rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -588,7 +585,7 @@ color: white !important;
 
 /* --- RESPONSIVE FOOTER --- */
 
-/* TABLETTE : max-width 1024px : 2 colonnes */
+/* TABLETTE  2 colonnes */
 @media screen and (max-width: 1024px) {
   .footer-content {
     grid-template-columns: repeat(2, 1fr);
@@ -596,7 +593,7 @@ color: white !important;
   }
 }
 
-/* MOBILE : max-width 768px : 1 colonne */
+/* MOBILE : max-width 768px */
 @media screen and (max-width: 768px) {
   .footer-content {
     grid-template-columns: 1fr;
@@ -626,7 +623,6 @@ color: white !important;
 
       /* A PROPOS DE NOUS */
 
-/* Page À propos */
 .page-a-propos {
     padding: 4rem 1.5rem;
     background: #f3f4f6;
@@ -638,7 +634,7 @@ color: white !important;
     margin: 0 auto;
 }
 
-/* En-tête de page */
+/* En tete de page */
 .entete-page {
     text-align: center;
     margin-bottom: 4rem;
@@ -681,7 +677,7 @@ color: white !important;
     margin-bottom: 1.5rem;
 }
 
-/* Section mission/vision */
+/*  mission/vision */
 .grille-mission {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -783,7 +779,7 @@ color: white !important;
     text-align: center;
 }
 
-/* Optimisations SEO pour le contenu */
+/* seo*/
 strong {
     font-weight: 600;
     color: #111827;
@@ -794,7 +790,7 @@ em {
     color: #374151;
 }
 
-/* Responsive Design */
+/* Responsive  */
 @media (max-width: 768px) {
     .grille-mission {
         grid-template-columns: 1fr;
@@ -825,13 +821,13 @@ em {
     }
 }
 
-/* Améliorations d'accessibilité */
+/* Améliorations accessibilite */
 .carte-membre:focus-within {
     outline: 2px solid #2563eb;
     outline-offset: 2px;
 }
 
-/* Animations subtiles */
+/* Animations  */
 .carte-mission {
     transition: transform 0.2s ease;
 }
@@ -863,7 +859,7 @@ em {
     margin: 0 auto;
 }
 
-/* En-tête */
+/* En tete */
 .entete-page {
     text-align: center;
     margin-bottom: 4rem;
@@ -930,7 +926,6 @@ em {
     border: 1px solid #d1d5db;
     border-radius: 0.5rem;
     font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .champ-texte:focus, .champ-select:focus, .champ-textarea:focus {
@@ -958,11 +953,10 @@ em {
 }
 
 .bouton-envoyer:hover {
-    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
 }
 
-/* Idées populaires */
+/* Idees populaires */
 .grille-idees-populaires {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1084,7 +1078,7 @@ em {
     border-left: 4px solid #2563eb;
 }
 
-/* Optimisations SEO pour le contenu */
+/* seo */
 strong {
     font-weight: 600;
     color: #111827;
@@ -1096,7 +1090,7 @@ em {
 }
 
 
-/* Améliorations d'accessibilité */
+/* accesibilite */
 .bouton-envoyer:focus {
     outline: 2px solid #2563eb;
     outline-offset: 2px;
@@ -1106,14 +1100,11 @@ em {
     outline: none;
 }
 
-/* Animations subtiles */
+/* Animations  */
 .carte-idee {
     transition: transform 0.2s ease;
 }
 
-.carte-idee:hover {
-    transform: translateY(-2px);
-}
 
 /* Performance et optimisation */
 .bouton-envoyer {
@@ -1192,7 +1183,7 @@ em {
       }
 
 
-          /* Bloc pour le futur formulaire **********/
+          /* Bloc pour le futur formulaire - A FAIRE PLIS TARD **********/ 
    /* 
  
 
@@ -1206,7 +1197,7 @@ em {
     
      ***************** */  
     
-  /****** Seconde Section "Explorez par ville" ******/
+  /****** Seconde Section xplorer par ville ******/
 
     .section-villes {
       padding: 3rem 1.5rem;
@@ -1230,13 +1221,13 @@ em {
       color: #374151;
     }
 
-    /* Centrer par sélectionner une ville */
+    /* Centrer  */
 
     .sous-titre-section{
       text-align: center;
     }
 
-  /* carte blanche contenant la grille */
+  /* carte blanche  */
     .conteneur-villes {
       max-width: 75rem;
       margin: 0 auto;
@@ -1263,7 +1254,7 @@ em {
       cursor: pointer;
     }
 
-  /* focus clavier accessible */
+
     .carte-ville:focus {
       outline: none;
       border-color: #2563eb;
@@ -1361,7 +1352,7 @@ em {
     font-size: 1rem;
   }
 
-/****** Section : Vendez ou louez votre bien facilement ******/
+/****** Section : Vendez / louez  bien facilement ******/
 
   .section-publication {
     padding: 3rem 1.5rem;
@@ -1421,7 +1412,7 @@ em {
       background: #047857;
     }
 
-/****** Section Forum ******/
+/****** Section Forum ********************/
 
 .section-forum {
   padding: 3rem 1.5rem ;
@@ -1434,7 +1425,7 @@ em {
   margin: 0 auto;
 }
 
-/* En-tête de section */
+/* Entete */
 .section-forum .entete-forum {
   text-align: center;
   margin-bottom: 3rem;
@@ -1463,7 +1454,7 @@ em {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
 }
 
-/* Grille des avantages */
+/* Grille avtage */
 .section-forum .avantages-forum {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1519,14 +1510,10 @@ em {
   text-align: center;
 }
 
-
-/***************************************
- * 📱 RESPONSIVE — TABLETTE & MOBILE
- ***************************************/
-/* === MOBILE : max 767px === */
+/************ MOBILE : max 767px ***********/
 @media (max-width: 767px) {
 
-  /* === SECTION ACCUEIL === */
+  /*  SECTION ACCUEIL  */
   .conteneur-accueil {
     grid-template-columns: 1fr;
     text-align: center;
@@ -1553,7 +1540,7 @@ em {
     gap: 1rem;
   }
 
-  /* === SECTION VILLES === */
+  /*  SECTION VILLES  */
   .conteneur-villes {
     padding: 1.5rem;
   }
@@ -1567,7 +1554,7 @@ em {
     padding: 1.2rem;
   }
 
-  /* === SECTION TERRAINS / APPARTEMENTS / COLOC === */
+  /*  SECTION TERRAINS / APPARTEMENTS / COLOC  */
   .header-terrains {
     flex-direction: column;
     text-align: center;
@@ -1588,7 +1575,7 @@ em {
     height: 10rem;
   }
 
-  /* === SECTION PUBLICATION === */
+  /*  SECTION PUBLICATION  */
   .contenu-publication {
     flex-direction: column;
     text-align: center;
@@ -1604,7 +1591,7 @@ em {
     text-align: center;
   }
 
-  /* === SECTION FORUM === */
+  /*  SECTION FORUM  */
   .section-forum .contenu-forum {
     padding: 2rem 1.2rem;
   }
@@ -1630,9 +1617,9 @@ em {
     margin-top: 0.5rem;
   }
 
-  /* === SECTION BLOG === */
+  /*  SECTION BLOG  */
   .grille-categorie {
-    display: block !important;           /* pleine largeur */
+    display: block !important;           
     width: 100% !important;
     max-width: none !important;
   }
@@ -1642,10 +1629,10 @@ em {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    border-radius: 12px;                 /* joli rayon si tu veux */
+    border-radius: 12px;                
   }
 
-  /* On garde uniquement le 1er article visible sur mobile */
+  /*  1er visible sur mobile */
   .grille-categorie .carte-article:nth-child(n+2) {
     display: none !important;
   }
@@ -1661,10 +1648,10 @@ em {
     font-size: 0.95rem;
   }
 }
-/* === TABLETTE : entre 768px et 1023px === */
+
 @media (min-width: 768px) and (max-width: 1023px) {
 
-  /* === SECTION ACCUEIL === */
+  /*  SECTION ACCUEIL  */
   .conteneur-accueil {
     grid-template-columns: 1fr;
     text-align: center;
@@ -1688,7 +1675,7 @@ em {
     justify-content: center;
   }
 
-  /* === SECTION VILLES === */
+  /*  SECTION VILLES  */
   .grille-villes {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -1698,7 +1685,7 @@ em {
     padding: 1.5rem;
   }
 
-  /* === SECTION TERRAINS === */
+  /*  SECTION TERRAINS  */
   .header-terrains {
     flex-direction: column;
     text-align: center;
@@ -1714,7 +1701,7 @@ em {
     height: 11rem;
   }
 
-  /* === SECTION PUBLICATION === */
+  /*  SECTION PUBLICATION  */
   .contenu-publication {
     flex-direction: column;
     text-align: center;
@@ -1726,7 +1713,7 @@ em {
     font-size: 1rem;
   }
 
-  /* === SECTION FORUM === */
+  /*  SECTION FORUM  */
   .section-forum .contenu-forum {
     padding: 2.5rem;
   }
@@ -1741,14 +1728,14 @@ em {
     font-size: 1rem;
   }
 
-  /* === SECTION BLOG === */
+  /*  SECTION BLOG  */
   .grille-categorie {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     justify-items: center;
   }
 
-  /* On garde seulement 2 articles visibles */
+  /* seulement 2 visibles */
   .grille-categorie .carte-article:nth-child(n+3) {
     display: none;
   }
@@ -1864,7 +1851,7 @@ em {
       color: #111827;
     }
 
-  /* Sous-titre */
+  /* Sous titre */
     .formulaire-register .soustitre-register {
       text-align: center;
       font-size: 1.1rem;
@@ -1872,7 +1859,7 @@ em {
       margin-bottom: 1rem;
     }
 
-  /* Ligne de séparation après le sous-titre */
+  /* Ligne de séparation après le sous-titre  = Jd devrais les maque tporu plus tard */
     .formulaire-register .soustitre-register::after {
       content: "";
       display: block;
@@ -1899,7 +1886,7 @@ em {
       font-size: 1rem;
     }
 
-  /* Bloc centré pour la phrase et la checkbox */
+
     .formulaire-register .checkbox-container {
       display: flex;
       flex-direction: column;
@@ -1907,7 +1894,7 @@ em {
       margin-top: 1.5rem;
     }
 
-  /* Le texte au-dessus de la checkbox */
+
     .formulaire-register .checkbox-container .checkbox-label {
       font-weight: 600;
       color: #374151;
@@ -1915,7 +1902,7 @@ em {
       margin-bottom: 0.5rem;
     }
 
-  /* Style de la checkbox */
+
     .formulaire-register .checkbox-container input[type="checkbox"] {
       cursor: pointer;
     }
@@ -1996,7 +1983,7 @@ em {
       color: #42b72a;
     }
 
-  /* DOIS-JE JUSTFIER OU PAS ?  */
+  /* DOIS-JE JUSTFIER OU PAS ? a voir si ca rend bien ou pas je ne sais pas encore   */
     p{
       text-align: justify;
     }
@@ -2190,7 +2177,6 @@ em {
         box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
       }
 
-  /* Agrandir la zone de texte */
 
     .sujet-formulaire textarea {
       min-height: 200px;
@@ -2229,7 +2215,7 @@ em {
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    /* En-tête du message  objectif : (auteur à gauche, date à droite) */
+    /* entet message  */
 
     .message-header {
       display: flex;
@@ -2434,7 +2420,6 @@ em {
   resize: vertical;
 }
 
-/* focus accessible */
 .forum-sujet-form input:focus,
 .forum-sujet-form select:focus,
 .forum-sujet-form textarea:focus{
@@ -2483,7 +2468,7 @@ em {
   color: #2563eb;
 }
 
-/* Zone de texte plus grande */
+
 .message-formulaire textarea {
   width: 100%;
   min-height: 150px;
@@ -2547,7 +2532,7 @@ em {
       margin-bottom: 6rem;
     }
 
-  /* En-tête avec titre + lien "voir plus" */
+ 
     .en-tete-bloc {
       display: flex;
       justify-content: space-between;
@@ -2571,7 +2556,7 @@ em {
       text-decoration: underline;
     }
 
-  /* Grille d'annonces ( 3 ou 4 par lignes */
+  /* Grille d'annonces ( 3 ou 4 par lignes  ??? je dois regarder le rendu ou rend plu petit */
     .grille-annonces {
       display: grid;
       grid-template-columns: repeat(4, 1fr); 
@@ -2617,7 +2602,7 @@ em {
       color: #1f2937;
     }
 
-  /* Surface et prix en gras */
+
     .infos-annonce .surface,
     .infos-annonce strong {
       font-weight: 600;
@@ -2632,6 +2617,50 @@ em {
     color: inherit;
     display: block; 
   }
+
+  /* === Responsive  === */
+
+/* Grand écran  */
+@media (min-width: 1024px) {
+  .grille-annonces {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*  Tablette (≤ 1024px) */
+@media (max-width: 1024px) {
+  .grille-annonces {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .titre-principal {
+    font-size: 1.8rem;
+  }
+}
+
+/* Mobile  */
+@media (max-width: 768px) {
+  .liste-annonces {
+    padding: 2rem 1rem;
+  }
+
+  .grille-annonces {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .en-tete-bloc {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .titre-principal {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+}
 
 /*--------------------------------------------------------------------------------------*/
 
@@ -2650,7 +2679,7 @@ em {
   margin: 0 auto;
 }
 
-/* En-tête de section */
+/* En tete de section */
 .entete-blog {
   text-align: center;
   margin-bottom: 3rem;
@@ -2680,7 +2709,7 @@ em {
   margin-bottom: 0;
 }
 
-/* En-tête de chaque catégorie */
+/* En tete de chaque catégorie */
 .entete-categorie {
   text-align: right;
   margin-bottom: 1.5rem;
@@ -2802,7 +2831,7 @@ em {
   padding: 0 2rem;
 }
 
-/* --- En-tête --- */
+/* --- En tete --- */
 .entete-liste-annonces {
   display: flex;
   justify-content: center;
@@ -2819,6 +2848,7 @@ em {
   text-align: center;
   margin: 0;
 }
+
 /* --- Conteneur principal : filtres + annonces --- */
 .conteneur-liste-annonces {
   display: grid;
@@ -2863,120 +2893,6 @@ em {
   border-radius: 0.375rem;
 }
 
-.bouton-valider-filtres {
-  display: inline-block;
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.bouton-valider-filtres:hover {
-  background: #1d4ed8;
-}
-
-/* --- Zone des annonces --- */
-.zone-grille-annonces {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.carte-annonce-liste {
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  border: 0.1rem solid transparent;
-  transition: border-color 0.3s ease;
-}
-
-/*
-.carte-annonce-liste:hover {
-  border-color: #2563eb; 
-}
-  */
-
-.bloc-image-annonce img,
-.image-vide-annonce {
-  width: 100%;
-  height: 15rem;
-  object-fit: cover;
-  border-bottom: 0.1rem solid #e5e7eb;
-}
-
-.image-vide-annonce {
-  background: #d1d5db;
-}
-
-.bloc-infos-annonce {
-  padding: 1rem;
-}
-
-.texte-lieu {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.texte-prix {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.texte-reference {
-  font-size: 0.875rem;
-  color: #6b7280;
-}
-
-/* --- Footer liens --- */
-.liens-voir-aussi{
-  max-width: 72rem;         
-  margin: 3rem auto 1.5rem;  
-  padding: 1rem 1.25rem;
-  background: transparent;   
-  border-radius: 0.5rem;
-  text-align: center;
-}
-
-.liens-voir-aussi > span{
-  display: block;
-  font-size: 1.125rem;   
-  font-weight: 600;
-  color: #111827;       
-  margin-bottom: 0.75rem;
-}
-
-.liens-voir-aussi a{
-  display: inline-block;
-  text-decoration: none;       
-  color: #2563eb;   
-  background: #ffffff;      
-  border: 0.0625rem solid #e5e7eb;
-  border-radius: 9999px;         
-  padding: 0.5rem 0.875rem;     
-  font-weight: 600;
-  line-height: 1;
-  margin: 0 0.375rem;          
-}
-
-.liens-voir-aussi a:hover,
-.liens-voir-aussi a:focus{
-  background: #2563eb;
-  color: #ffffff;
-  border-color: #2563eb;
-  outline: none;
-}
-
-
-/* Renitialiser et Valider */ 
-
 /* --- Boutons du formulaire --- */
 .boutons-formulaire {
   display: flex;
@@ -3016,6 +2932,136 @@ em {
   color: #fff;
 }
 
+/* --- Zone des annonces --- */
+.zone-grille-annonces {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.carte-annonce-liste {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  border: 0.1rem solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.bloc-image-annonce img,
+.image-vide-annonce {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  border-bottom: 0.1rem solid #e5e7eb;
+}
+
+.image-vide-annonce {
+  background: #d1d5db;
+}
+
+.bloc-infos-annonce {
+  padding: 1rem;
+}
+
+.texte-lieu {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.texte-prix {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.texte-reference {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* --- Liens bas de page  --- */
+.liens-voir-aussi {
+  max-width: 72rem;         
+  margin: 3rem auto 1.5rem;  
+  padding: 1rem 1.25rem;
+  background: transparent;   
+  border-radius: 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* un en dessoud e l'autre ou un a cote de l'autre ? */
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.liens-voir-aussi a {
+  display: inline-block;
+  text-decoration: none;       
+  color: #2563eb;   
+  background: #ffffff;      
+  border: 0.0625rem solid #e5e7eb;
+  border-radius: 9999px;         
+  padding: 0.5rem 0.875rem;     
+  font-weight: 600;
+  line-height: 1;
+}
+
+.liens-voir-aussi a:hover,
+.liens-voir-aussi a:focus {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  outline: none;
+}
+
+/* --- Responsive  ------------------- */
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .conteneur-liste-annonces {
+    grid-template-columns: 1fr; 
+    gap: 2rem;
+  }
+
+  .zone-grille-annonces {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zone-filtres-annonces {
+    order: -1; 
+  }
+
+  .liens-voir-aussi {
+    margin-top: 2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .entete-liste-annonces h1 {
+    font-size: 1.8rem;
+  }
+
+  .zone-grille-annonces {
+    grid-template-columns: 1fr;
+  }
+
+  .zone-filtres-annonces {
+    padding: 1rem;
+  }
+
+  .liens-voir-aussi {
+    gap: 0.5rem;
+  }
+
+  .liens-voir-aussi a {
+    width: 100%;
+    max-width: 15rem;
+  }
+}
 
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -3033,7 +3079,7 @@ em {
     gap: 50px;
 }
 
-/* ----------- 1. BANDEAU PHOTOS ----------- */
+/* ----------- BANDEAU  PHOTOS ----------- */
 
 .bandeau-photos {
     display: flex;
@@ -3053,7 +3099,7 @@ em {
     display: block;
 }
 
-/* 2 photos côte à côte */
+/*  photos cote a cote */
 .grille-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -3067,7 +3113,7 @@ em {
     border-radius: 8px;
 }
 
-/* 3 photos : grande + 2 petites à droite */
+/*  les " pjoto A grand et les deuc a cpte */
 .grille-3 {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -3095,7 +3141,7 @@ em {
     position: relative;
 }
 
-/* Bouton "Voir les photos" */
+/* Bouton .... A FAIRE PLUS TARD VOIR LES PHOTOS  */
 .btn-voir-photos {
     position: absolute;
     bottom: 10px;
@@ -3112,7 +3158,7 @@ em {
     background-color: #1d4ed8;
 }
 
-/* ----------- 2. CONTENU PRINCIPAL ----------- */
+/* -----------  CONTENU PRINCIPAL ----------- */
 .contenu-annonce {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -3127,7 +3173,7 @@ em {
     gap: 25px;
 }
 
-/* Bloc titre (Cocody – Terrain – 500 m²) */
+/* Bloc titre */
 .entete-annonce {
     background: none;       
     box-shadow: none; 
@@ -3170,7 +3216,7 @@ em {
     color: #555;
 }
 
-/* Tableau descriptif */
+/* Tableau descriptif  A COMPLETER AVEC LE RESTE */
 .tableau-descriptif {
     width: 100%;
     border-collapse: collapse;
@@ -3192,7 +3238,7 @@ em {
     font-weight: 600;
 }
 
-/* --- Colonne droite (prix + actions) --- */
+/* --- Colonne droite  prix --- */
 .colonne-droite {
     position: relative;
 }
@@ -3244,7 +3290,7 @@ em {
 
 
 
-/* ----------- 3. BLOCS SECONDAIRES ----------- */
+/* -----------  BLOCS SECONDAIRES ----------- */
 .bloc-secondaire {
     border-top: 1px solid #eee;
     padding-top: 40px;
@@ -3288,7 +3334,7 @@ em {
   padding: 0 40px;
 }
 
-/* ----- Disposition principale : desktop ----- */
+
 .message-layout {
   display: flex;
   align-items: flex-start;
@@ -3297,7 +3343,7 @@ em {
   flex-direction: row; 
 }
 
-/* ----- Bloc message (à gauche) ----- */
+
 .bloc-gauche {
   flex: 1.1;
   background-color: #fff;
@@ -3354,7 +3400,7 @@ textarea {
   background-color: #1d4ed8;
 }
 
-/* ----- Bloc résumé (à droite) ----- */
+/* ----- Bloc résumé pour expliquer ----- */
 .bloc-droite {
   flex: 0.9;
   background-color: #f9fafb;
@@ -3382,7 +3428,7 @@ textarea {
   font-size: 1.1rem;
 }
 
-/* ----- Responsive tablette et mobile ----- */
+/* ----- RESPOINSIVE  ----- */
 @media (max-width: 992px) {
   .page-message {
     padding: 0 20px;
@@ -3401,7 +3447,7 @@ textarea {
   }
 }
 
-/* ----- Très petits écrans ----- */
+/* ----- petit ecran ----- */
 @media (max-width: 600px) {
   .page-message {
     padding: 0 10px;
@@ -3564,7 +3610,6 @@ textarea {
 
 /* ---------------- Responsive Design ------------------- */
 
-/* Tablette  */
 @media (max-width: 768px) {
   .page-mentions-legales {
     max-width: 95%;
@@ -3610,10 +3655,7 @@ textarea {
                                              /****************  PROFIL UTILISATEUR  *******. RESPONSIVE OK   *********/ 
 
        
- /* ---------------------------------------------------
-   PAGE PROFIL — STYLE COMPLET ISOLÉ
-   (aucune interférence avec les autres pages)
---------------------------------------------------- */
+/* ISOLE */
 
 .bloc-profil {
   max-width: 1000px;
@@ -3623,7 +3665,7 @@ textarea {
   color: #111827;
 }
 
-/* ---------- EN-TÊTE DU PROFIL ---------- */
+/* ---------- PROFIL  ---------- */
 
 .entete-profil {
   display: flex;
@@ -3668,16 +3710,16 @@ textarea {
   border-radius: 10px;
   font-weight: 600;
   text-decoration: none;
-  border: 2px solid #2563eb; /* même bordure en permanence */
+  border: 2px solid #2563eb; 
 }
 
 .bouton-modif-profil a:hover {
   background-color: #fff;
   color: #2563eb;
-  border: 2px solid #2563eb; /* identique, rien ne bouge */
+  border: 2px solid #2563eb; 
 }
 
-/* ---------- INFORMATIONS UTILISATEUR ---------- */
+/* ---------- INFORMATION ---------- */
 
 .infos-profil {
   margin-bottom: 40px;
@@ -3779,7 +3821,7 @@ textarea {
 
 /* ---------- BOUTONS DU PROFIL ---------- */
 
-/* bouton Éditer mon profil → principal */
+/* pour editer  */
 .bouton-modif-profil a {
   display: inline-block;
   background-color: #2563eb;
@@ -3797,7 +3839,7 @@ textarea {
   border: 2px solid #2563eb;
 }
 
-/* bouton Déposer une nouvelle annonce → secondaire */
+/* Déposer une nouvelle annonce dans le profil  */
 .lien-ajout-annonce {
   background-color: transparent;
   color: #2563eb;
@@ -3837,7 +3879,7 @@ textarea {
   color: #fff;
 }
 
-/* ---------- RESPONSIVE DESIGN ---------- */
+/* ---------- RESPONSIVE  ---------- */
 
 @media (max-width: 768px) {
   .entete-profil {
@@ -3865,13 +3907,10 @@ textarea {
 }
 
 
-
-/* Masquer les messages d'aide "est obligatoire" */
 .champ-form ul li {
   display: none;
 }
 
-/* Ou plus ciblé si nécessaire */
 .section-obligatoire .champ-form ul,
 .section-facultatif .champ-form ul {
   display: none;
@@ -3895,7 +3934,7 @@ textarea {
   --ombre: 0 8px 20px rgba(37, 99, 235, 0.1);
 }
 
-/* ===== Structure globale ===== */
+/*  Structure globale  */
 .page-annonce {
   display: flex;
   flex-direction: column;
@@ -3906,7 +3945,7 @@ textarea {
   color: var(--texte-noir);
 }
 
-/* ===== Intro ===== */
+/*  Intro  */
 .zone-intro-annonce {
   text-align: center;
   width: 100%;
@@ -3939,7 +3978,7 @@ textarea {
   text-align: center;
 }
 
-/* ===== Étape 1 ===== */
+/* ===== Étape 1===== */
 .etape-formulaire {
   width: 100%;
 }
@@ -3997,7 +4036,7 @@ textarea {
   background-color: #1d4ed8;
 }
 
-/* ===== Conteneur des champs dynamiques ===== */
+/* ===== Conteneur des champs ===== */
 .sous-formulaire-annonce {
   width: 100%;
   max-width: 700px;
@@ -4070,7 +4109,7 @@ textarea {
   resize: vertical;
 }
 
-/* ===== Équipements (checkboxes) ===== */
+/* ===== Équipements box ===== */
 .zone-facultative-checkbox {
   text-align: center;
   margin-top: 40px;
@@ -4148,7 +4187,7 @@ textarea {
   margin-top: 26px;
 }
 
-/* ===== Masquer les messages "est obligatoire" ===== */
+/* ===== Masquer les messages  ===== */
 .champ-annonce ul li,
 .message-erreur,
 .form-error-message,
@@ -4156,7 +4195,7 @@ textarea {
   display: none !important;
 }
 
-/* ===== Alertes flash ===== */
+/* =====  ===== */
 .alerte-message {
   padding: 14px 20px;
   margin-bottom: 20px;
@@ -4189,7 +4228,7 @@ textarea {
 
 /* ===== RESPONSIVE ===== */
 
-/* Tablettes (768px - 1024px) */
+
 @media (max-width: 1024px) {
   .page-annonce {
     padding: 40px 20px 60px;
@@ -4216,7 +4255,7 @@ textarea {
   }
 }
 
-/* Mobiles (< 768px) */
+
 @media (max-width: 768px) {
   .page-annonce {
     padding: 30px 16px 50px;
@@ -4235,7 +4274,6 @@ textarea {
   }
 
 
-  /* ===== Correction centrage Étape 1 ===== */
 .etape-formulaire#etape-1 {
   text-align: center;
 }
@@ -4245,7 +4283,7 @@ textarea {
   margin-bottom: 20px;
 }
 
-/* ===== Correction centrage Photos ===== */
+
 .bloc-photos {
   text-align: center;
   margin-top: 40px;
@@ -4304,7 +4342,7 @@ textarea {
   }
 }
 
-/* Très petits écrans (< 480px) */
+
 @media (max-width: 480px) {
   .page-annonce {
     padding: 20px 12px 40px;
@@ -4351,5 +4389,139 @@ textarea {
   }
 } 
 
-/*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+                                                       /*========== EDITER LE PROFIL  - RESPONSIVE OK  ==========*/
 
+.page-profil-edit {
+    max-width: 520px;
+    margin: 80px auto;
+    padding: 30px 25px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    font-family: 'Inter', sans-serif;
+}
+
+
+.page-profil-edit .bloc-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-profil-edit h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0;
+}
+
+.page-profil-edit .lien-retour {
+    font-size: 0.95rem;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.page-profil-edit .lien-retour:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+
+.page-profil-edit .bloc-formulaire form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+.page-profil-edit label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.page-profil-edit input[type="text"],
+.page-profil-edit input[type="file"],
+.page-profil-edit input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.page-profil-edit input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+
+.page-profil-edit .btn-primary {
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+.page-profil-edit .btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* === RESPONSIVE === */
+
+
+@media (max-width: 1024px) {
+    .page-profil-edit {
+        max-width: 600px;
+        padding: 25px;
+        margin: 60px auto;
+    }
+
+    .page-profil-edit h1 {
+        font-size: 1.6rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .page-profil-edit {
+        max-width: 90%;
+        padding: 20px;
+        margin: 40px auto;
+    }
+
+    .page-profil-edit .bloc-entete {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .page-profil-edit h1 {
+        font-size: 1.4rem;
+    }
+
+    .page-profil-edit .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}                                                    
+
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+                                                       /*========== BLOG - LECTURE  ==========*/
+
+ 
+                                                       
+                                                       

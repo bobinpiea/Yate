@@ -3,11 +3,15 @@
 {% block title %}Modifier l’annonce{% endblock %}
 
 {% block body %}
-    <h1>Modifier mon annonce</h1>
+    <main>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
+        <h1>Modifier mon annonce</h1>
 
-        <button class="btn">Enregistrer les modifications</button>
-    {{ form_end(form) }}
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <button class="btn">Enregistrer les modifications</button>
+        {{ form_end(form) }}
+
+    </main>
 {% endblock %}

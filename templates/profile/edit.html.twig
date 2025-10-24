@@ -3,19 +3,23 @@
 {% block title %}Éditer mon profil{% endblock %}
 
 {% block body %}
+<main class="page-profil-edit">
 
-    <div>
+    <div class="bloc-entete">
         <h1>Éditer mon profil</h1>
-        <a href=" {{ path('app_profile')}}"> Revenir en arrière</a>
+        <a href="{{ path('app_profile') }}" class="lien-retour">Revenir au profil</a>
     </div>
 
+    <section class="bloc-formulaire">
+        {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.pseudo) }}
+            {{ form_row(form.avatar) }}
 
-    {{ form_start(form) }}
-        {{ form_row(form.nom) }}
-        {{ form_row(form.prenom) }}
-        {{ form_row(form.pseudo) }}
-        {{ form_row(form.avatar) }}
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+    </section>
 
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
+</main>
 {% endblock %}

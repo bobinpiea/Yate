@@ -8,8 +8,6 @@
     
          <h1 class="titre-profil">Mon profil</h1>
 
-         
-         
         <div class="entete-profil">
             <div class="photo-profil">
                 {% if user.avatar %}
@@ -18,8 +16,6 @@
                     <span class="image-defaut">A faire</span>
                 {% endif %}
             </div>
-
-         
 
             <div class="bouton-modif-profil">
                 <a href="{{ path('app_profile_edit') }}">Éditer mon profil</a>

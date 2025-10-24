@@ -3,7 +3,7 @@
 {% block title %}Annonces à louer - Ayitate{% endblock %}
 
 {% block body %}
-  <section class="liste-annonces">
+  <main class="liste-annonces">
     <h1>Annonces disponibles à la location</h1>
 
     {% if annonces is empty %}
@@ -20,5 +20,5 @@
         {% endfor %}
       </ul>
     {% endif %}
-  </section>
+  </main>
 {% endblock %}

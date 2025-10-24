@@ -1,15 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-  <style>
-    .formulaire-article { outline: 4px solid red; }
-    .titre-blog { color: #e11d48; } /* rose */
-  </style>
+  
 {% endblock %}
 
 {% block title %}Écrire un nouvel article{% endblock %}
 
 {% block body %}
+<main>
   <h1 class="titre-blog">Écrire un nouvel article</h1>
 
   <div class="formulaire-article">
@@ -41,4 +39,5 @@
 
     {{ form_end(form) }}
   </div>
+</main>
 {% endblock %}

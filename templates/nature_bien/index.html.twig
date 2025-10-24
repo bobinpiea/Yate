@@ -3,33 +3,35 @@
 {% block title %}NatureBien index{% endblock %}
 
 {% block body %}
-    <h1>NatureBien index</h1>
+    <main>
+        <h1>NatureBien index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for nature_bien in nature_biens %}
-            <tr>
-                <td>{{ nature_bien.id }}</td>
-                <td>{{ nature_bien.nom }}</td>
-                <td>
-                    <a href="{{ path('app_nature_bien_show', {'id': nature_bien.id}) }}">show</a>
-                    <a href="{{ path('app_nature_bien_edit', {'id': nature_bien.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for nature_bien in nature_biens %}
+                <tr>
+                    <td>{{ nature_bien.id }}</td>
+                    <td>{{ nature_bien.nom }}</td>
+                    <td>
+                        <a href="{{ path('app_nature_bien_show', {'id': nature_bien.id}) }}">show</a>
+                        <a href="{{ path('app_nature_bien_edit', {'id': nature_bien.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_nature_bien_new') }}">Create new</a>
+        <a href="{{ path('app_nature_bien_new') }}">Create new</a>
+    </main>
 {% endblock %}

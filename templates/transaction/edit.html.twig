@@ -3,6 +3,7 @@
 {% block title %}Edit Transaction{% endblock %}
 
 {% block body %}
+<main>
     <h1>Edit Transaction</h1>
 
     {{ include('transaction/_form.html.twig', {'button_label': 'Update'}) }}
@@ -10,4 +11,5 @@
     <a href="{{ path('app_transaction_index') }}">back to list</a>
 
     {{ include('transaction/_delete_form.html.twig') }}
+</main>
 {% endblock %}

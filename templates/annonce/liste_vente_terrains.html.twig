@@ -3,16 +3,16 @@
 {% block title %}Terrains à vendre{% endblock %}
 
 {% block body %}
-<section id="page-liste-terrains" class="page-liste-annonces">
+<main id="page-liste-terrains" class="page-liste-annonces">
 
-  <header class="entete-liste-annonces">
+  <section class="entete-liste-annonces">
     <h1>Terrains à vendre</h1>
-  </header>
+  </section>
 
   <div class="conteneur-liste-annonces">
 
     {# FILTRE  #}
-    <aside class="zone-filtres-annonces">
+    <aside class="zone-filtres-annonces" aria-label="Filtres de recherche">
       <h2 class="titre-filtres-annonces">Affiner la recherche</h2>
 
       {{ form_start(form, { method: 'GET' }) }}
@@ -64,7 +64,7 @@
     </aside>
 
     {# ----------- LISTE DES ANNONCES ----------- #}
-    <main class="zone-grille-annonces">
+    <section class="zone-grille-annonces">
       {% if annonces is not empty %}
         {% for annonce in annonces %}
           <a href="{{ path('annonce_show', { id: annonce.id }) }}" class="carte-annonce-liste">
@@ -91,13 +91,13 @@
       {% else %}
         <p>Aucun terrain à vendre pour le moment.</p>
       {% endif %}
-    </main>
+    </section>
   </div>
 
-  <footer class="liens-voir-aussi">
-    <a href="{{ path('app_annonce_liste_vente_maisons') }}">Maisons à vendre</a> |
+  <div class="liens-voir-aussi">
+    <a href="{{ path('app_annonce_liste_vente_maisons') }}">Maisons à vendre</a>
     <a href="">Appartements à vendre</a>
-  </footer>
+  </div>
 
-</section>
+</main>
 {% endblock %}

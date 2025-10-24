@@ -3,6 +3,7 @@
 {% block title %}Conseils D'expert{% endblock %}
 
 {% block body %}
+<main>
     <h1>Conseils D'expert</h1>
 
     {% if blogs is empty %}
@@ -14,7 +15,6 @@
                     <strong>{{ blog.titre }}</strong><br>
                     {{ blog.article|slice(0, 150) ~ '...' }}<br>
                     <em>
-                        par 
                         {% if blog.auteur.pseudo %}
                             {{ blog.auteur.pseudo }}
                         {% elseif blog.auteur.prenom or blog.auteur.nom %}
@@ -44,4 +44,5 @@
             {% endfor %}
         </ul>
     {% endif %}
+</main>
 {% endblock %}

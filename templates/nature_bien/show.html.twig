@@ -3,24 +3,26 @@
 {% block title %}NatureBien{% endblock %}
 
 {% block body %}
-    <h1>NatureBien</h1>
+    <main>
+        <h1>NatureBien</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ nature_bien.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ nature_bien.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ nature_bien.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ nature_bien.nom }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_nature_bien_index') }}">back to list</a>
+        <a href="{{ path('app_nature_bien_index') }}">back to list</a>
 
-    <a href="{{ path('app_nature_bien_edit', {'id': nature_bien.id}) }}">edit</a>
+        <a href="{{ path('app_nature_bien_edit', {'id': nature_bien.id}) }}">edit</a>
 
-    {{ include('nature_bien/_delete_form.html.twig') }}
+        {{ include('nature_bien/_delete_form.html.twig') }}
+    </main>
 {% endblock %}

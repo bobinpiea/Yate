@@ -4,7 +4,7 @@
 
 {% block body %}
 
-  <div class="forum-container">
+  <main class="forum-container">
       
       <!-- Colonne gauche : Catégories -->
 
@@ -24,7 +24,7 @@
 
       <!-- Colonne droite : Sujets -->
 
-      <main class="forum-sujets">
+      <section class="forum-sujets">
         <div class="sujet-header">
           <h2> {{ categorie.nom }} - Sujets </h2>
           <a href="{{ path('app_forum_sujet_new') }} " class="btn-new-sujet" >Créer un sujet</a>   
@@ -44,7 +44,7 @@
             {% endfor %}
           </ul>
 
-      </main>
+      </section>
 
-  </div>
+  </main>
 {% endblock %}
