@@ -234,7 +234,7 @@ header {
   }
 }
 
-/* Tablette et Mobile : menu burger */
+
 @media (max-width: 1024px) {
   .burger-toggle {
     display: block;
@@ -363,7 +363,7 @@ header {
   }
 }
 
-/* Mobile  (768px) */
+
 @media (max-width: 768px) {
   .header-top {
     padding: 0.8rem 1rem;
@@ -593,13 +593,13 @@ color: white !important;
   }
 }
 
-/* MOBILE : max-width 768px */
-@media screen and (max-width: 768px) {
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    text-align: center;
-  }
+
+  @media screen and (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      text-align: center;
+    }
 
   section.footer-section h2 {
     text-align: center;

@@ -22,7 +22,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             // Champ email (lié à l'entité User)
-            ->add('email') // Pas besoin d’ajouter de contraintes ici car elles sont déjà définies dans l’entité User
+            ->add('email') 
 
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false, // Champ n'existe pas dans la BDD
