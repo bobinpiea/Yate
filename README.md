@@ -1,5 +1,5 @@
 🗂️ Structure du projet
-
+```
 ayitate/
 │
 ├── assets/                # Fichiers front-end
@@ -21,7 +21,7 @@ ayitate/
 │   └── base.html.twig
 │
 └── README.md
-
+```
 
 🏠 Ayitate – Plateforme immobilière
 
