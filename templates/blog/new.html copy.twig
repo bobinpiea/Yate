@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Article{% endblock %}
+
+{% block body %}
+    <main class="formulaire-blog">
+        <h1 class="titre-blog">Écrire un nouvel article</h1>
+        <p class="soustitre-blog">Partagez vos idées, conseils ou inspirations déco.</p>
+
+
+        {{ form_errors(form) }}
+
+        {{ form_start(form) }} 
+
+            <div class="champ-formulaire">
+                {{ form_label(form.titre, 'Titre de l’article') }}
+                {{ form_widget(form.titre, {'attr': {'class': 'input'}}) }}
+                {{ form_errors(form.titre) }}
+            </div>
+
+            <div class="champ-formulaire">
+                {{ form_label(form.article, 'Contenu de l’article') }}
+                {{ form_widget(form.article, {'attr': {'class': 'textarea'}}) }}
+                {{ form_errors(form.article) }}
+            </div>
+
+            <div class="champ-formulaire">
+                {{ form_label(form.categorie, 'Catégorie') }}
+                {{ form_widget(form.categorie, {'attr': {'class': 'select'}}) }}
+                {{ form_errors(form.categorie) }}
+            </div>
+
+            <div class="champ-formulaire">
+                {{ form_label(form.url, 'Lien (optionnel)') }}
+                {{ form_widget(form.url, {'attr': {'class': 'input'}}) }}
+                {{ form_errors(form.url) }}
+            </div>
+
+            <button type="submit" class="btn-submit">Publier</button>
+
+        {{ form_end(form) }} 
+    </main>
+{% endblock %}

@@ -1,43 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvel Article{% endblock %}
+{% block title %}Nouvel Article | Ayitaté{% endblock %}
 
 {% block body %}
-    <main class="formulaire-blog">
-        <h1 class="titre-blog">Écrire un nouvel article</h1>
-        <p class="soustitre-blog">Partagez vos idées, conseils ou inspirations déco.</p>
+<main class="blogform-container">
 
+  <section class="blogform-header">
+    <h1 class="blogform-title">Écrire un nouvel article</h1>
+    <p class="blogform-subtitle">Partagez vos idées, conseils ou inspirations déco.</p>
+  </section>
 
-        {{ form_errors(form) }}
+  {{ form_start(form, {'attr': {'class': 'blogform-form'}}) }}
 
-        {{ form_start(form) }} 
+    <div class="blogform-field">
+      {{ form_label(form.titre, 'Titre de l’article', {'label_attr': {'class': 'blogform-label'}}) }}
+      {{ form_widget(form.titre, {'attr': {'class': 'blogform-input'}}) }}
+      {{ form_errors(form.titre) }}
+    </div>
 
-            <div class="champ-formulaire">
-                {{ form_label(form.titre, 'Titre de l’article') }}
-                {{ form_widget(form.titre, {'attr': {'class': 'input'}}) }}
-                {{ form_errors(form.titre) }}
-            </div>
+    <div class="blogform-field">
+      {{ form_label(form.article, 'Contenu de l’article', {'label_attr': {'class': 'blogform-label'}}) }}
+      {{ form_widget(form.article, {'attr': {'class': 'blogform-textarea'}}) }}
+      {{ form_errors(form.article) }}
+    </div>
 
-            <div class="champ-formulaire">
-                {{ form_label(form.article, 'Contenu de l’article') }}
-                {{ form_widget(form.article, {'attr': {'class': 'textarea'}}) }}
-                {{ form_errors(form.article) }}
-            </div>
+    <div class="blogform-field">
+      {{ form_label(form.categorie, 'Catégorie', {'label_attr': {'class': 'blogform-label'}}) }}
+      {{ form_widget(form.categorie, {'attr': {'class': 'blogform-select'}}) }}
+      {{ form_errors(form.categorie) }}
+    </div>
 
-            <div class="champ-formulaire">
-                {{ form_label(form.categorie, 'Catégorie') }}
-                {{ form_widget(form.categorie, {'attr': {'class': 'select'}}) }}
-                {{ form_errors(form.categorie) }}
-            </div>
+    <div class="blogform-field">
+      {{ form_label(form.url, 'Lien (optionnel)', {'label_attr': {'class': 'blogform-label'}}) }}
+      {{ form_widget(form.url, {'attr': {'class': 'blogform-input'}}) }}
+      {{ form_errors(form.url) }}
+    </div>
 
-            <div class="champ-formulaire">
-                {{ form_label(form.url, 'Lien (optionnel)') }}
-                {{ form_widget(form.url, {'attr': {'class': 'input'}}) }}
-                {{ form_errors(form.url) }}
-            </div>
+    <div class="blogform-actions">
+      <button type="submit" class="blogform-btn">Publier</button>
+    </div>
 
-            <button type="submit" class="btn-submit">Publier</button>
+  {{ form_end(form) }}
 
-        {{ form_end(form) }} 
-    </main>
+</main>
 {% endblock %}

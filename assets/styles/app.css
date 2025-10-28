@@ -3923,13 +3923,13 @@ textarea {
                                              /****************  DEPOSER ANNONCE  *******. RESPONSIVE OK   *********/ 
 
 
-  /* ===== Variables principales ===== */
 :root {
   --bleu-ayitate: #2563eb;
   --texte-noir: #1f2328;
   --texte-gris: #444;
   --bordure: #d1d5db;
   --fond-blanc: #ffffff;
+
   --rayon: 10px;
   --ombre: 0 8px 20px rgba(37, 99, 235, 0.1);
 }
@@ -4520,8 +4520,196 @@ textarea {
 
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------*/
-                                                       /*========== BLOG - LECTURE  ==========*/
+                                                       /*========== BLOG - ECRIRE  ==========*/
 
- 
+/* Conteneur principal */
+.blogform-container {
+  max-width: 850px; 
+  margin: 5rem auto;
+  padding: 3rem 3.5rem; 
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+}
+
+/*  En-tête (titre + sous-titre) */
+.blogform-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.blogform-title {
+  font-size: 2rem;
+  color: #111111;
+  margin-bottom: 0.5rem;
+}
+
+.blogform-subtitle {
+  font-size: 1rem;
+  color: #555555;
+}
+
+/*  Structure du formulaire */
+.blogform-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+/* Chaque champ */
+.blogform-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.blogform-label {
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 0.5rem;
+}
+
+/* Champs texte, URL  zone de texte */
+.blogform-input,
+.blogform-textarea,
+.blogform-select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Champ focus */
+.blogform-input:focus,
+.blogform-textarea:focus,
+.blogform-select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/*  Zone texte agrandie */
+.blogform-textarea {
+  min-height: 320px; 
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Bouton principal */
+.blogform-actions {
+  text-align: center;
+}
+
+.blogform-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.blogform-btn:hover {
+  background-color: #1d4ed8;
+}
+
+
+
+/* (form_errors) */
+.blogform-field .form-error-message {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+
+/* Tablette ≤ 1024px */
+@media (max-width: 1024px) {
+  .blogform-container {
+    max-width: 90%;
+    margin: 4rem auto;
+    padding: 2rem;
+  }
+
+  .blogform-title {
+    font-size: 1.8rem;
+  }
+
+  .blogform-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .blogform-textarea {
+    min-height: 260px;
+  }
+}
+
+/* Mobile ≤ 768px */
+@media (max-width: 768px) {
+  .blogform-container {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+    box-shadow: none;
+    border-radius: 0.5rem;
+  }
+
+  .blogform-title {
+    font-size: 1.6rem;
+  }
+
+  .blogform-form {
+    gap: 1.2rem;
+  }
+
+  .blogform-btn {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .blogform-textarea {
+    min-height: 220px;
+  }
+}
                                                        
-                                                       
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+                                                       /*========== MESSAGE FLASH  ==========*/
+
+  /* Pour les messages flashes */
+
+    .flash {
+      max-width: 600px;          
+      margin: 1.5rem auto;    
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-align: center;      
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+/* Couleurs selon le type de message */
+  .flash-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+  }
+
+  .flash-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+  }
+
+  .flash-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #f59e0b;
+  }
+                                               
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+                                                       /*========== MESSAGERIE  ==========*/
